@@ -46,7 +46,7 @@ struct GenreSectionView: View {
                     .listRowSeparator(.hidden)
                 }
                 .listStyle(.plain)
-                .navigationTitle("genreSection.title")
+                .navigationTitle(Enviroment.name == .dev ? "DEV" : "PROD")
             }
                 
             }
