@@ -10,13 +10,18 @@ import SwiftUI
 class GenreSectionViewModel: ObservableObject {
     @Published var genres: [Genre] = []
     
-    func loadGenres() {
-        self.genres = [
-            Genre(id: 1, name: "Adventure"),
-            Genre(id: 2, name: "Sci-fi"),
-            Genre(id: 3, name: "Horror"),
-            Genre(id: 4, name: "Comedy")
-        ]
+    private var movieService: MovieServiceProtocol = MovieService()
+    
+    func loadGenres() async {
+        do {
+            let request = FetchGenreRequest()
+            let genres = try await movieService.FetchGenres(req: request)
+            DispatchQueue.main.async {
+                self.genres = genres
+            }
+        } catch {
+            print("Error fetchin genres: \(genres)")
+        }
     }
 }
 
@@ -51,7 +56,9 @@ struct GenreSectionView: View {
                 
             }
             .onAppear {
-                viewModel.loadGenres()
+                Task {
+                    await viewModel.loadGenres()
+                }
             }
         }
 }
