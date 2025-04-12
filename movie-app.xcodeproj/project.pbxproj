@@ -12,11 +12,11 @@
 
 /* Begin PBXFileReference section */
 		AD81FF782DA5345E0060AE12 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		ADA6F7372DA14F8E007981C1 /* movie-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "movie-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADA6F7372DA14F8E007981C1 /* movie-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "movie-app.app"; path = "/Users/fmolnar/RDI/movie-app/build/Debug-iphoneos/movie-app.app"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		AD81007E2DA53EDB0060AE12 /* Exceptions for "movie-app" folder in "movie-app" target */ = {
+		AD2C77C82DA58D380093D474 /* Exceptions for "movie-app" folder in "movie-app" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -29,7 +29,7 @@
 		ADA6F7392DA14F8E007981C1 /* movie-app */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				AD81007E2DA53EDB0060AE12 /* Exceptions for "movie-app" folder in "movie-app" target */,
+				AD2C77C82DA58D380093D474 /* Exceptions for "movie-app" folder in "movie-app" target */,
 			);
 			path = "movie-app";
 			sourceTree = "<group>";
@@ -51,17 +51,8 @@
 			isa = PBXGroup;
 			children = (
 				ADA6F7392DA14F8E007981C1 /* movie-app */,
-				ADA6F7382DA14F8E007981C1 /* Products */,
 				AD81FF782DA5345E0060AE12 /* .gitignore */,
 			);
-			sourceTree = "<group>";
-		};
-		ADA6F7382DA14F8E007981C1 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				ADA6F7372DA14F8E007981C1 /* movie-app.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -115,7 +106,7 @@
 			mainGroup = ADA6F72E2DA14F8E007981C1;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = ADA6F7382DA14F8E007981C1 /* Products */;
+			productRefGroup = ADA6F72E2DA14F8E007981C1;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
