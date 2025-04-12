@@ -35,10 +35,12 @@ class MovieService : MovieServiceProtocol {
                         case .success(let response):
                             do {
                                 let decodedResponse = try JSONDecoder().decode(GenreListResponse.self, from: response.data)
-                                var genres = [Genre]()
-                                for genreRespone in decodedResponse.genres {
-                                    genres.append(Genre(dto: genreRespone))
+                                let genres = decodedResponse.genres.map{ genreResponse in
+                                    Genre(dto: genreResponse)
                                 }
+                                    .sorted {
+                                        $0.name < $1.name
+                                    }
                                 continuation.resume(returning: genres)
                             } catch {
                                 continuation.resume(throwing: error)
