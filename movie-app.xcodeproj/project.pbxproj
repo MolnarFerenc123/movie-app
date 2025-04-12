@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD8085792DAA65340006D665 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = AD8085782DAA65340006D665 /* CombineMoya */; };
+		AD80857B2DAA65340006D665 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = AD80857A2DAA65340006D665 /* Moya */; };
 		AD81FF7A2DA534660060AE12 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = AD81FF782DA5345E0060AE12 /* .gitignore */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD80857B2DAA65340006D665 /* Moya in Frameworks */,
+				AD8085792DAA65340006D665 /* CombineMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +80,8 @@
 			);
 			name = "movie-app";
 			packageProductDependencies = (
+				AD8085782DAA65340006D665 /* CombineMoya */,
+				AD80857A2DAA65340006D665 /* Moya */,
 			);
 			productName = "movie-app";
 			productReference = AD80854D2DAA57250006D665 /* movie-app.app */;
@@ -106,6 +112,9 @@
 			);
 			mainGroup = ADA6F72E2DA14F8E007981C1;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				AD8085772DAA65340006D665 /* XCRemoteSwiftPackageReference "Moya" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = ADA6F72E2DA14F8E007981C1;
 			projectDirPath = "";
@@ -213,6 +222,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "movie-app/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = PROD;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -301,6 +311,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "movie-app/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -452,6 +463,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "movie-app/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = DEV;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -463,7 +475,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "hu.rdi.swift.course.movie-app";
+				PRODUCT_BUNDLE_IDENTIFIER = "hu.rdi.swift.course.movie-app.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENV_DEB;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -484,6 +496,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "movie-app/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -495,7 +508,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "hu.rdi.swift.course.movie-app";
+				PRODUCT_BUNDLE_IDENTIFIER = "hu.rdi.swift.course.movie-app.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENV_DEV;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -530,6 +543,30 @@
 			defaultConfigurationName = "Release DEV";
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AD8085772DAA65340006D665 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AD8085782DAA65340006D665 /* CombineMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD8085772DAA65340006D665 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = CombineMoya;
+		};
+		AD80857A2DAA65340006D665 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD8085772DAA65340006D665 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ADA6F72F2DA14F8E007981C1 /* Project object */;
 }
