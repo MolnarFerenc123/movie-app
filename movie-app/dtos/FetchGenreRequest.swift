@@ -6,8 +6,7 @@
 //
 
 struct FetchGenreRequest {
-    let accessToken: String = "Config.bearerToken"
-    
+    let accessToken: String = Config.bearerToken
     func asReqestParams() -> [String: String] {
         return [:]
     }

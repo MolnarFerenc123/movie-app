@@ -34,8 +34,12 @@ class MovieService : MovieServiceProtocol {
                         switch result {
                         case .success(let response):
                             do {
-                                let decodedResponse = try JSONDecoder().decode(GenreResponse.self, from: response.data)
-                                continuation.resume(returning: decodedResponse.genres)
+                                let decodedResponse = try JSONDecoder().decode(GenreListResponse.self, from: response.data)
+                                var genres = [Genre]()
+                                for genreRespone in decodedResponse.genres {
+                                    genres.append(Genre(dto: genreRespone))
+                                }
+                                continuation.resume(returning: genres)
                             } catch {
                                 continuation.resume(throwing: error)
                             }
