@@ -10,6 +10,7 @@ import Moya
 
 enum MoviesApi {
     case fetchGenres(req: FetchGenreRequest)
+    case fetchTvSeriesGenres(req: FetchTvSeriesGenresRequest)
 }
 
 extension MoviesApi: TargetType{
@@ -23,28 +24,36 @@ extension MoviesApi: TargetType{
     
     var path: String {
         switch self {
-            case .fetchGenres:
+        case .fetchGenres:
             return "genre/movie/list"
+        case .fetchTvSeriesGenres:
+            return "genre/tv/list"
         }
     }
     
     var method: Moya.Method {
         switch self {
-            case .fetchGenres:
+        case .fetchGenres:
+            return .get
+        case .fetchTvSeriesGenres:
             return .get
         }
     }
     
     var task: Moya.Task {
         switch self {
-            case let .fetchGenres(req):
+        case let .fetchGenres(req):
+            return .requestParameters(parameters: req.asReqestParams(), encoding: URLEncoding.queryString)
+        case let .fetchTvSeriesGenres(req):
             return .requestParameters(parameters: req.asReqestParams(), encoding: URLEncoding.queryString)
         }
     }
     
     var headers: [String : String]? {
         switch self {
-            case let .fetchGenres(req):
+        case let .fetchGenres(req):
+            return ["Authorization" : req.accessToken]
+        case let .fetchTvSeriesGenres(req):
             return ["Authorization" : req.accessToken]
         }
     }

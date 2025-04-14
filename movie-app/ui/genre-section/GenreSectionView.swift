@@ -14,8 +14,14 @@ class GenreSectionViewModel: ObservableObject {
     
     func loadGenres() async {
         do {
+            #if SERIESDEV
+            let request = FetchTvSeriesGenresRequest()
+            let genres = try await movieService.FetchTvSeriesGenres(req: request)
+            #else
             let request = FetchGenreRequest()
             let genres = try await movieService.FetchGenres(req: request)
+            #endif
+            
             DispatchQueue.main.async {
                 self.genres = genres
             }
@@ -33,7 +39,7 @@ struct GenreSectionView: View {
             ZStack(alignment: .topTrailing){
                 Image(.redQuarterCircle)
                     .ignoresSafeArea(.all)
-                List(viewModel.genres){ genre in
+                List(viewModel.genres.sorted{$0.name < $1.name}){ genre in
                     ZStack {
                         NavigationLink(destination: Text(genre.name)){
                             EmptyView()
