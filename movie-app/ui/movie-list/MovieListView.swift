@@ -6,14 +6,17 @@
 //
 
 import SwiftUI
-//import InjectPropertyWrapper
+import InjectPropertyWrapper
 
-class MovieListViewModel: ObservableObject {
-    @Published var movies: [Movie] = []
-    private let service = MoviesService()
+protocol MovieListViewModelProtocol: ObservableObject {
     
-//    @Inject
-//    private var service: MoviesServiceProtocol
+}
+
+class MovieListViewModel: MovieListViewModelProtocol {
+    @Published var movies: [Movie] = []
+    
+    @Inject
+    private var service: MovieServiceProtocol
     
     func loadMovies(by genreId: Int) async {
         do {
@@ -32,31 +35,37 @@ struct MovieListView: View {
     @StateObject private var viewModel = MovieListViewModel()
     let genre: Genre
     
+//    let columns = [
+//        GridItem(.flexible(), spacing: 16),
+//        GridItem(.flexible(), spacing: 16)
+//    ]
+//    
     let columns = [
-        GridItem(.flexible(), spacing: 16),
-        GridItem(.flexible(), spacing: 16)
+        GridItem(.adaptive(minimum: 150), spacing: 16)
     ]
     
-//    let columns = [
-//        GridItem(.adaptive(minimum: 150), spacing: 16)
-//    ]
-    
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: 24) {
-                ForEach(viewModel.movies) { movie in
-                    MovieCellView(movie: movie)
+            ScrollView {
+                ZStack(alignment: .topTrailing){
+                    Image(.redQuarterCircle)
+                        .ignoresSafeArea(.all)
+                        .offset(x: 0, y: -150)
+                    LazyVGrid(columns: columns, spacing: 24) {
+                        ForEach(viewModel.movies) { movie in
+                            MovieCellView(movie: movie)
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.top, 16)
                 }
             }
-            .padding(.horizontal, 16)
-            .padding(.top, 16)
-        }
-        .navigationTitle(genre.name)
-        .onAppear {
-            Task {
-                await viewModel.loadMovies(by: genre.id)
+            .navigationTitle(genre.name)
+            .onAppear {
+                Task {
+                    await viewModel.loadMovies(by: genre.id)
+                }
             }
-        }
+        
     }
 }
 
@@ -81,15 +90,13 @@ struct MovieCellView: View {
                             image
                                 .resizable()
                                 .scaledToFill()
-
                         case .failure:
                             ZStack {
                                 Color.red.opacity(0.3)
                                 Image(systemName: "photo")
                                     .foregroundColor(.white)
                             }
-
-                        default:
+                        @unknown default:
                             EmptyView()
                         }
                     }
@@ -98,17 +105,26 @@ struct MovieCellView: View {
                     .clipped()
                     .cornerRadius(12)
                 }
-                
-                //TODO: Import star image and add new font
-                HStack(spacing: 6) {
-                    Image(.star)
-                    Text(String(format: "%.1f", movie.rating))
-                        .font(Fonts.labelBold)
+                HStack{
+                    HStack(spacing: 10) {
+                        Image(.ratingStar)
+                        Text(String(format: "%.1f", movie.rating))
+                            .font(Fonts.labelBold)
+                    }
+                    .padding(6)
+                    .background(Color.main.opacity(0.5))
+                    .cornerRadius(12)
+                    HStack(spacing: 10) {
+                        Image(.heart)
+                        Text(String(format: "%.0f M", movie.popularity))
+                            .font(Fonts.labelBold)
+                    }
+                    .padding(6)
+                    .background(Color.main.opacity(0.5))
+                    .cornerRadius(12)
                 }
                 .padding(6)
-                .background(Color.main.opacity(0.5))
-                .cornerRadius(12)
-                .padding(6)
+                
             }
 
             Text(movie.title)
@@ -116,8 +132,7 @@ struct MovieCellView: View {
                 .lineLimit(2)
 
             Text("\(movie.year)")
-                .font
-(Fonts.paragraph)
+                .font(Fonts.paragraph)
 
             Text("\(movie.duration)")
                 .font(Fonts.caption)

@@ -6,18 +6,24 @@
 //
 
 import SwiftUI
+import InjectPropertyWrapper
 import Foundation
 
-class GenreSectionViewModel: ObservableObject {
+protocol GenreSectionViewModelProtocol : ObservableObject {
+    
+}
+
+class GenreSectionViewModel: GenreSectionViewModelProtocol {
     @Published var genres: [Genre] = []
     
-    private var movieService: MovieServiceProtocol = MovieService()
+    @Inject
+    private var movieService: MovieServiceProtocol
     
     func loadGenres() async {
         do {
             let request = FetchGenreRequest()
-            let genres = Enviroments.name == .tv ? try await movieService.FetchTvSeriesGenres(req: request) :
-                                                    try await movieService.FetchGenres(req: request)
+            let genres = Enviroments.name == .tv ? try await movieService.fetchTvSeriesGenres(req: request) :
+                                                    try await movieService.fetchGenres(req: request)
             
             DispatchQueue.main.async {
                 self.genres = genres
@@ -38,7 +44,7 @@ struct GenreSectionView: View {
                     .ignoresSafeArea(.all)
                 List(viewModel.genres.sorted{$0.name < $1.name}){ genre in
                     ZStack {
-                        NavigationLink(destination: Text(genre.name)){
+                        NavigationLink(destination: MovieListView(genre:genre)){
                             EmptyView()
                         }
                         HStack{
