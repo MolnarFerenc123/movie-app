@@ -38,7 +38,7 @@ struct GenreSectionView: View {
                     .ignoresSafeArea(.all)
                 List(viewModel.genres.sorted{$0.name < $1.name}){ genre in
                     ZStack {
-                        NavigationLink(destination: Text(genre.name)){
+                        NavigationLink(destination: MovieListView(genre:genre)){
                             EmptyView()
                         }
                         HStack{

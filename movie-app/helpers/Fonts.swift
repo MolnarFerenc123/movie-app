@@ -13,4 +13,5 @@ enum Fonts {
     static let subheading = Font.custom("Raleway-ExtraBold", size: 16)
     static let paragraph = Font.custom("Lato-Regular", size: 12)
     static let caption = Font.custom("Lato-Bold", size: 12)
+    static let labelBold = Font.custom("Raleway-ExtraBold", size: 12)
 }

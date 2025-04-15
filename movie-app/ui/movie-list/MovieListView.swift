@@ -10,7 +10,7 @@ import SwiftUI
 
 class MovieListViewModel: ObservableObject {
     @Published var movies: [Movie] = []
-    private let service = MoviesService()
+    private let service = MovieService()
     
 //    @Inject
 //    private var service: MoviesServiceProtocol
@@ -32,31 +32,37 @@ struct MovieListView: View {
     @StateObject private var viewModel = MovieListViewModel()
     let genre: Genre
     
+//    let columns = [
+//        GridItem(.flexible(), spacing: 16),
+//        GridItem(.flexible(), spacing: 16)
+//    ]
+//    
     let columns = [
-        GridItem(.flexible(), spacing: 16),
-        GridItem(.flexible(), spacing: 16)
+        GridItem(.adaptive(minimum: 150), spacing: 16)
     ]
     
-//    let columns = [
-//        GridItem(.adaptive(minimum: 150), spacing: 16)
-//    ]
-    
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: 24) {
-                ForEach(viewModel.movies) { movie in
-                    MovieCellView(movie: movie)
+            ScrollView {
+                ZStack(alignment: .topTrailing){
+                    Image(.redQuarterCircle)
+                        .ignoresSafeArea(.all)
+                        .offset(x: 0, y: -150)
+                    LazyVGrid(columns: columns, spacing: 24) {
+                        ForEach(viewModel.movies) { movie in
+                            MovieCellView(movie: movie)
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.top, 16)
                 }
             }
-            .padding(.horizontal, 16)
-            .padding(.top, 16)
-        }
-        .navigationTitle(genre.name)
-        .onAppear {
-            Task {
-                await viewModel.loadMovies(by: genre.id)
+            .navigationTitle(genre.name)
+            .onAppear {
+                Task {
+                    await viewModel.loadMovies(by: genre.id)
+                }
             }
-        }
+        
     }
 }
 
@@ -73,7 +79,7 @@ struct MovieCellView: View {
                         switch phase {
                         case .empty:
                             ZStack {
-                                Color.gray.opacity(0.3)
+                                Color.gray
                                 ProgressView()
                             }
 
@@ -81,15 +87,14 @@ struct MovieCellView: View {
                             image
                                 .resizable()
                                 .scaledToFill()
-
+                                .scaleEffect(0.9)
                         case .failure:
                             ZStack {
-                                Color.red.opacity(0.3)
+                                Color.red
                                 Image(systemName: "photo")
                                     .foregroundColor(.white)
                             }
-
-                        default:
+                        @unknown default:
                             EmptyView()
                         }
                     }
@@ -99,9 +104,8 @@ struct MovieCellView: View {
                     .cornerRadius(12)
                 }
                 
-                //TODO: Import star image and add new font
                 HStack(spacing: 6) {
-                    Image(.star)
+                    Image(.ratingStar)
                     Text(String(format: "%.1f", movie.rating))
                         .font(Fonts.labelBold)
                 }
@@ -116,8 +120,7 @@ struct MovieCellView: View {
                 .lineLimit(2)
 
             Text("\(movie.year)")
-                .font
-(Fonts.paragraph)
+                .font(Fonts.paragraph)
 
             Text("\(movie.duration)")
                 .font(Fonts.caption)
