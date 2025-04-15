@@ -6,17 +6,25 @@
 //
 
 import SwiftUI
+import Foundation
 
 class GenreSectionViewModel: ObservableObject {
     @Published var genres: [Genre] = []
     
-    func loadGenres() {
-        self.genres = [
-            Genre(id: 1, name: "Adventure"),
-            Genre(id: 2, name: "Sci-fi"),
-            Genre(id: 3, name: "Horror"),
-            Genre(id: 4, name: "Comedy")
-        ]
+    private var movieService: MovieServiceProtocol = MovieService()
+    
+    func loadGenres() async {
+        do {
+            let request = FetchGenreRequest()
+            let genres = Enviroments.name == .tv ? try await movieService.FetchTvSeriesGenres(req: request) :
+                                                    try await movieService.FetchGenres(req: request)
+            
+            DispatchQueue.main.async {
+                self.genres = genres
+            }
+        } catch {
+            print("Error fetchin genres: \(genres)")
+        }
     }
 }
 
@@ -28,7 +36,7 @@ struct GenreSectionView: View {
             ZStack(alignment: .topTrailing){
                 Image(.redQuarterCircle)
                     .ignoresSafeArea(.all)
-                List(viewModel.genres){ genre in
+                List(viewModel.genres.sorted{$0.name < $1.name}){ genre in
                     ZStack {
                         NavigationLink(destination: Text(genre.name)){
                             EmptyView()
@@ -46,12 +54,14 @@ struct GenreSectionView: View {
                     .listRowSeparator(.hidden)
                 }
                 .listStyle(.plain)
-                .navigationTitle("genreSection.title")
+                .navigationTitle(Enviroments.name == .tv ? "TV" : "genreSection.title")
             }
                 
             }
             .onAppear {
-                viewModel.loadGenres()
+                Task {
+                    await viewModel.loadGenres()
+                }
             }
         }
 }
