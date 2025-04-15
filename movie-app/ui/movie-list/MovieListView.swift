@@ -8,7 +8,11 @@
 import SwiftUI
 import InjectPropertyWrapper
 
-class MovieListViewModel: ObservableObject {
+protocol MovieListViewModelProtocol: ObservableObject {
+    
+}
+
+class MovieListViewModel: MovieListViewModelProtocol {
     @Published var movies: [Movie] = []
     
     @Inject
@@ -17,7 +21,7 @@ class MovieListViewModel: ObservableObject {
     func loadMovies(by genreId: Int) async {
         do {
             let request = FetchMoviesRequest(genreId: genreId)
-            let movies = try await service.FetchMovies(req: request)
+            let movies = try await service.fetchMovies(req: request)
             DispatchQueue.main.async {
                 self.movies = movies
             }

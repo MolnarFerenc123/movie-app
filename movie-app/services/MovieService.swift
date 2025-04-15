@@ -10,16 +10,16 @@ import InjectPropertyWrapper
 import Moya
 
 protocol MovieServiceProtocol {
-    func FetchGenres(req: FetchGenreRequest) async throws -> [Genre]
-    func FetchTvSeriesGenres(req: FetchGenreRequest) async throws -> [Genre]
-    func FetchMovies(req: FetchMoviesRequest) async throws -> [Movie]
+    func fetchGenres(req: FetchGenreRequest) async throws -> [Genre]
+    func fetchTvSeriesGenres(req: FetchGenreRequest) async throws -> [Genre]
+    func fetchMovies(req: FetchMoviesRequest) async throws -> [Movie]
 }
 
 class MovieService : MovieServiceProtocol {
     @Inject
     var moya: MoyaProvider<MultiTarget>!
     
-    func FetchGenres(req: FetchGenreRequest) async throws -> [Genre] {
+    func fetchGenres(req: FetchGenreRequest) async throws -> [Genre] {
         return try await withCheckedThrowingContinuation { continuation in
                     moya.request(MultiTarget(MoviesApi.fetchGenres(req: req))) { result in
                         switch result {
@@ -43,7 +43,7 @@ class MovieService : MovieServiceProtocol {
                 }
     }
     
-    func FetchTvSeriesGenres(req: FetchGenreRequest) async throws -> [Genre] {
+    func fetchTvSeriesGenres(req: FetchGenreRequest) async throws -> [Genre] {
         return try await withCheckedThrowingContinuation { continuation in
                     moya.request(MultiTarget(MoviesApi.fetchTvSeriesGenres(req: req))) { result in
                         switch result {
@@ -64,7 +64,7 @@ class MovieService : MovieServiceProtocol {
                 }
     }
     
-    func FetchMovies(req: FetchMoviesRequest) async throws -> [Movie] {
+    func fetchMovies(req: FetchMoviesRequest) async throws -> [Movie] {
             return try await withCheckedThrowingContinuation { continuation in
                 moya.request(MultiTarget(MoviesApi.fetchMovies(req: req))) { result in
                     switch result {

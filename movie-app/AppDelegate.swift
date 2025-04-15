@@ -22,7 +22,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     override init() {
         assembler = MainAssembler.create(withAssemblies: [
-            ServiceAssembly()
+            ServiceAssembly(),
+            ViewModelAssembly()
         ])
         InjectSettings.resolver = assembler.container
     }
