@@ -6,19 +6,18 @@
 //
 
 import SwiftUI
-//import InjectPropertyWrapper
+import InjectPropertyWrapper
 
 class MovieListViewModel: ObservableObject {
     @Published var movies: [Movie] = []
-    private let service = MovieService()
     
-//    @Inject
-//    private var service: MoviesServiceProtocol
+    @Inject
+    private var service: MovieServiceProtocol
     
     func loadMovies(by genreId: Int) async {
         do {
             let request = FetchMoviesRequest(genreId: genreId)
-            let movies = try await service.fetchMovies(req: request)
+            let movies = try await service.FetchMovies(req: request)
             DispatchQueue.main.async {
                 self.movies = movies
             }
@@ -79,7 +78,7 @@ struct MovieCellView: View {
                         switch phase {
                         case .empty:
                             ZStack {
-                                Color.gray
+                                Color.gray.opacity(0.3)
                                 ProgressView()
                             }
 
@@ -87,10 +86,9 @@ struct MovieCellView: View {
                             image
                                 .resizable()
                                 .scaledToFill()
-                                .scaleEffect(0.9)
                         case .failure:
                             ZStack {
-                                Color.red
+                                Color.red.opacity(0.3)
                                 Image(systemName: "photo")
                                     .foregroundColor(.white)
                             }
@@ -103,16 +101,26 @@ struct MovieCellView: View {
                     .clipped()
                     .cornerRadius(12)
                 }
-                
-                HStack(spacing: 6) {
-                    Image(.ratingStar)
-                    Text(String(format: "%.1f", movie.rating))
-                        .font(Fonts.labelBold)
+                HStack{
+                    HStack(spacing: 10) {
+                        Image(.ratingStar)
+                        Text(String(format: "%.1f", movie.rating))
+                            .font(Fonts.labelBold)
+                    }
+                    .padding(6)
+                    .background(Color.main.opacity(0.5))
+                    .cornerRadius(12)
+                    HStack(spacing: 10) {
+                        Image(.heart)
+                        Text(String(format: "%.0f M", movie.popularity))
+                            .font(Fonts.labelBold)
+                    }
+                    .padding(6)
+                    .background(Color.main.opacity(0.5))
+                    .cornerRadius(12)
                 }
                 .padding(6)
-                .background(Color.main.opacity(0.5))
-                .cornerRadius(12)
-                .padding(6)
+                
             }
 
             Text(movie.title)

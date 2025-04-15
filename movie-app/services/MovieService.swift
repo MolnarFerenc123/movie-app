@@ -6,28 +6,18 @@
 //
 
 import Foundation
+import InjectPropertyWrapper
 import Moya
 
 protocol MovieServiceProtocol {
     func FetchGenres(req: FetchGenreRequest) async throws -> [Genre]
     func FetchTvSeriesGenres(req: FetchGenreRequest) async throws -> [Genre]
+    func FetchMovies(req: FetchMoviesRequest) async throws -> [Movie]
 }
 
 class MovieService : MovieServiceProtocol {
-    
+    @Inject
     var moya: MoyaProvider<MultiTarget>!
-    
-    init() {
-        let configuration = URLSessionConfiguration.default
-        configuration.headers = .default
-        
-        self.moya = MoyaProvider<MultiTarget> (
-            session: Session(configuration: configuration, startRequestsImmediately: false),
-            plugins : [
-                NetworkLoggerPlugin()
-            ]
-        )
-    }
     
     func FetchGenres(req: FetchGenreRequest) async throws -> [Genre] {
         return try await withCheckedThrowingContinuation { continuation in
@@ -74,7 +64,7 @@ class MovieService : MovieServiceProtocol {
                 }
     }
     
-    func fetchMovies(req: FetchMoviesRequest) async throws -> [Movie] {
+    func FetchMovies(req: FetchMoviesRequest) async throws -> [Movie] {
             return try await withCheckedThrowingContinuation { continuation in
                 moya.request(MultiTarget(MoviesApi.fetchMovies(req: req))) { result in
                     switch result {

@@ -14,8 +14,9 @@ struct Movie: Identifiable {
     let imageUrl: URL?
     let rating: Double
     let voteCount: Int
+    let popularity: Double
     
-    init(id: Int, title: String, year: String, duration: String, imageUrl: URL?, rating: Double, voteCount: Int) {
+    init(id: Int, title: String, year: String, duration: String, imageUrl: URL?, rating: Double, voteCount: Int, popularity: Double) {
         self.id = id
         self.title = title
         self.year = year
@@ -23,6 +24,7 @@ struct Movie: Identifiable {
         self.imageUrl = imageUrl
         self.rating = rating
         self.voteCount = voteCount
+        self.popularity = popularity
     }
     
     init(dto: MovieResponse) {
@@ -42,6 +44,7 @@ struct Movie: Identifiable {
         self.imageUrl = imageUrl
         self.rating = dto.voteAverage
         self.voteCount = dto.voteCount
+        self.popularity = dto.popularity
         
     }
     
