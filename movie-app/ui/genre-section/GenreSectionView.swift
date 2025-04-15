@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 class GenreSectionViewModel: ObservableObject {
     @Published var genres: [Genre] = []
@@ -14,13 +15,9 @@ class GenreSectionViewModel: ObservableObject {
     
     func loadGenres() async {
         do {
-            #if SERIESDEV
-            let request = FetchTvSeriesGenresRequest()
-            let genres = try await movieService.FetchTvSeriesGenres(req: request)
-            #else
             let request = FetchGenreRequest()
-            let genres = try await movieService.FetchGenres(req: request)
-            #endif
+            let genres = Enviroments.name == .tv ? try await movieService.FetchTvSeriesGenres(req: request) :
+                                                    try await movieService.FetchGenres(req: request)
             
             DispatchQueue.main.async {
                 self.genres = genres
@@ -57,7 +54,7 @@ struct GenreSectionView: View {
                     .listRowSeparator(.hidden)
                 }
                 .listStyle(.plain)
-                .navigationTitle(Enviroment.name == .dev ? "DEV" : "PROD")
+                .navigationTitle(Enviroments.name == .tv ? "TV" : "genreSection.title")
             }
                 
             }

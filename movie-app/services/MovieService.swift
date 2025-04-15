@@ -10,7 +10,7 @@ import Moya
 
 protocol MovieServiceProtocol {
     func FetchGenres(req: FetchGenreRequest) async throws -> [Genre]
-    func FetchTvSeriesGenres(req: FetchTvSeriesGenresRequest) async throws -> [Genre]
+    func FetchTvSeriesGenres(req: FetchGenreRequest) async throws -> [Genre]
 }
 
 class MovieService : MovieServiceProtocol {
@@ -53,7 +53,7 @@ class MovieService : MovieServiceProtocol {
                 }
     }
     
-    func FetchTvSeriesGenres(req: FetchTvSeriesGenresRequest) async throws -> [Genre] {
+    func FetchTvSeriesGenres(req: FetchGenreRequest) async throws -> [Genre] {
         return try await withCheckedThrowingContinuation { continuation in
                     moya.request(MultiTarget(MoviesApi.fetchTvSeriesGenres(req: req))) { result in
                         switch result {

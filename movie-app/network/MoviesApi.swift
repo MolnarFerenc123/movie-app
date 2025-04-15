@@ -10,7 +10,7 @@ import Moya
 
 enum MoviesApi {
     case fetchGenres(req: FetchGenreRequest)
-    case fetchTvSeriesGenres(req: FetchTvSeriesGenresRequest)
+    case fetchTvSeriesGenres(req: FetchGenreRequest)
 }
 
 extension MoviesApi: TargetType{
@@ -33,9 +33,7 @@ extension MoviesApi: TargetType{
     
     var method: Moya.Method {
         switch self {
-        case .fetchGenres:
-            return .get
-        case .fetchTvSeriesGenres:
+        case .fetchGenres, .fetchTvSeriesGenres:
             return .get
         }
     }
