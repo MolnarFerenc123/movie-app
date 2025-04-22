@@ -60,9 +60,9 @@ extension MainTabView{
         }
         .frame(width: 60, height: 60)
         .background(isActive ? .white : .clear)
-        .cornerRadius(100)
+        .cornerRadius(30)
     }
-}
+
 
 #Preview {
     MainTabView()
