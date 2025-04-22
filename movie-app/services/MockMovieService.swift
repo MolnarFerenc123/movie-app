@@ -68,4 +68,7 @@ class MockMoviesService: MovieServiceProtocol {
         []
     }
     
+    func fetchMoviesByTitle(req: FetchMoviesByTitleRequest) async throws -> [Movie] {
+        []
+    }
 }

@@ -17,5 +17,10 @@ class ViewModelAssembly: Assembly {
         container.register((any GenreSectionViewModelProtocol).self) { _ in
             return GenreSectionViewModel()
         }.inObjectScope(.container)
+        
+        container.register((any SearchMovieViewModelProtocol).self) { _ in
+            return SearchMovieViewModel()
+        }.inObjectScope(.container)
+
     }
 }
