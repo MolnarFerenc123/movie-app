@@ -60,13 +60,17 @@ extension MoviesApi: TargetType{
     var headers: [String : String]? {
         switch self {
         case let .fetchGenres(req):
-            return ["Authorization" : req.accessToken]
+            return ["Authorization" : req.accessToken,
+                    "accept" : "application/json"]
         case let .fetchTvSeriesGenres(req):
-            return ["Authorization" : req.accessToken]
+            return ["Authorization" : req.accessToken,
+                    "accept" : "application/json"]
         case let .fetchMovies(req):
-            return ["Authorization" : req.accessToken]
+            return ["Authorization" : req.accessToken,
+                    "accept" : "application/json"]
         case let .fetchMoviesByTitle(req):
-            return ["Authorization" : req.accessToken]
+            return ["Authorization" : req.accessToken,
+                    "accept" : "application/json"]
         }
     }
     

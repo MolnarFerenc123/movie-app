@@ -24,22 +24,20 @@ struct MainTabView: View {
                     .tag(1)
             }
             .padding(.bottom, -10)
-            ZStack{
-                HStack{
+            HStack{
+                ForEach((TabbedItems.allCases), id: \.self){ item in
                     Spacer()
-                    ForEach((TabbedItems.allCases), id: \.self){ item in
-                        Button{
-                            selectedTab = item.rawValue
-                        } label: {
-                            CustomTabItem(imageName: item.iconName, isActive: (selectedTab == item.rawValue))
-                        }
-                        Spacer()
+                    Button{
+                        selectedTab = item.rawValue
+                    } label: {
+                        CustomTabItem(imageName: item.iconName, isActive: (selectedTab == item.rawValue))
                     }
+                    Spacer()
                 }
-                .padding(6)
             }
-            .frame(height: 112)
-            .background(Color.init(red: 34/255, green: 34/255, blue: 34/255))
+            .padding(.top, 24)
+            .padding(.bottom, 48)
+            .background(.tabBarBackground)
             .cornerRadius(30)
         }
         .ignoresSafeArea()
@@ -55,15 +53,17 @@ extension MainTabView{
                 .resizable()
                 .renderingMode(.template)
                 .foregroundStyle( isActive ? .black : .white )
+                .aspectRatio(contentMode: .fit)
                 .frame(width: 16, height: 18)
             Spacer()
         }
-        .frame(width: 60, height: 60)
+        .frame(width: 40, height: 40)
         .background(isActive ? .white : .clear)
-        .cornerRadius(30)
+        .cornerRadius(20)
     }
-
-
+    
+}
+    
 #Preview {
     MainTabView()
 }

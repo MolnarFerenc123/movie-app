@@ -9,29 +9,6 @@ import SwiftUI
 import InjectPropertyWrapper
 import Foundation
 
-protocol SearchMovieViewModelProtocol : ObservableObject {
-    
-}
-
-class SearchMovieViewModel: SearchMovieViewModelProtocol {
-    @Published var movies: [Movie] = []
-    
-    @Inject
-    private var service: MovieServiceProtocol
-
-    func searchMovies(searchText: String) async {
-        do {
-            let request = FetchMoviesByTitleRequest(searchText: searchText)
-            let movies = try await service.fetchMoviesByTitle(req: request)
-            DispatchQueue.main.async {
-                self.movies = movies
-            }
-        } catch {
-            print("Error fetching movies: \(error)")
-        }
-    }
-}
-
 struct SearchMovieView: View {
     @StateObject private var viewModel = SearchMovieViewModel()
     
@@ -44,18 +21,15 @@ struct SearchMovieView: View {
     @FocusState private var textFieldIsFocused: Bool
     
     var body: some View{
-        
-        return VStack{
+        VStack{
             HStack {
                 Image(.searchIcon)
                 TextField("", text: $searchText, prompt: Text("Movies, Director, Actor, Actress, etc.").foregroundColor(Color.mainInvert))
                     .foregroundStyle(Color.mainInvert)
                     .font(Fonts.paragraph)
-                    
                     .onChange(of: searchText){ oldValue, newValue in
                         Task {
-                            await viewModel.searchMovies(searchText: searchText
-                            )
+                            await viewModel.searchMovies(searchText: searchText)
                         }
                     }
                     .focused($textFieldIsFocused)
