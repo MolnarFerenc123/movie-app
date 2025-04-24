@@ -26,13 +26,14 @@ struct MainTabView: View {
             .padding(.bottom, -10)
             HStack{
                 ForEach((TabbedItems.allCases), id: \.self){ item in
-                    Spacer()
-                    Button{
-                        selectedTab = item.rawValue
-                    } label: {
-                        CustomTabItem(imageName: item.iconName, isActive: (selectedTab == item.rawValue))
-                    }
-                    Spacer()
+                        Spacer()
+                        Button{
+                            selectedTab = item.rawValue
+                        }
+                    label: {
+                            CustomTabItem(imageName: item.iconName, isActive: (selectedTab == item.rawValue))
+                        }
+                        Spacer()
                 }
             }
             .padding(.top, 24)
@@ -60,6 +61,7 @@ extension MainTabView{
         .frame(width: 40, height: 40)
         .background(isActive ? .white : .clear)
         .cornerRadius(20)
+        .accessibilityIdentifier(imageName)
     }
     
 }
