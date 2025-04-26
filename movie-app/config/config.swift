@@ -13,4 +13,13 @@ enum Config {
     static var bearerToken: String {
         "Bearer \(apiToken)"
     }
-} 
+    
+    static let accountId: String = {
+        guard let path = Bundle.main.path(forResource: "Config", ofType: "plist"),
+              let dict = NSDictionary(contentsOfFile: path),
+              let token = dict["ACCOUNT_ID"] as? String else {
+            fatalError("Config.plist file or ACCOUNT_ID not found")
+        }
+        return token
+    }()
+}

@@ -14,6 +14,8 @@ protocol MovieServiceProtocol {
     func fetchTvSeriesGenres(req: FetchGenreRequest) async throws -> [Genre]
     func fetchMovies(req: FetchMoviesRequest) async throws -> [Movie]
     func fetchMoviesByTitle(req: FetchMoviesByTitleRequest) async throws -> [Movie]
+    func fetchFavorites(req: FetchFavoritesRequest) async throws -> [Movie]
+    func addFavorite(req: AddFavoriteRequest) async throws -> AddFavoriteResult
 }
 
 class MovieService : MovieServiceProtocol {
@@ -102,4 +104,42 @@ class MovieService : MovieServiceProtocol {
                 }
             }
         }
+    
+    func fetchFavorites(req: FetchFavoritesRequest) async throws -> [Movie] {
+        return try await withCheckedThrowingContinuation { continuation in
+            moya.request(MultiTarget(MoviesApi.fetchFavorites(req: req))) { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let decodedResponse = try JSONDecoder().decode(MoviePageResponse.self, from: response.data)
+                        let movies = decodedResponse.results.map { Movie(dto: $0) }
+                        continuation.resume(returning: movies)
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+    
+    func addFavorite(req: AddFavoriteRequest) async throws -> AddFavoriteResult{
+        return try await withCheckedThrowingContinuation { continuation in
+            moya.request(MultiTarget(MoviesApi.addFavorite(req: req))) { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let decodedResponse = try JSONDecoder().decode(AddFavoriteResponse.self, from: response.data)
+                        let result = AddFavoriteResult(dto: decodedResponse)
+                        continuation.resume(returning: result)
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
 }
