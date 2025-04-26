@@ -52,7 +52,7 @@ struct MovieListView: View {
                         .offset(x: 0, y: -150)
                     LazyVGrid(columns: columns, spacing: 24) {
                         ForEach(viewModel.movies) { movie in
-                            MovieCellView(movie: movie, imageHeight: 100, showFavouriteIcon: false)
+                            MovieCell(movie: movie, imageHeight: 100, showFavouriteIcon: false)
                         }
                     }
                     .padding(.horizontal, 16)

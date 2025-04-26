@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MovieCellView: View {
+struct MovieCell: View {
     let movie: Movie
     let imageHeight: CGFloat?
     let showFavouriteIcon: Bool
