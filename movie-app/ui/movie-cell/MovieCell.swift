@@ -7,13 +7,8 @@
 
 import SwiftUI
 
-<<<<<<< HEAD:movie-app/ui/movie-cell/MovieCell.swift
 struct MovieCell: View {
-=======
-struct MovieCellView: View {
     @StateObject private var viewModel = MovieCellViewModel()
-    
->>>>>>> 4b9ae62350645d980f3409662bf510d5d7d60b55:movie-app/ui/movie-cell/MovieCellView.swift
     let movie: Movie
     let imageHeight: CGFloat?
     let showFavouriteIcon: Bool

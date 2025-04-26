@@ -25,7 +25,7 @@ struct FavoriteListView: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 10) {
                     ForEach(viewModel.movies) { movie in
-                        MovieCellView(movie: movie, imageHeight: 180, showFavouriteIcon: true)
+                        MovieCell(movie: movie, imageHeight: 180, showFavouriteIcon: true)
                             .padding(.horizontal, 25)
                     }
                 }
