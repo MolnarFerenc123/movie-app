@@ -22,5 +22,8 @@ class ViewModelAssembly: Assembly {
             return SearchMovieViewModel()
         }.inObjectScope(.container)
 
+        container.register((any FavoriteListViewModelProtocol).self) { _ in
+            return FavoriteListViewModel()
+        }.inObjectScope(.container)
     }
 }

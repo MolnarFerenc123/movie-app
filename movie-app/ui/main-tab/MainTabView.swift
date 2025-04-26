@@ -22,6 +22,8 @@ struct MainTabView: View {
                     .tag(0)
                 SearchMovieView()
                     .tag(1)
+                FavoriteListView()
+                    .tag(2)
             }
             .padding(.bottom, -10)
             HStack{

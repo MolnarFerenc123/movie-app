@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MovieCellView: View {
+    @StateObject private var viewModel = MovieCellViewModel()
+    
     let movie: Movie
     let imageHeight: CGFloat?
     let showFavouriteIcon: Bool
@@ -63,7 +65,17 @@ struct MovieCellView: View {
                     .cornerRadius(12)
                     if showFavouriteIcon {
                         Spacer()
-                        Image(.favourite)
+                        Button {
+                            
+                        } label: {
+                            Image(.favourite)
+                                .onTapGesture {
+                                    Task {
+                                        await viewModel.addFavorite(movieId: movie.id)
+                                    }
+                                }
+                        }
+                        
                     }
                     
                 }

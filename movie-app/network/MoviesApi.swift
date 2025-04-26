@@ -13,6 +13,8 @@ enum MoviesApi {
     case fetchTvSeriesGenres(req: FetchGenreRequest)
     case fetchMovies(req: FetchMoviesRequest)
     case fetchMoviesByTitle(req: FetchMoviesByTitleRequest)
+    case fetchFavorites(req: FetchFavoritesRequest)
+    case addFavorite(req: AddFavoriteRequest)
 }
 
 extension MoviesApi: TargetType{
@@ -34,13 +36,19 @@ extension MoviesApi: TargetType{
             return "discover/movie"
         case .fetchMoviesByTitle:
             return "search/movie"
+        case .fetchFavorites(let req):
+            return "account/\(req.accountId)/favorite/movies"
+        case .addFavorite(let req):
+            return "account/\(req.accountId)/favorite"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .fetchGenres, .fetchTvSeriesGenres, .fetchMovies, .fetchMoviesByTitle:
+        case .fetchGenres, .fetchTvSeriesGenres, .fetchMovies, .fetchMoviesByTitle, .fetchFavorites:
             return .get
+        case .addFavorite:
+            return .post
         }
     }
     
@@ -54,6 +62,10 @@ extension MoviesApi: TargetType{
             return .requestParameters(parameters: req.asReqestParams(), encoding: URLEncoding.queryString)
         case let .fetchMoviesByTitle(req):
             return .requestParameters(parameters: req.asReqestParams(), encoding: URLEncoding.queryString)
+        case let .fetchFavorites(req):
+            return .requestParameters(parameters: req.asReqestParams(), encoding: URLEncoding.queryString)
+        case let .addFavorite(req):
+            return .requestCompositeParameters(bodyParameters: req.asBodyParams(), bodyEncoding: JSONEncoding.default, urlParameters: req.asReqestParams())
         }
     }
     
@@ -71,6 +83,13 @@ extension MoviesApi: TargetType{
         case let .fetchMoviesByTitle(req):
             return ["Authorization" : req.accessToken,
                     "accept" : "application/json"]
+        case let .fetchFavorites(req):
+            return ["Authorization" : req.accessToken,
+                    "accept" : "application/json"]
+        case let .addFavorite(req):
+            return ["Authorization" : req.accessToken,
+                    "accept" : "application/json"]
+
         }
     }
     
