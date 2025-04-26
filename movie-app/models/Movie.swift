@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct Movie: Identifiable {
+struct Movie: Identifiable, Equatable {
     let id: Int
     let title: String
     let year: String

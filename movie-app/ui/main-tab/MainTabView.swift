@@ -11,7 +11,7 @@ struct MainTabView: View {
     
     init() {
             let transparentAppearence = UITabBarAppearance()
-            transparentAppearence.configureWithTransparentBackground() // 🔑
+            transparentAppearence.configureWithTransparentBackground()
             UITabBar.appearance().standardAppearance = transparentAppearence
         }
     
@@ -28,13 +28,14 @@ struct MainTabView: View {
             .padding(.bottom, -10)
             HStack{
                 ForEach((TabbedItems.allCases), id: \.self){ item in
-                    Spacer()
-                    Button{
-                        selectedTab = item.rawValue
-                    } label: {
-                        CustomTabItem(imageName: item.iconName, isActive: (selectedTab == item.rawValue))
-                    }
-                    Spacer()
+                        Spacer()
+                        Button{
+                            selectedTab = item.rawValue
+                        }
+                    label: {
+                            CustomTabItem(imageName: item.iconName, isActive: (selectedTab == item.rawValue))
+                        }
+                        Spacer()
                 }
             }
             .padding(.top, 24)
@@ -45,7 +46,7 @@ struct MainTabView: View {
         .ignoresSafeArea()
     }
 }
-    
+
 #Preview {
     MainTabView()
 }
