@@ -47,14 +47,8 @@ struct GenreSectionView: View {
                         NavigationLink(destination: MovieListView(genre:genre)){
                             EmptyView()
                         }
-                        HStack{
-                            Text(genre.name)
-                                .font(Fonts.title)
-                                .foregroundStyle(.primary)
-                            Spacer()
-                            Image(.rightArrow)
-                        }
                         
+                        GenreSectionCell(genre: genre)
                     }
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)

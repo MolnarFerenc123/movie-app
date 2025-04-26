@@ -7,3 +7,5 @@
 */
 
 "genreSection.title" = "Movie app";
+"search.empty.text" = "Start typing to search";
+"search.textfield.placeholder" = "Movies, Director, Actor, Actress, etc.";

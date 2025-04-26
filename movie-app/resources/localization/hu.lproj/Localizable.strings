@@ -7,3 +7,5 @@
 */
 
 "genreSection.title" = "Film alkalmazás";
+"search.empty.text" = "Kezdj el gépelni a kereséshez";
+"search.textfield.placeholder" = "Filmek, rendezők, színészek, stb.";

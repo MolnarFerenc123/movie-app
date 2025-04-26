@@ -24,7 +24,7 @@ struct SearchMovieView: View {
         VStack{
             HStack {
                 Image(.searchIcon)
-                TextField("", text: $searchText, prompt: Text("Movies, Director, Actor, Actress, etc.").foregroundColor(Color.mainInvert))
+                TextField("", text: $searchText, prompt: Text("search.textfield.placeholder").foregroundColor(Color.mainInvert))
                     .foregroundStyle(Color.mainInvert)
                     .font(Fonts.paragraph)
                     .onChange(of: searchText){ oldValue, newValue in
@@ -46,7 +46,7 @@ struct SearchMovieView: View {
 
             if(searchText.isEmpty) {
                 Spacer()
-                Text("Kezdj el gépelni a kereséshez")
+                Text("search.empty.text")
                     .font(Fonts.title)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 100)
