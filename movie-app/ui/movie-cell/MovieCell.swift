@@ -46,22 +46,8 @@ struct MovieCell: View {
                     .cornerRadius(12)
                 }
                 HStack{
-                    HStack(spacing: 10) {
-                        Image(.ratingStar)
-                        Text(String(format: "%.1f", movie.rating))
-                            .font(Fonts.labelBold)
-                    }
-                    .padding(6)
-                    .background(Color.main.opacity(0.5))
-                    .cornerRadius(12)
-                    HStack(spacing: 10) {
-                        Image(.heart)
-                        Text(String(format: "%.0f M", movie.popularity))
-                            .font(Fonts.labelBold)
-                    }
-                    .padding(6)
-                    .background(Color.main.opacity(0.5))
-                    .cornerRadius(12)
+                    MovieLabel(type: .rating(value: movie.rating))
+                    MovieLabel(type: .popularity(popularity: movie.popularity))
                     if showFavouriteIcon {
                         Spacer()
                         Button {
@@ -78,7 +64,7 @@ struct MovieCell: View {
                     }
                     
                 }
-                .padding(6)
+                .padding(LayoutConst.smallPadding)
                 
             }
             HStack{

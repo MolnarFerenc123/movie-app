@@ -27,7 +27,7 @@ struct SearchMovieView: View {
                 TextField("", text: $searchText, prompt: Text("search.textfield.placeholder").foregroundColor(Color.mainInvert))
                     .foregroundStyle(Color.mainInvert)
                     .font(Fonts.paragraph)
-                    .onChange(of: searchText){ oldValue, newValue in
+                    .onChange(of: searchText){ _, _ in
                         Task {
                             await viewModel.searchMovies(searchText: searchText)
                         }

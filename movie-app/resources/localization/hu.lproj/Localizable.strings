@@ -9,3 +9,9 @@
 "genreSection.title" = "Film alkalmazás";
 "search.empty.text" = "Kezdj el gépelni a kereséshez";
 "search.textfield.placeholder" = "Filmek, rendezők, színészek, stb.";
+"button.close.text" = "Bezárás";
+"unexpected.error.title" = "Váratlan hiba";
+"unexpected.error.message" = "Váratlab hiba történt. Kérjük próbálja meg később.";
+
+"resource.not.found.error.title" = "Nem található erőforrás";
+"resource.not.found.error.message" = "A kért erőforrás nem található";

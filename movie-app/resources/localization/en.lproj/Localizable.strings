@@ -9,3 +9,10 @@
 "genreSection.title" = "Movie app";
 "search.empty.text" = "Start typing to search";
 "search.textfield.placeholder" = "Movies, Director, Actor, Actress, etc.";
+"button.close.text" = "Close";
+
+"unexpected.error.title" = "Unexpected Error";
+"unexpected.error.message" = "Something went wrong. Please try again later";
+
+"resource.not.found.error.title" = "Resource not found";
+"resource.not.found.error.message" = "The resource you requested could not be found.";

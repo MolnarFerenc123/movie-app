@@ -38,6 +38,11 @@ struct GenreSectionView: View {
                     await viewModel.loadGenres()
                 }
             }
+            .alert(item: $viewModel.alertModel) {model in
+                return Alert(title: Text(LocalizedStringKey(model.title)), message: Text(LocalizedStringKey(model.message)), dismissButton: .default(Text(LocalizedStringKey(model.dismissButtonTitle))) {
+                    viewModel.alertModel = nil
+                })
+            }
         }
 }
 
