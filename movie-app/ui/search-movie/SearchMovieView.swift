@@ -12,8 +12,6 @@ import Foundation
 struct SearchMovieView: View {
     @StateObject private var viewModel = SearchMovieViewModel()
     
-    @State var searchText: String = ""
-    
     let columns = [
         GridItem(.adaptive(minimum: 380), spacing: 16)
     ]
@@ -24,12 +22,12 @@ struct SearchMovieView: View {
         VStack{
             HStack {
                 Image(.searchIcon)
-                TextField("", text: $searchText, prompt: Text("search.textfield.placeholder").foregroundColor(Color.mainInvert))
+                TextField("", text: $viewModel.searchText, prompt: Text("search.textfield.placeholder").foregroundColor(Color.mainInvert))
                     .foregroundStyle(Color.mainInvert)
                     .font(Fonts.paragraph)
-                    .onChange(of: searchText){ _, _ in
+                    .onChange(of: viewModel.debouncedSearchText){ _, _ in
                         Task {
-                            await viewModel.searchMovies(searchText: searchText)
+                            await viewModel.searchMovies()
                         }
                     }
                     .focused($textFieldIsFocused)
@@ -44,7 +42,7 @@ struct SearchMovieView: View {
             .padding(30)
             
 
-            if(searchText.isEmpty) {
+            if(viewModel.searchText.isEmpty) {
                 Spacer()
                 Text("search.empty.text")
                     .font(Fonts.title)
@@ -71,6 +69,7 @@ struct SearchMovieView: View {
         }
     }
 }
+
 
 
 
