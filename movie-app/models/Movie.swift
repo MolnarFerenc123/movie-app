@@ -28,7 +28,7 @@ struct Movie: Identifiable, Equatable {
     }
     
     init(dto: MovieResponse) {
-        let year = String(dto.releaseDate.prefix(4))
+        let year = String(dto.releaseDate?.prefix(4) ?? "2020")
         let duration = "1h 25min" // TODO: placeholder – ha lesz ilyen adat, cserélhető
         
         var imageUrl: URL? {
@@ -42,9 +42,9 @@ struct Movie: Identifiable, Equatable {
         self.year = year
         self.duration = duration
         self.imageUrl = imageUrl
-        self.rating = dto.voteAverage
-        self.voteCount = dto.voteCount
-        self.popularity = dto.popularity
+        self.rating = dto.voteAverage ?? 3
+        self.voteCount = dto.voteCount ?? 23
+        self.popularity = dto.popularity ?? 21
         
     }
     

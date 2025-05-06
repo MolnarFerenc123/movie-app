@@ -32,7 +32,6 @@ class SearchMovieViewModel: SearchMovieViewModelProtocol {
             let movies = try await service.fetchMoviesByTitle(req: request)
             DispatchQueue.main.async {
                 self.movies = movies
-                print(self.movies)
             }
         } catch {
             print("Error fetching movies: \(error)")
@@ -42,7 +41,7 @@ class SearchMovieViewModel: SearchMovieViewModelProtocol {
     func setupDebounce(){
         debouncedSearchText = self.searchText
         $searchText
-            .debounce(for: .seconds(1), scheduler: RunLoop.main)
+            .debounce(for: .seconds(5), scheduler: RunLoop.main)
             .assign(to: &$debouncedSearchText)
     }
 }
