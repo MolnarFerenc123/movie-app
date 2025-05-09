@@ -65,7 +65,10 @@ extension MoviesApi: TargetType{
         case let .fetchFavorites(req):
             return .requestParameters(parameters: req.asReqestParams(), encoding: URLEncoding.queryString)
         case let .addFavorite(req):
-            return .requestCompositeParameters(bodyParameters: req.asBodyParams(), bodyEncoding: JSONEncoding.default, urlParameters: req.asReqestParams())
+            return .requestCompositeParameters(
+                bodyParameters: req.asBodyParams(),
+                bodyEncoding: JSONEncoding.default,
+                urlParameters: req.asReqestParams())
         }
     }
     

@@ -38,9 +38,7 @@ struct MovieListView: View {
             }
             .navigationTitle(genre.name)
             .onAppear {
-                Task {
-                    await viewModel.loadMovies(by: genre.id)
-                }
+                viewModel.loadMovies(by: genre.id)
             }
         
     }

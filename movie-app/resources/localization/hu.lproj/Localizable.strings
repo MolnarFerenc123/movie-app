@@ -15,3 +15,5 @@
 
 "resource.not.found.error.title" = "Nem található erőforrás";
 "resource.not.found.error.message" = "A kért erőforrás nem található";
+
+"favoriteMovies.title" = "Kedvencek";

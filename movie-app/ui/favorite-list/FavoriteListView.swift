@@ -17,7 +17,7 @@ struct FavoriteListView: View {
     
     var body: some View {
         VStack(alignment: .leading){
-            Text("Favourites")
+            Text("favoriteMovies.title")
                 .font(Fonts.heading)
                 .padding(.top, 41)
                 .padding(.leading, 21)
@@ -31,13 +31,17 @@ struct FavoriteListView: View {
                 }
             }
             .scrollDismissesKeyboard(.interactively)
-            .onAppear {
-                Task {
-                    await viewModel.loadFavorites()
-                }
-            }
             
             
+        }
+        .alert(item: $viewModel.alertModel) { model in
+            Alert(
+                title: Text(LocalizedStringKey(model.title)),
+                message: Text(LocalizedStringKey(model.message)),
+                dismissButton: .default(Text(LocalizedStringKey(model.dismissButtonTitle))) {
+                viewModel.alertModel = nil
+            })
+
         }
     }
 }

@@ -16,3 +16,4 @@
 
 "resource.not.found.error.title" = "Resource not found";
 "resource.not.found.error.message" = "The resource you requested could not be found.";
+"favoriteMovies.title" = "Favourites";

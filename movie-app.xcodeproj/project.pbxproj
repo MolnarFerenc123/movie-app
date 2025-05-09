@@ -46,16 +46,28 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				"ui/tv-list/TVListViewMode.swift",
 			);
 			target = ADA6F7362DA14F8E007981C1 /* movie-app */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		ADAC4DB72DCA287100614C69 /* Exceptions for "movie-app" folder in "Copy Bundle Resources" phase from "movie-app" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = ADA6F7352DA14F8E007981C1 /* Resources */;
+			membershipExceptions = (
+				"ui/tv-list/TVListViewMode.swift",
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		ADA6F7392DA14F8E007981C1 /* movie-app */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				AD2C77C82DA58D380093D474 /* Exceptions for "movie-app" folder in "movie-app" target */,
+				ADAC4DB72DCA287100614C69 /* Exceptions for "movie-app" folder in "Copy Bundle Resources" phase from "movie-app" target */,
 			);
 			path = "movie-app";
 			sourceTree = "<group>";

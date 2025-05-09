@@ -17,91 +17,36 @@ protocol GenreSectionViewModelProtocol : ObservableObject {
     var genres: [Genre] {get}
 }
 
-class GenreSectionViewModel: GenreSectionViewModelProtocol {
+class GenreSectionViewModel: GenreSectionViewModelProtocol, ErrorPresentable{
     @Published var genres: [Genre] = []
     @Published var alertModel: AlertModel? = nil
     
     private var cancellables = Set<AnyCancellable>()
     
-    @Inject
-    private var movieService: MovieServiceProtocol
     
-    init(){
+    @Inject
+    private var reactiveMovieService: ReactiveMoviesService
+    
+    init() {
         let request = FetchGenreRequest()
         
-        let future = Future<[Genre], Error> { future in
-            Task {
-                do {
-                    let genres = try await self.movieService.fetchGenres(req: request)
-                    future(.success(genres))
-                } catch {
-                    future(.failure(error))
-                }
-            }
-        }
+        let genres = Enviroments.name == .tv ?
+        self.reactiveMovieService.fetchGenres(req: request) :
+        self.reactiveMovieService.fetchTvSeriesGenres(req: request)
         
-        let futureTv = Future<[Genre], Error> { future in
-            Task {
-                do {
-                    let genres = try await self.movieService.fetchTvSeriesGenres(req: request)
-                    future(.success(genres))
-                } catch {
-                    future(.failure(error))
-                }
-            }
-        }
-        
-        
-//        Publishers.CombineLatest(future, futureTv)
-        future
-            .flatMap({ genres in
-                futureTv.map { genreTv in
-                    (genres, genreTv)
-                }
+        genres
+            .handleEvents(receiveOutput: { genres in
+                print("Custom action before receive: genres count = \(genres.count)")
             })
-            .receive(on: RunLoop.main)
+            .print("<<<debug")
             .sink { completion in
-                switch completion {
-                case .failure(let error):
+                if case let .failure(error) = completion {
                     self.alertModel = self.toAlertModel(error)
-                case .finished:
-                    break
                 }
-            } receiveValue: { [weak self]genres, genresTv in
-                self?.genres = genres + genresTv
+            } receiveValue: { genres in
+                self.genres = genres
             }
             .store(in: &cancellables)
     }
-
-    func loadGenres() async {
-        do {
-            let request = FetchGenreRequest()
-            let genres = Enviroments.name == .tv ? try await movieService.fetchTvSeriesGenres(req: request) :
-                                                    try await movieService.fetchGenres(req: request)
-            
-            DispatchQueue.main.async {
-                self.genres = genres
-            }
-        } catch let error as MovieError{
-            DispatchQueue.main.async {
-                self.alertModel = self.toAlertModel(error)
-            }
-        }catch {
-            print("Error fetchin genres: \(genres)")
-        }
-    }
     
-    private func toAlertModel(_ error: Error) -> AlertModel{
-        guard let error = error as? MovieError else {
-            return AlertModel(title: "unexpected.error.title", message: "unexpected.error.message", dismissButtonTitle: "button.close.text")
-        }
-        switch error {
-        case .invalidApiKeyError(let message):
-            return AlertModel(title: "API Error", message: message, dismissButtonTitle: "button.close.text")
-        case .resourceNotFound:
-            return AlertModel(title: "resource.not.found.error.title", message: "resource.not.found.error.message", dismissButtonTitle: "button.close.text")
-        default:
-            return AlertModel(title: "unexpected.error.title", message: "unexpected.error.message", dismissButtonTitle: "button.close.text")
-        }
-    }
 }

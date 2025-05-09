@@ -7,26 +7,32 @@
 
 import SwiftUI
 import InjectPropertyWrapper
+import Combine
 
 protocol MovieListViewModelProtocol: ObservableObject {
     
 }
 
-class MovieListViewModel: MovieListViewModelProtocol {
+class MovieListViewModel: MovieListViewModelProtocol, ErrorPresentable {
     @Published var movies: [Movie] = []
+    @Published var alertModel: AlertModel? = nil
+    
+    
+    private var cancellables = Set<AnyCancellable>()
     
     @Inject
-    private var service: MovieServiceProtocol
+    private var service: ReactiveMoviesServiceProtocol
     
-    func loadMovies(by genreId: Int) async {
-        do {
-            let request = FetchMoviesRequest(genreId: genreId)
-            let movies = try await service.fetchMovies(req: request)
-            DispatchQueue.main.async {
-                self.movies = movies
+    func loadMovies(by genreId: Int) {
+        let request = FetchMoviesRequest(genreId: genreId)
+        service.fetchMovies(req: request)
+            .sink{ completion in
+                if case let .failure(error) = completion {
+                    self.alertModel = self.toAlertModel(error)
+                }
+            } receiveValue: { [weak self]movies in
+                self?.movies = movies
             }
-        } catch {
-            print("Error fetching genres: \(error)")
-        }
+            .store(in: &cancellables)
     }
 }
