@@ -29,21 +29,12 @@ struct GenreSectionView: View {
                     .listRowSeparator(.hidden)
                 }
                 .listStyle(.plain)
-                .navigationTitle(Enviroments.name == .tv ? "TV" : "genreSection.title")
+                .navigationTitle(Environments.name == .tv ? "TV" : "genreSection.title")
             }
-                
-            }
-            .onAppear {
-//                Task {
-//                    await viewModel.loadGenres()
-//                }
-            }
-            .alert(item: $viewModel.alertModel) {model in
-                return Alert(title: Text(LocalizedStringKey(model.title)), message: Text(LocalizedStringKey(model.message)), dismissButton: .default(Text(LocalizedStringKey(model.dismissButtonTitle))) {
-                    viewModel.alertModel = nil
-                })
-            }
+            
         }
+        .showAlert(model: $viewModel.alertModel)
+    }
 }
 
 #Preview {

@@ -6,15 +6,24 @@
 //
 
 import Foundation
+import Combine
 
-class MockMoviesService: MovieServiceProtocol {
-    func addFavorite(req: AddFavoriteRequest) async throws -> AddFavoriteResult {
-        AddFavoriteResult(success: true, statusCode: 2, statusMessage: "Mock")
+class MockMoviesService: MoviesServiceProtocol {
+    func fetchGenres(req: FetchGenreRequest) -> AnyPublisher<[Genre], MovieError> {
+        Just([])
+            .setFailureType(to: MovieError.self)
+            .eraseToAnyPublisher()
     }
     
-    func fetchFavorites(req: FetchFavoritesRequest) async throws -> [Movie] {
+    func fetchTVGenres(req: FetchGenreRequest) -> AnyPublisher<[Genre], MovieError> {
+        Just([])
+            .setFailureType(to: MovieError.self)
+            .eraseToAnyPublisher()
+    }
+    
+    func searchMovies(req: SearchMovieRequest) async throws -> [MediaItem] {
         return [
-            Movie(id: 1,
+            MediaItem(id: 1,
                   title: "Mock movie1",
                   year: "2024",
                   duration: "1h 34m",
@@ -22,7 +31,7 @@ class MockMoviesService: MovieServiceProtocol {
                   rating: 1.0,
                   voteCount: 1000,
                   popularity: 15.54),
-            Movie(id: 2,
+            MediaItem(id: 2,
                   title: "Mock movie2",
                   year: "2024",
                   duration: "1h 34m",
@@ -30,7 +39,7 @@ class MockMoviesService: MovieServiceProtocol {
                   rating: 1.0,
                   voteCount: 1000,
                   popularity: 15.54),
-            Movie(id: 3,
+            MediaItem(id: 3,
                   title: "Mock movie3",
                   year: "2024",
                   duration: "1h 34m",
@@ -38,7 +47,7 @@ class MockMoviesService: MovieServiceProtocol {
                   rating: 1.0,
                   voteCount: 1000,
                   popularity: 15.54),
-            Movie(id: 4,
+            MediaItem(id: 4,
                   title: "Mock movie4",
                   year: "2024",
                   duration: "1h 34m",
@@ -46,7 +55,7 @@ class MockMoviesService: MovieServiceProtocol {
                   rating: 1.0,
                   voteCount: 1000,
                   popularity: 15.54),
-            Movie(id: 5,
+            MediaItem(id: 5,
                   title: "Mock movie5",
                   year: "2024",
                   duration: "1h 34m",
@@ -68,9 +77,9 @@ class MockMoviesService: MovieServiceProtocol {
         ]
     }
     
-    func fetchMovies(req: FetchMoviesRequest) async throws -> [Movie] {
+    func fetchMovies(req: FetchMediaListRequest) async throws -> [MediaItem] {
         return [
-            Movie(id: 1,
+            MediaItem(id: 1,
                   title: "Mock movie1",
                   year: "2024",
                   duration: "1h 34m",
@@ -78,7 +87,7 @@ class MockMoviesService: MovieServiceProtocol {
                   rating: 1.0,
                   voteCount: 1000,
                   popularity: 15.54),
-            Movie(id: 2,
+            MediaItem(id: 2,
                   title: "Mock movie2",
                   year: "2024",
                   duration: "1h 34m",
@@ -86,7 +95,7 @@ class MockMoviesService: MovieServiceProtocol {
                   rating: 1.0,
                   voteCount: 1000,
                   popularity: 15.54),
-            Movie(id: 3,
+            MediaItem(id: 3,
                   title: "Mock movie3",
                   year: "2024",
                   duration: "1h 34m",
@@ -94,7 +103,7 @@ class MockMoviesService: MovieServiceProtocol {
                   rating: 1.0,
                   voteCount: 1000,
                   popularity: 15.54),
-            Movie(id: 4,
+            MediaItem(id: 4,
                   title: "Mock movie4",
                   year: "2024",
                   duration: "1h 34m",
@@ -102,7 +111,7 @@ class MockMoviesService: MovieServiceProtocol {
                   rating: 1.0,
                   voteCount: 1000,
                   popularity: 15.54),
-            Movie(id: 5,
+            MediaItem(id: 5,
                   title: "Mock movie5",
                   year: "2024",
                   duration: "1h 34m",
@@ -114,11 +123,20 @@ class MockMoviesService: MovieServiceProtocol {
         ]
     }
     
-    func fetchTvSeriesGenres(req: FetchGenreRequest) async throws -> [Genre] {
+    func fetchTVGenres(req: FetchGenreRequest) async throws -> [Genre] {
+        return []
+    }
+    
+    func fetchFavoriteMovies(req: FetchFavoriteMovieRequest) async throws -> [MediaItem] {
         []
     }
     
-    func fetchMoviesByTitle(req: FetchMoviesByTitleRequest) async throws -> [Movie] {
-        []
+    
+    func addFavoriteMovie(req: AddFavoriteRequest) async throws -> AddFavoriteResponse {
+        AddFavoriteResponse(success: true,
+                            statusCode: 100,
+                            statusMessage: ""
+        )
     }
+    
 }

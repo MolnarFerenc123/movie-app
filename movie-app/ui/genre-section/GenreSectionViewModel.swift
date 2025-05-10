@@ -9,10 +9,6 @@ import InjectPropertyWrapper
 import Foundation
 import Combine
 
-protocol ErrorViewModelProtocol {
-    var alertModel: AlertModel {get}
-}
-
 protocol GenreSectionViewModelProtocol : ObservableObject {
     var genres: [Genre] {get}
 }
@@ -25,14 +21,14 @@ class GenreSectionViewModel: GenreSectionViewModelProtocol, ErrorPresentable{
     
     
     @Inject
-    private var reactiveMovieService: ReactiveMoviesService
+    private var service: ReactiveMoviesServiceProtocol
     
     init() {
         let request = FetchGenreRequest()
         
-        let genres = Enviroments.name == .tv ?
-        self.reactiveMovieService.fetchGenres(req: request) :
-        self.reactiveMovieService.fetchTvSeriesGenres(req: request)
+        let genres = Environments.name == .tv ?
+        self.service.fetchGenres(req: request) :
+        self.service.fetchTVGenres(req: request)
         
         genres
             .handleEvents(receiveOutput: { genres in

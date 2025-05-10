@@ -14,6 +14,9 @@
 "unexpected.error.title" = "Unexpected Error";
 "unexpected.error.message" = "Something went wrong. Please try again later";
 
-"resource.not.found.error.title" = "Resource not found";
-"resource.not.found.error.message" = "The resource you requested could not be found.";
+"api.error.title" = "API Error";
+
+"client.error.title" = "Client Error";
+"client.error.message" = "Lost connection to server";
+
 "favoriteMovies.title" = "Favourites";

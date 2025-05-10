@@ -12,11 +12,6 @@ struct MovieListView: View {
     @StateObject private var viewModel = MovieListViewModel()
     let genre: Genre
     
-//    let columns = [
-//        GridItem(.flexible(), spacing: 16),
-//        GridItem(.flexible(), spacing: 16)
-//    ]
-//    
     let columns = [
         GridItem(.adaptive(minimum: 150), spacing: 16)
     ]
@@ -29,7 +24,10 @@ struct MovieListView: View {
                         .offset(x: 0, y: -150)
                     LazyVGrid(columns: columns, spacing: 24) {
                         ForEach(viewModel.movies) { movie in
-                            MovieCell(movie: movie, imageHeight: 100, showFavouriteIcon: false)
+                            NavigationLink(destination: DetailView(mediaItem: movie)) {
+                                MovieCell(movie: movie, imageHeight: 100, showFavouriteIcon: false)
+                            }
+                            .buttonStyle(PlainButtonStyle())
                         }
                     }
                     .padding(.horizontal, 16)
@@ -38,8 +36,9 @@ struct MovieListView: View {
             }
             .navigationTitle(genre.name)
             .onAppear {
-                viewModel.loadMovies(by: genre.id)
+                viewModel.genreIdSubject.send(genre.id)
             }
+            .showAlert(model: $viewModel.alertModel)
         
     }
 }

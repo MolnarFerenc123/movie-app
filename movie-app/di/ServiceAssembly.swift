@@ -12,7 +12,7 @@ import Foundation
 class ServiceAssembly: Assembly {
     func assemble(container: Container) {
         container.register(MoyaProvider<(MultiTarget)>.self) { _ in
-            let configuration = URLSessionConfiguration.default
+            let configuration = URLSessionConfiguration.ephemeral
             configuration.headers = .default
             
             return MoyaProvider<MultiTarget> (
@@ -26,16 +26,20 @@ class ServiceAssembly: Assembly {
                                     print("Response \(item)")
                                 }
                             },
-                            logOptions: .verbose
+                            logOptions: [.verbose, .requestBody]
                         )
                     )
                 ]
             )
         }.inObjectScope(.container)
         
-        container.register(MovieServiceProtocol.self) { _ in
-            return MovieService()
-//            return MockMoviesService()
+        container.register(MoviesServiceProtocol.self) { _ in
+            return MoviesService()
+        }.inObjectScope(.container)
+        
+        
+        container.register(ReactiveMoviesServiceProtocol.self) { _ in
+            return ReactiveMoviesService()
         }.inObjectScope(.container)
     }
 }

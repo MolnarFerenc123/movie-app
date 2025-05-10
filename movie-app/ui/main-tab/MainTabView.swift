@@ -20,10 +20,12 @@ struct MainTabView: View {
             TabView(selection: $selectedTab) {
                 GenreSectionView()
                     .tag(0)
-                SearchMovieView()
+                SearchView()
                     .tag(1)
-                FavoriteListView()
+                FavoritesView()
                     .tag(2)
+                SettingsView()
+                    .tag(3)
             }
             .padding(.bottom, -10)
             HStack{
