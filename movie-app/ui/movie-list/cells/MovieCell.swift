@@ -47,7 +47,7 @@ struct MovieCell: View {
                 }
                 HStack{
                     MovieLabel(type: .rating(movie.rating))
-                    MovieLabel(type: .popularity(movie.popularity))
+                    MovieLabel(type: .voteCount(movie.voteCount))
                     if showFavouriteIcon {
                         Spacer()
                         Button {

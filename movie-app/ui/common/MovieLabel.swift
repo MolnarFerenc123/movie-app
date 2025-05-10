@@ -9,7 +9,7 @@ import SwiftUI
 
 enum MovieLabelType {
     case rating(_ value: Double)
-    case popularity(_ popularity: Double)
+    case voteCount(_ voteCount: Int)
 }
 
 struct MovieLabel : View {
@@ -22,9 +22,9 @@ struct MovieLabel : View {
         case .rating(let value):
             imageRes = .ratingStar
             text = String(format: "%.1f", value)
-        case .popularity(let popularity):
+        case .voteCount(let voteCount):
             imageRes = .heart
-            text = String(format: "%.0f M", popularity)
+            text = String(format: "%.0f M", voteCount)
         }
         
         return HStack(spacing: 6) {
