@@ -35,6 +35,11 @@ class FavoritesViewModel: FavoritesViewModelProtocol, ErrorPresentable {
                 }
             }receiveValue: { [weak self] movies in
                 self?.movies = movies
+                Favorites.favoritesId = movies
+                    .map{ movie in
+                        movie.id
+                    }
+                print("<<<<\(Favorites.favoritesId)")
             }
             .store(in: &cancellables)
         

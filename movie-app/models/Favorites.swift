@@ -6,5 +6,5 @@
 //
 
 class Favorites{
-    public static var favorites: [MediaItem] = []
+    public static var favoritesId: [Int] = []
 }

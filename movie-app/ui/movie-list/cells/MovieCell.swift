@@ -57,6 +57,7 @@ struct MovieCell: View {
                                 Image(.favourite)
                                     .onTapGesture {
                                         viewModel.mediaIdSubject.send(movie.id)
+                                        print("<<<<nem tuodm már mivan")
                                     }
                             }
                             

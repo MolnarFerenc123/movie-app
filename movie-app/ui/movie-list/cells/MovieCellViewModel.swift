@@ -9,25 +9,40 @@ import Combine
 import InjectPropertyWrapper
 
 protocol MovieCellViewModelProtocol : ObservableObject {
-    
+    var addFavoriteResponse: AddFavoriteResponse? {get}
 }
 
-class MovieCellViewModel: MovieCellViewModelProtocol {
+class MovieCellViewModel: MovieCellViewModelProtocol, ErrorPresentable {
+    @Published var addFavoriteResponse: AddFavoriteResponse? = nil
+    @Published var alertModel: AlertModel? = nil
     
     let mediaIdSubject = PassthroughSubject<Int, Never>()
+    
+    private var cancellables = Set<AnyCancellable>()
     
     @Inject
     private var service: ReactiveMoviesServiceProtocol
     
     init() {
+        print("<<<<IDIOTA1")
         mediaIdSubject
-            .flatMap{ [weak self]mediaItemId in
+            .flatMap{ [weak self]mediaItemId -> AnyPublisher<AddFavoriteResponse, MovieError> in
                 guard let self = self else {
                     preconditionFailure("There is no self")
                 }
                 let request = AddFavoriteRequest(movieId: mediaItemId)
+                Favorites.favoritesId.append(mediaItemId)
+                print("<<<<\(Favorites.favoritesId)")
                 return self.service.addFavoriteMovie(req: request)
             }
+            .sink { [weak self] completion in
+                if case let .failure(error) = completion {
+                    self?.alertModel = self?.toAlertModel(error)
+                }
+            } receiveValue: { [weak self] addFavoriteResponse in
+                self?.addFavoriteResponse = addFavoriteResponse
+            }
+            .store(in: &cancellables)
         
     }
 }

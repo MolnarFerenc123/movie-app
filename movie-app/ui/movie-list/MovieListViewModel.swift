@@ -5,7 +5,6 @@
 //  Created by Ferenc Molnar on 2025. 04. 15..
 //
 
-import SwiftUI
 import InjectPropertyWrapper
 import Combine
 

@@ -96,6 +96,7 @@ class ReactiveMoviesService: ReactiveMoviesServiceProtocol {
         decodeTo: ResponseType.Type,
         transform: @escaping (ResponseType) -> Output
     ) -> AnyPublisher<Output, MovieError> {
+        print("<<<<\(Favorites.favoritesId)")
         let future = Future<Output, MovieError> { future in
             self.moya.request(target) { result in
                 switch result {
