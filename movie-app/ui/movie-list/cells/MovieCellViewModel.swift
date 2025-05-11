@@ -24,7 +24,6 @@ class MovieCellViewModel: MovieCellViewModelProtocol, ErrorPresentable {
     private var service: ReactiveMoviesServiceProtocol
     
     init() {
-        print("<<<<IDIOTA1")
         mediaIdSubject
             .flatMap{ [weak self]mediaItemId -> AnyPublisher<AddFavoriteResponse, MovieError> in
                 guard let self = self else {
@@ -32,7 +31,6 @@ class MovieCellViewModel: MovieCellViewModelProtocol, ErrorPresentable {
                 }
                 let request = AddFavoriteRequest(movieId: mediaItemId)
                 Favorites.favoritesId.append(mediaItemId)
-                print("<<<<\(Favorites.favoritesId)")
                 return self.service.addFavoriteMovie(req: request)
             }
             .sink { [weak self] completion in
