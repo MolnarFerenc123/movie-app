@@ -20,3 +20,14 @@
 "client.error.message" = "Megszakadt a kapcsolat a szerverrel";
 
 "favoriteMovies.title" = "Kedvencek";
+
+"closed.caption.available" = "Elérhető";
+"closed.caption.unavailable" = "Nem elérhető";
+
+"release.date" = "Kiadás Éve";
+"runtime" = "Hossz";
+"language" = "Nyelv";
+
+"detail.rate" = "Értékeld ezt a filmet";
+"detail.visit.imdb" = "Meglátogatás IMDB-n";
+"detail.title" = "Szinopszis";

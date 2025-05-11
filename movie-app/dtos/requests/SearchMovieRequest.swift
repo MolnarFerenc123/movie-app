@@ -10,9 +10,12 @@ import Foundation
 struct SearchMovieRequest {
     let accessToken: String = Config.bearerToken
     let query: String
+    let includeAdult: Bool
     
     func asReqestParams() -> [String: Any] {
         return ["language" : Locale.preferredLanguages.first?.components(separatedBy: "-")[0] ?? "en",
-                "query" : query]
+                "query" : query,
+                "include_adult" : includeAdult
+        ]
     }
 }

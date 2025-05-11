@@ -10,35 +10,48 @@ struct MediaItemDetail: Identifiable{
     let id: Int
     let title: String
     let year: String
-    let duration: String
+    let runtime: Int
     let imageUrl: URL?
     let rating: Double
     let voteCount: Int
     let summary: String?
     let popularity: Double
+    let adult: Bool
+    let genres: [String]
+    let spokenLanguages: [String]
+    let overview: String
     
     init() {
         self.id = 0
         self.title = ""
         self.year = ""
-        self.duration = ""
+        self.runtime = 0
         self.imageUrl = nil
         self.rating = 0.0
         self.voteCount = 0
         self.summary = nil
         self.popularity = 0.0
+        self.adult = false
+        self.genres = []
+        self.spokenLanguages = []
+        self.overview = ""
     }
     
-    init(id: Int, title: String, year: String, duration: String, imageUrl: URL?, rating: Double, voteCount: Int, summary: String? = nil, popularity: Double = 0) {
+    init(id: Int, title: String, year: String, runtime: Int, imageUrl: URL?, rating: Double, voteCount: Int, summary: String? = nil, popularity: Double = 0, adult: Bool = false, genres: [String] = [], spokenLanguages: [String] = [],
+         overview: String = "") {
         self.id = id
         self.title = title
         self.year = year
-        self.duration = duration
+        self.runtime = runtime
         self.imageUrl = imageUrl
         self.rating = rating
         self.voteCount = voteCount
         self.summary = summary
         self.popularity = popularity
+        self.adult = adult
+        self.genres = genres
+        self.spokenLanguages = spokenLanguages
+        self.overview = overview
     }
     
     init(dto: MovieDetailResponse) {
@@ -56,12 +69,39 @@ struct MediaItemDetail: Identifiable{
         self.id = dto.id
         self.title = dto.title
         self.year = year
-        self.duration = duration
+        self.runtime = dto.runtime
         self.imageUrl = imageUrl
         self.rating = dto.voteAverage ?? 0.0
         self.voteCount = dto.voteCount ?? 0
         self.summary = nil
         self.popularity = dto.popularity
+        self.adult = dto.adult
+        self.genres = dto.genres
+            .map{ genre in
+                genre.name
+            }
+        self.spokenLanguages = dto.spokenLanguages
+            .map{ language in
+                language.englishName
+            }
+        self.overview = dto.overview
+    }
+    
+    var genreList :String {
+        genres.joined(separator: ", ")
+    }
+    
+    var langList :String {
+        spokenLanguages.joined(separator: ", ")
+    }
+    
+    var runTimeString : String {
+        var time = self.runtime
+        var toReturn = ""
+        toReturn += "\(time / 60)h "
+        time -= time/60
+        toReturn += "\(time)min"
+        return toReturn
     }
     
 }

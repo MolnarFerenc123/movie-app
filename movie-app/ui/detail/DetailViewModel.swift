@@ -26,7 +26,6 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable{
     
     init() {
         mediaIdSubject
-            .delay(for: .seconds(2), scheduler: RunLoop.main)
             .flatMap{ [weak self]mediaItemId in
                 guard let self = self else {
                     preconditionFailure("There is no self")

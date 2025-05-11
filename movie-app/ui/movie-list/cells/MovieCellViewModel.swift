@@ -13,14 +13,21 @@ protocol MovieCellViewModelProtocol : ObservableObject {
 }
 
 class MovieCellViewModel: MovieCellViewModelProtocol {
-    let addFavorite = PassthroughSubject<Int, Never>()
     
-    private var cancellables = Set<AnyCancellable>()
+    let mediaIdSubject = PassthroughSubject<Int, Never>()
     
     @Inject
     private var service: ReactiveMoviesServiceProtocol
     
-    init(){
-        addFavorite
+    init() {
+        mediaIdSubject
+            .flatMap{ [weak self]mediaItemId in
+                guard let self = self else {
+                    preconditionFailure("There is no self")
+                }
+                let request = AddFavoriteRequest(movieId: mediaItemId)
+                return self.service.addFavoriteMovie(req: request)
+            }
+        
     }
 }

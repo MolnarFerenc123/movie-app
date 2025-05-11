@@ -14,75 +14,78 @@ struct MovieCell: View {
     let showFavouriteIcon: Bool
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            ZStack(alignment: .topLeading) {
-                HStack(alignment: .center) {
-                    AsyncImage(url: movie.imageUrl) { phase in
-                        switch phase {
-                        case .empty:
-                            ZStack {
-                                Color.gray.opacity(0.3)
-                                ProgressView()
-                            }
-
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .scaledToFill()
-                                .frame(height: imageHeight,alignment: .top)
-                        case .failure:
-                            ZStack {
-                                Color.red.opacity(0.3)
-                                Image(systemName: "photo")
-                                    .foregroundColor(.white)
-                            }
-                        @unknown default:
-                            EmptyView()
-                        }
-                    }
-                    .frame(height: imageHeight)
-                    .frame(maxWidth: .infinity)
-                    .clipped()
-                    .cornerRadius(12)
-                }
-                HStack{
-                    MovieLabel(type: .rating(movie.rating))
-                    MovieLabel(type: .voteCount(movie.voteCount))
-                    if showFavouriteIcon {
-                        Spacer()
-                        Button {
-                            
-                        } label: {
-                            Image(.favourite)
-                                .onTapGesture {
-                                    viewModel.addFavorite.send(movie.id)
+        NavigationLink(destination: DetailView(mediaItem: movie)){
+            VStack(alignment: .leading, spacing: 8) {
+                ZStack(alignment: .topLeading) {
+                    HStack(alignment: .center) {
+                        AsyncImage(url: movie.imageUrl) { phase in
+                            switch phase {
+                            case .empty:
+                                ZStack {
+                                    Color.gray.opacity(0.3)
+                                    ProgressView()
                                 }
+                                
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(height: imageHeight,alignment: .top)
+                            case .failure:
+                                ZStack {
+                                    Color.red.opacity(0.3)
+                                    Image(systemName: "photo")
+                                        .foregroundColor(.white)
+                                }
+                            @unknown default:
+                                EmptyView()
+                            }
+                        }
+                        .frame(height: imageHeight)
+                        .frame(maxWidth: .infinity)
+                        .clipped()
+                        .cornerRadius(12)
+                    }
+                    HStack{
+                        MovieLabel(type: .rating(movie.rating))
+                        MovieLabel(type: .voteCount(movie.voteCount))
+                        if showFavouriteIcon {
+                            Spacer()
+                            Button {
+                                
+                            } label: {
+                                Image(.favourite)
+                                    .onTapGesture {
+                                        viewModel.mediaIdSubject.send(movie.id)
+                                    }
+                            }
+                            
                         }
                         
                     }
+                    .padding(LayoutConst.smallPadding)
                     
                 }
-                .padding(LayoutConst.smallPadding)
-                
-            }
-            HStack{
-                VStack (alignment: .leading){
-                    Text(movie.title)
-                        .font(Fonts.subheading)
-                        .lineLimit(2)
-
-                    Text("\(movie.year)")
-                        .font(Fonts.paragraph)
-
-                    Text("\(movie.duration)")
-                        .font(Fonts.caption)
+                HStack{
+                    VStack (alignment: .leading){
+                        Text(movie.title)
+                            .font(Fonts.subheading)
+                            .lineLimit(2)
+                        
+                        Text("\(movie.year)")
+                            .font(Fonts.paragraph)
+                        
+                        Text("\(movie.duration)")
+                            .font(Fonts.caption)
+                    }
+                    Spacer()
+                    Image(.playButton)
                 }
+                
+                
                 Spacer()
-                Image(.playButton)
             }
-            
-
-            Spacer()
         }
+        .buttonStyle(PlainButtonStyle())
     }
 }

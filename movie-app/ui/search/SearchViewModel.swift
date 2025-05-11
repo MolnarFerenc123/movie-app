@@ -33,7 +33,7 @@ class SearchViewModel: SearchViewModelProtocol, ErrorPresentable {
                 guard let self = self else {
                     preconditionFailure("There is no self")
                 }
-                let request = SearchMovieRequest(query: self.searchText)
+                let request = SearchMovieRequest(query: self.searchText, includeAdult: true)
                 return self.service.searchMovies(req: request)
             }
             .sink { [weak self] completion in

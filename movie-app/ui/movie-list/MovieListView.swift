@@ -24,10 +24,7 @@ struct MovieListView: View {
                         .offset(x: 0, y: -150)
                     LazyVGrid(columns: columns, spacing: 24) {
                         ForEach(viewModel.movies) { movie in
-                            NavigationLink(destination: DetailView(mediaItem: movie)) {
-                                MovieCell(movie: movie, imageHeight: 100, showFavouriteIcon: false)
-                            }
-                            .buttonStyle(PlainButtonStyle())
+                            MovieCell(movie: movie, imageHeight: 100, showFavouriteIcon: false)
                         }
                     }
                     .padding(.horizontal, 16)

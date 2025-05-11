@@ -10,9 +10,12 @@ import Foundation
 struct FetchMediaListRequest {
     let accessToken: String = Config.bearerToken
     let genreId: Int
+    let includeAdult: Bool
     
     func asReqestParams() -> [String: Any] {
         return ["language" : Locale.preferredLanguages.first?.components(separatedBy: "-")[0] ?? "en",
-                "with_genres" : genreId]
+                "with_genres" : genreId,
+                "include_adult" : includeAdult
+        ]
     }
 }

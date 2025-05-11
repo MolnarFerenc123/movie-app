@@ -20,3 +20,14 @@
 "client.error.message" = "Lost connection to server";
 
 "favoriteMovies.title" = "Favourites";
+
+"closed.caption.available" = "Available";
+"closed.caption.unavailable" = "Unvailable";
+
+"release.date" = "Release Date";
+"runtime" = "Runtime";
+"language" = "Language";
+
+"detail.rate" = "Rate this movie";
+"detail.visit.imdb" = "Visit at IMDB";
+"detail.title" = "Synopsis";
