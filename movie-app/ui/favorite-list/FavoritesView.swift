@@ -30,7 +30,11 @@ struct FavoritesView: View {
             }
             .navigationTitle("favoriteMovies.title")
         }
-        .showAlert(model: $viewModel.alertModel)    }
+        .showAlert(model: $viewModel.alertModel)
+        .onAppear{
+            viewModel.fetchFavorites()
+        }
+    }
 }
 
 #Preview {

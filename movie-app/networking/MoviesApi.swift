@@ -15,7 +15,7 @@ enum MoviesApi {
     case fetchTV(req: FetchMediaListRequest)
     case searchMovies(req: SearchMovieRequest)
     case fetchFavoriteMovies(req: FetchFavoriteMovieRequest)
-    case addFavoriteMovie(req: AddFavoriteRequest)
+    case editFavoriteMovie(req: EditFavoriteRequest)
     case fetchMovieDetail(req: FetchDetailRequest)
 }
 
@@ -40,7 +40,7 @@ extension MoviesApi: TargetType{
             return "search/movie"
         case .fetchFavoriteMovies(let req):
             return "account/\(req.accountId)/favorite/movies"
-        case .addFavoriteMovie(let req):
+        case .editFavoriteMovie(let req):
             return "account/\(req.accountId)/favorite"
         case .fetchTV:
             return "discover/tv"
@@ -53,7 +53,7 @@ extension MoviesApi: TargetType{
         switch self {
         case .fetchGenres, .fetchTVGenres, .fetchMovies, .fetchTV, .searchMovies, .fetchFavoriteMovies, .fetchMovieDetail:
             return .get
-        case .addFavoriteMovie:
+        case .editFavoriteMovie:
             return .post
         }
     }
@@ -70,7 +70,7 @@ extension MoviesApi: TargetType{
             return .requestParameters(parameters: req.asReqestParams(), encoding: URLEncoding.queryString)
         case .fetchFavoriteMovies(let req):
             return .requestParameters(parameters: req.asReqestParams(), encoding: URLEncoding.queryString)
-        case .addFavoriteMovie(let req):
+        case .editFavoriteMovie(let req):
             return .requestCompositeParameters(
                 bodyParameters: req.asBodyParams(),
                 bodyEncoding: JSONEncoding.default,
@@ -97,7 +97,7 @@ extension MoviesApi: TargetType{
                     "accept" : "application/json"]
         case let .fetchFavoriteMovies(req):
             return ["Authorization" : req.accessToken]
-        case let .addFavoriteMovie(req):
+        case let .editFavoriteMovie(req):
             return ["Authorization" : req.accessToken,
                     "accept" : "application/json"]
         case let .fetchMovieDetail(req):

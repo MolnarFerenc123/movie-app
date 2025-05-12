@@ -10,10 +10,10 @@ struct MainTabView: View {
     @State var selectedTab = 0
     
     init() {
-            let transparentAppearence = UITabBarAppearance()
-            transparentAppearence.configureWithTransparentBackground()
-            UITabBar.appearance().standardAppearance = transparentAppearence
-        }
+        let transparentAppearence = UITabBarAppearance()
+        transparentAppearence.configureWithTransparentBackground()
+        UITabBar.appearance().standardAppearance = transparentAppearence
+    }
     
     var body: some View {
         VStack {
@@ -30,14 +30,14 @@ struct MainTabView: View {
             .padding(.bottom, -10)
             HStack{
                 ForEach((TabbedItems.allCases), id: \.self){ item in
-                        Spacer()
-                        Button{
-                            selectedTab = item.rawValue
-                        }
+                    Spacer()
+                    Button{
+                        selectedTab = item.rawValue
+                    }
                     label: {
-                            CustomTabItem(imageName: item.iconName, isActive: (selectedTab == item.rawValue))
-                        }
-                        Spacer()
+                        CustomTabItem(imageName: item.iconName, isActive: (selectedTab == item.rawValue))
+                    }
+                    Spacer()
                 }
             }
             .padding(.top, 24)

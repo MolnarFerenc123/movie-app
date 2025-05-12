@@ -54,9 +54,10 @@ struct MovieCell: View {
                             Button {
                                 
                             } label: {
-                                Image(.favourite)
+                                Image(Favorites.favoritesId.contains(movie.id) ? .favorite : .noFavorite)
                                     .onTapGesture {
-                                        viewModel.mediaIdSubject.send(movie.id)
+                                        viewModel.mediaIdSubject.send([movie.id,
+                                                                       Favorites.favoritesId.contains(movie.id) ? false : true])
                                     }
                             }
                             

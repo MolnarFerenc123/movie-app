@@ -7,16 +7,17 @@
 
 import Foundation
 
-struct AddFavoriteRequest {
+struct EditFavoriteRequest {
     let accessToken: String = Config.bearerToken
     let accountId: String = Config.accountId
     let movieId: Int
+    let favorite: Bool
     func asReqestParams() -> [String: String] {
         return ["language" : Locale.preferredLanguages.first?.components(separatedBy: "-")[0] ?? "en"]
     }
     func asBodyParams() -> [String: Any] {
         return ["media_type" : "movie",
                 "media_id" : movieId,
-                "favorite" : true]
+                "favorite" : favorite]
     }
 }

@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct DetailView: View {
-    @StateObject private var viewModel = DetailViewModel()
+    @StateObject private var detailViewModel = DetailViewModel()
+    @StateObject private var movieCellViewModel = MovieCellViewModel()
     let mediaItem: MediaItem
     
     var body: some View {
         var mediaItemDetail : MediaItemDetail{
-            viewModel.mediaItemDetail
+            detailViewModel.mediaItemDetail
         }
         
         return ScrollView {
@@ -78,9 +79,9 @@ struct DetailView: View {
         .toolbar{
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
-                    
+                    movieCellViewModel.mediaIdSubject.send([mediaItem.id, Favorites.favoritesId.contains(mediaItem.id) ? false : true])
                 }){
-                    Image(.favourite)
+                    Image(Favorites.favoritesId.contains(mediaItem.id) ? .favoriteSmall : .noFavoriteSmall)
                         .resizable()
                         .frame(height: 48)
                         .frame(width: 48)
@@ -88,9 +89,9 @@ struct DetailView: View {
                 
             }
         }
-        .showAlert(model: $viewModel.alertModel)
+        .showAlert(model: $detailViewModel.alertModel)
         .onAppear{
-            viewModel.mediaIdSubject.send(mediaItem.id)
+            detailViewModel.mediaIdSubject.send(mediaItem.id)
         }
     }
 }

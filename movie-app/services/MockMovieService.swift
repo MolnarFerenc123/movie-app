@@ -127,7 +127,7 @@ class MockMoviesService: MoviesServiceProtocol {
     }
     
     
-    func addFavoriteMovie(req: AddFavoriteRequest) async throws -> AddFavoriteResponse {
+    func editFavoriteMovie(req: EditFavoriteRequest) async throws -> AddFavoriteResponse {
         AddFavoriteResponse(success: true,
                             statusCode: 100,
                             statusMessage: ""

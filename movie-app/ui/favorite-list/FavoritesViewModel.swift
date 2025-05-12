@@ -14,6 +14,9 @@ protocol FavoritesViewModelProtocol : ObservableObject {
 }
 
 class FavoritesViewModel: FavoritesViewModelProtocol, ErrorPresentable {
+    private var loadedFavorites: [Int] = []
+    private var firstLoad: Bool = true
+    
     @Published var movies: [MediaItem] = []
     @Published var alertModel: AlertModel? = nil
     
@@ -23,25 +26,26 @@ class FavoritesViewModel: FavoritesViewModelProtocol, ErrorPresentable {
     private var service: ReactiveMoviesServiceProtocol
     
     init() {
-        let request = FetchFavoriteMovieRequest()
-        service.fetchFavoriteMovies(req: request)
-            .receive(on: RunLoop.main)
-            .sink{ completion in
-                switch completion {
-                case .failure(let error):
-                    self.alertModel = self.toAlertModel(error)
-                case .finished:
-                    break
-                }
-            }receiveValue: { [weak self] movies in
-                self?.movies = movies
-                Favorites.favoritesId = movies
-                    .map{ movie in
-                        movie.id
+        fetchFavorites()
+    }
+    
+    public func fetchFavorites(){
+            firstLoad = false
+            let request = FetchFavoriteMovieRequest()
+            service.fetchFavoriteMovies(req: request)
+                .receive(on: RunLoop.main)
+                .sink{ completion in
+                    switch completion {
+                    case .failure(let error):
+                        self.alertModel = self.toAlertModel(error)
+                    case .finished:
+                        break
                     }
-                print("<<<<\(Favorites.favoritesId)")
-            }
-            .store(in: &cancellables)
-        
+                }receiveValue: { [weak self] movies in
+                    self?.movies = movies
+                    Favorites.favoritesId = movies.map{$0.id}
+                    self?.loadedFavorites = movies.map{$0.id}
+                }
+                .store(in: &cancellables)
     }
 }

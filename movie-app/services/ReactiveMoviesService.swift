@@ -17,11 +17,13 @@ protocol ReactiveMoviesServiceProtocol {
     func fetchMovies(req: FetchMediaListRequest) -> AnyPublisher<[MediaItem], MovieError>
     func fetchTV(req: FetchMediaListRequest) -> AnyPublisher<[MediaItem], MovieError>
     func fetchFavoriteMovies(req: FetchFavoriteMovieRequest) -> AnyPublisher<[MediaItem], MovieError>
-    func addFavoriteMovie(req: AddFavoriteRequest) -> AnyPublisher<AddFavoriteResponse, MovieError>
+    func editFavoriteMovie(req: EditFavoriteRequest) -> AnyPublisher<AddFavoriteResponse, MovieError>
     func fetchMovieDetail(req: FetchDetailRequest) -> AnyPublisher<MediaItemDetail, MovieError>
 }
 
 class ReactiveMoviesService: ReactiveMoviesServiceProtocol {
+    
+    
     @Inject
     var moya: MoyaProvider<MultiTarget>!
     
@@ -73,9 +75,9 @@ class ReactiveMoviesService: ReactiveMoviesServiceProtocol {
         )
     }
     
-    func addFavoriteMovie(req: AddFavoriteRequest) -> AnyPublisher<AddFavoriteResponse, MovieError> {
+    func editFavoriteMovie(req: EditFavoriteRequest) -> AnyPublisher<AddFavoriteResponse, MovieError> {
         requestAndTransform(
-            target: MultiTarget(MoviesApi.addFavoriteMovie(req: req)),
+            target: MultiTarget(MoviesApi.editFavoriteMovie(req: req)),
             decodeTo: AddFavoriteResponse.self,
             transform: { response in
                 response
@@ -89,6 +91,7 @@ class ReactiveMoviesService: ReactiveMoviesServiceProtocol {
             decodeTo: MovieDetailResponse.self,
             transform: { MediaItemDetail(dto: $0) }
         )
+        
     }
     
     private func requestAndTransform<ResponseType: Decodable, Output>(
