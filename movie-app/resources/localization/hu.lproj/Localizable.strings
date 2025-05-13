@@ -31,3 +31,6 @@
 "detail.rate" = "Értékeld ezt a filmet";
 "detail.visit.imdb" = "Meglátogatás IMDB-n";
 "detail.title" = "Szinopszis";
+
+"publishers.and.companies.subtitle" = "Kiadó és vállalatok";
+"cast.subtitle" = "Szereposztás";

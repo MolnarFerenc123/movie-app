@@ -19,11 +19,10 @@ protocol ReactiveMoviesServiceProtocol {
     func fetchFavoriteMovies(req: FetchFavoriteMovieRequest) -> AnyPublisher<[MediaItem], MovieError>
     func editFavoriteMovie(req: EditFavoriteRequest) -> AnyPublisher<AddFavoriteResponse, MovieError>
     func fetchMovieDetail(req: FetchDetailRequest) -> AnyPublisher<MediaItemDetail, MovieError>
+    func fetchCast(req: FetchDetailRequest) -> AnyPublisher<[Contributor], MovieError>
 }
 
 class ReactiveMoviesService: ReactiveMoviesServiceProtocol {
-    
-    
     @Inject
     var moya: MoyaProvider<MultiTarget>!
     
@@ -94,12 +93,21 @@ class ReactiveMoviesService: ReactiveMoviesServiceProtocol {
         
     }
     
+    
+    func fetchCast(req: FetchDetailRequest) -> AnyPublisher<[Contributor], MovieError> {
+        requestAndTransform(
+            target: MultiTarget(MoviesApi.fetchCast(req: req)),
+            decodeTo: ContributorListResponse.self,
+            transform: { $0.contributors.map(Contributor.init(dto:)) }
+        )
+    }
+    
+    
     private func requestAndTransform<ResponseType: Decodable, Output>(
         target: MultiTarget,
         decodeTo: ResponseType.Type,
         transform: @escaping (ResponseType) -> Output
     ) -> AnyPublisher<Output, MovieError> {
-        print("<<<<\(Favorites.favoritesId)")
         let future = Future<Output, MovieError> { future in
             self.moya.request(target) { result in
                 switch result {

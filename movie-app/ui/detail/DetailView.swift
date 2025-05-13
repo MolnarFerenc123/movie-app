@@ -72,8 +72,9 @@ struct DetailView: View {
                     Text(mediaItemDetail.overview)
                         .font(Fonts.paragraph)
                 }
+                ContributorHScrollView(title: "publishers.and.companies.subtitle", contributors: detailViewModel.cast)
+                ContributorHScrollView(title: "cast.subtitle", contributors: mediaItemDetail.productionCompanies)
             }
-            
             .padding(.horizontal, LayoutConst.maxPadding)
         }
         .toolbar{

@@ -20,6 +20,7 @@ struct MediaItemDetail: Identifiable{
     let genres: [String]
     let spokenLanguages: [String]
     let overview: String
+    let productionCompanies: [Contributor]
     
     init() {
         self.id = 0
@@ -35,10 +36,11 @@ struct MediaItemDetail: Identifiable{
         self.genres = []
         self.spokenLanguages = []
         self.overview = ""
+        self.productionCompanies = []
     }
     
     init(id: Int, title: String, year: String, runtime: Int, imageUrl: URL?, rating: Double, voteCount: Int, summary: String? = nil, popularity: Double = 0, adult: Bool = false, genres: [String] = [], spokenLanguages: [String] = [],
-         overview: String = "") {
+         overview: String = "", productionCompanies: [Contributor] = []) {
         self.id = id
         self.title = title
         self.year = year
@@ -52,6 +54,7 @@ struct MediaItemDetail: Identifiable{
         self.genres = genres
         self.spokenLanguages = spokenLanguages
         self.overview = overview
+        self.productionCompanies = productionCompanies
     }
     
     init(dto: MovieDetailResponse) {
@@ -85,6 +88,11 @@ struct MediaItemDetail: Identifiable{
                 language.englishName
             }
         self.overview = dto.overview
+        self.productionCompanies = dto.productionCompanies
+            .map { el in
+                return Contributor(id: el.id, name: el.name, profileImageUrl: URL(string: "https://image.tmdb.org/t/p/w500\(el.logoImagePath!)"))
+            }
+        
     }
     
     var genreList :String {

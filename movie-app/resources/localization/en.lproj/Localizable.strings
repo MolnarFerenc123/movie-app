@@ -31,3 +31,6 @@
 "detail.rate" = "Rate this movie";
 "detail.visit.imdb" = "Visit at IMDB";
 "detail.title" = "Synopsis";
+
+"publishers.and.companies.subtitle" = "Publisher and companies";
+"cast.subtitle" = "Cast";

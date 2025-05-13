@@ -33,5 +33,6 @@ struct MovieResponse: Decodable {
         case releaseDate = "release_date"
         case posterPath = "poster_path"
         case voteAverage = "vote_average"
-        case voteCount = "vote_count"    }
+        case voteCount = "vote_count"
+    }
 }
