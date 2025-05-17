@@ -18,8 +18,7 @@ class MovieCellViewModel: MovieCellViewModelProtocol, ErrorPresentable {
     @Published var alertModel: AlertModel? = nil
     @Published var isFavorite: Bool = false
     
-    let mediaIdSubject = PassthroughSubject<Int, Never>()
-    let favoriteButtonTapped = PassthroughSubject<Void, Never>()
+    let favoriteButtonTapped = PassthroughSubject<Int, Never>()
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -27,16 +26,16 @@ class MovieCellViewModel: MovieCellViewModelProtocol, ErrorPresentable {
     private var service: ReactiveMoviesServiceProtocol
     
     @Inject
-    private var favoriteMediaStore: FavoriteMediaStoreProtocol
+    private var store: MediaItemStoreProtocol
     
     init() {
         favoriteButtonTapped
-                    .flatMap { [weak self] _ -> AnyPublisher<(EditFavoriteResult, Bool), MovieError> in
+                    .flatMap { [weak self] mediaItemId -> AnyPublisher<(EditFavoriteResult, Bool), MovieError> in
                         guard let self = self else {
                             preconditionFailure("There is no self")
                         }
                         let isFavorite = !self.isFavorite
-                        let request = EditFavoriteRequest(movieId: self.mediaItemDetail.id, favorite: isFavorite)
+                        let request = EditFavoriteRequest(movieId: mediaItemId, favorite: isFavorite)
                         return service.editFavoriteMovie(req: request)
                             .map { result in
                             (result, isFavorite)
@@ -56,7 +55,7 @@ class MovieCellViewModel: MovieCellViewModelProtocol, ErrorPresentable {
                             if isFavorite {
                                 //self.favoriteMediaStore.addFavoriteMediaItem(self.mediaItemDetail)
                             } else {
-                                self.favoriteMediaStore.removeFavoriteMediaItem(withId: self.mediaItemDetail.id)
+                                self.store.deleteMediaItem(withId: self.mediaItemDetail.id)
                             }
                         }
                     }

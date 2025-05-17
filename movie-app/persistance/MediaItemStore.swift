@@ -29,7 +29,7 @@ class MediaItemStore: MediaItemStoreProtocol {
     
     init() {
         guard let realm = try? Realm() else {
-            fatalError("Failed to initialize Reachability")
+            fatalError("Failed to initialize Realm")
         }
         
         self.realm = realm

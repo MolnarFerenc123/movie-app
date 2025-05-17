@@ -15,6 +15,16 @@ struct MediaItem: Identifiable{
     let rating: Double
     let voteCount: Int
     
+    init(id: Int = 0) {
+        self.id = id
+        self.title = ""
+        self.year = ""
+        self.duration = "duration"
+        self.imageUrl = nil
+        self.rating = 0.0
+        self.voteCount = 0
+    }
+    
     init(id: Int, title: String, year: String, duration: String, imageUrl: URL?, rating: Double, voteCount: Int) {
         self.id = id
         self.title = title

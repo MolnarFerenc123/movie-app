@@ -16,19 +16,25 @@ struct FavoritesView: View {
     ]
     
     var body: some View {
-        VStack(alignment: .leading){
+        VStack{
             NavigationView{
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: 10) {
-                        ForEach(viewModel.movies) { movie in
-                            MovieCell(movie: movie, imageHeight: 180, showFavouriteIcon: true)
-                                .padding(.horizontal, 25)
+                ZStack(alignment: .topTrailing){
+                    Image(.redQuarterCircle)
+                        .ignoresSafeArea(.all)
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 10) {
+                            ForEach(viewModel.movies) { movie in
+                                MovieCell(movie: movie, imageHeight: 180, showFavouriteIcon: true)
+                                    .padding(.horizontal, 25)
+                            }
                         }
                     }
+                    .scrollDismissesKeyboard(.interactively)
+                    .padding(.top, 20)
+                    .navigationTitle("favoriteMovies.title")
                 }
-                .scrollDismissesKeyboard(.interactively)
             }
-            .navigationTitle("favoriteMovies.title")
+            
         }
         .showAlert(model: $viewModel.alertModel)
         .onAppear{

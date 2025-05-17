@@ -25,31 +25,16 @@ class FavoritesViewModel: FavoritesViewModelProtocol, ErrorPresentable {
     private var service: ReactiveMoviesServiceProtocol
     
     @Inject
-    private var favoriteMediaStore: FavoriteMediaStoreProtocol
+    private var store: MediaItemStoreProtocol
     
     init() {
-        favoriteMediaStore.mediaItems
-            .receive(on: RunLoop.main)
-                        .sink { completion in
-                            switch completion {
-                            case .failure(let error):
-                                self.alertModel = self.toAlertModel(error)
-                            case .finished:
-                                break
-                            }
-                        } receiveValue: { [weak self]mediaItems in
-                            self?.movies = mediaItems
-                        }
-                        .store(in: &cancellables)
-        
         viewLoaded
             .flatMap { [weak self] _ -> AnyPublisher<[MediaItem], MovieError> in
                 guard let self = self else {
                     preconditionFailure("There is no self")
                 }
                 let request = FetchFavoriteMovieRequest()
-                
-                return service.fetchFavoriteMovies(req: request)
+                return service.fetchFavoriteMovies(req: request, fromLocal: false)
             }
             .receive(on: RunLoop.main)
             .sink { completion in
@@ -61,7 +46,6 @@ class FavoritesViewModel: FavoritesViewModelProtocol, ErrorPresentable {
                 }
             } receiveValue: { [weak self]movies in
                 self?.movies = movies
-                self?.favoriteMediaStore.addFavoriteMediaItems(movies)
             }
             .store(in: &cancellables)
     }

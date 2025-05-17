@@ -19,33 +19,11 @@ struct DetailView: View {
         
         return ScrollView {
             VStack (alignment: .leading, spacing: LayoutConst.largePadding){
-                AsyncImage(url: mediaItemDetail.imageUrl) { phase in
-                    switch phase {
-                    case .empty:
-                        ZStack {
-                            Color.gray.opacity(0.3)
-                            ProgressView()
-                        }
-                        
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .scaledToFill()
-                            .frame(height: 180,alignment: .top)
-                    case .failure:
-                        ZStack {
-                            Color.red.opacity(0.3)
-                            Image(systemName: "photo")
-                                .foregroundColor(.white)
-                        }
-                    @unknown default:
-                        EmptyView()
-                    }
-                }
-                .frame(maxHeight: 180)
-                .frame(maxWidth: .infinity)
-                .clipped()
-                .cornerRadius(12)
+                LoadImageView(url: mediaItemDetail.imageUrl)
+                    .frame(maxHeight: 180)
+                    .frame(maxWidth: .infinity)
+                    .clipped()
+                    .cornerRadius(12)
                 HStack{
                     MovieLabel(type: .rating(mediaItemDetail.rating))
                     MovieLabel(type: .voteCount(mediaItemDetail.voteCount))

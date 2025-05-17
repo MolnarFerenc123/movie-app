@@ -17,31 +17,8 @@ struct ContributorHScrollView: View {
             HStack(spacing: 20){
                 ForEach(contributors) { contributor in
                     VStack(alignment: .leading){
-                        AsyncImage(url: contributor.profileImageUrl) { phase in
-                            switch phase {
-                            case .empty:
-                                ZStack {
-                                    Color.gray.opacity(0.3)
-                                    ProgressView()
-                                }
-                                
-                            case .success(let image):
-                                image
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 56, height: 56)
-                                    .cornerRadius(28)
-                            case .failure:
-                                ZStack {
-                                    Color.red.opacity(0.3)
-                                    Image(systemName: "photo")
-                                        .foregroundColor(.white)
-                                }
-                            @unknown default:
-                                EmptyView()
-                            }
-                        }
-                        .padding(.bottom, 12)
+                        LoadImageView(url: contributor.profileImageUrl)
+                            .padding(.bottom, 12)
                         SubNamesView(name: contributor.name)
                     }
                 }

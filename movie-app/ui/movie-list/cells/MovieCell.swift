@@ -18,33 +18,11 @@ struct MovieCell: View {
             VStack(alignment: .leading, spacing: 8) {
                 ZStack(alignment: .topLeading) {
                     HStack(alignment: .center) {
-                        AsyncImage(url: movie.imageUrl) { phase in
-                            switch phase {
-                            case .empty:
-                                ZStack {
-                                    Color.gray.opacity(0.3)
-                                    ProgressView()
-                                }
-                                
-                            case .success(let image):
-                                image
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(height: imageHeight,alignment: .top)
-                            case .failure:
-                                ZStack {
-                                    Color.red.opacity(0.3)
-                                    Image(systemName: "photo")
-                                        .foregroundColor(.white)
-                                }
-                            @unknown default:
-                                EmptyView()
-                            }
-                        }
-                        .frame(height: imageHeight)
-                        .frame(maxWidth: .infinity)
-                        .clipped()
-                        .cornerRadius(12)
+                        LoadImageView(url: movie.imageUrl)
+                            .frame(height: imageHeight)
+                            .frame(maxWidth: .infinity)
+                            .clipped()
+                            .cornerRadius(12)
                     }
                     HStack{
                         MovieLabel(type: .rating(movie.rating))
@@ -56,7 +34,7 @@ struct MovieCell: View {
                             } label: {
                                 Image(true ? .favorite : .noFavorite)
                                     .onTapGesture {
-                                        viewModel.favoriteButtonTapped.send(())
+                                        viewModel.favoriteButtonTapped.send(movie.id)
                                     }
                             }
                             

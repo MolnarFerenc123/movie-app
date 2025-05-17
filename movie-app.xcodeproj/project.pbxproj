@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		AD5801CB2DD885E700526B57 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AD5801CA2DD885E700526B57 /* RealmSwift */; };
+		AD5801D42DD8981D00526B57 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = AD5801D32DD8981D00526B57 /* SDWebImageSwiftUI */; };
+		AD5801D72DD899A200526B57 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = AD5801CA2DD885E700526B57 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AD5801DB2DD89C5E00526B57 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = AD5801DA2DD89C5E00526B57 /* Reachability */; };
 		AD8085792DAA65340006D665 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = AD8085782DAA65340006D665 /* CombineMoya */; };
 		AD80857B2DAA65340006D665 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = AD80857A2DAA65340006D665 /* Moya */; };
 		AD81FF7A2DA534660060AE12 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = AD81FF782DA5345E0060AE12 /* .gitignore */; };
@@ -33,6 +36,20 @@
 			remoteInfo = "movie-app";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AD5801D82DD899A200526B57 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AD5801D72DD899A200526B57 /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		AD80854D2DAA57250006D665 /* movie-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "movie-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +95,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD5801D42DD8981D00526B57 /* SDWebImageSwiftUI in Frameworks */,
+				AD5801DB2DD89C5E00526B57 /* Reachability in Frameworks */,
 				AD80857B2DAA65340006D665 /* Moya in Frameworks */,
 				AD8085792DAA65340006D665 /* CombineMoya in Frameworks */,
 				AD9E9C142DAE85460052D059 /* InjectPropertyWrapper in Frameworks */,
@@ -129,6 +148,7 @@
 				ADA6F7332DA14F8E007981C1 /* Sources */,
 				ADA6F7342DA14F8E007981C1 /* Frameworks */,
 				ADA6F7352DA14F8E007981C1 /* Resources */,
+				AD5801D82DD899A200526B57 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -144,6 +164,8 @@
 				AD9E9C132DAE85460052D059 /* InjectPropertyWrapper */,
 				AD9E9C162DAE85610052D059 /* Swinject */,
 				AD5801CA2DD885E700526B57 /* RealmSwift */,
+				AD5801D32DD8981D00526B57 /* SDWebImageSwiftUI */,
+				AD5801DA2DD89C5E00526B57 /* Reachability */,
 			);
 			productName = "movie-app";
 			productReference = AD80854D2DAA57250006D665 /* movie-app.app */;
@@ -237,6 +259,8 @@
 				ADFBF1E52DB7B4970008C560 /* XCRemoteSwiftPackageReference "Nimble" */,
 				ADFBF1E82DB7B4BC0008C560 /* XCRemoteSwiftPackageReference "Quick" */,
 				AD5801C92DD885E700526B57 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				AD5801D22DD8981D00526B57 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				AD5801D92DD89C5E00526B57 /* XCRemoteSwiftPackageReference "Reachability" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = ADA6F72E2DA14F8E007981C1;
@@ -351,6 +375,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -447,6 +472,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -536,6 +562,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -625,6 +652,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -688,6 +716,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -810,6 +839,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1788,6 +1818,22 @@
 				kind = branch;
 			};
 		};
+		AD5801D22DD8981D00526B57 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.3;
+			};
+		};
+		AD5801D92DD89C5E00526B57 /* XCRemoteSwiftPackageReference "Reachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		AD8085772DAA65340006D665 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya.git";
@@ -1835,6 +1881,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AD5801C92DD885E700526B57 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		AD5801D32DD8981D00526B57 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD5801D22DD8981D00526B57 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+		AD5801DA2DD89C5E00526B57 /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD5801D92DD89C5E00526B57 /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
 		};
 		AD8085782DAA65340006D665 /* CombineMoya */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -27,7 +27,7 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable{
     private var service: ReactiveMoviesServiceProtocol
     
     @Inject
-    private var favoriteMediaStore: FavoriteMediaStoreProtocol
+    private var store: MediaItemStoreProtocol
     
     init() {
         let movieDetailsPublisher = mediaIdSubject
@@ -36,7 +36,7 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable{
                     preconditionFailure("There is no self")
                 }
                 let request = FetchDetailRequest(mediaId: mediaItemId)
-                isFavorite = favoriteMediaStore.isFavoriteMediaItem(withId: mediaItemId)
+                isFavorite = store.isMediaItemStored(withId: mediaItemId)
                 return self.service.fetchMovieDetail(req: request)
             }
             .share()
@@ -94,7 +94,7 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable{
                             if isFavorite {
                                 //self.favoriteMediaStore.addFavoriteMediaItem(self.mediaItemDetail)
                             } else {
-                                self.favoriteMediaStore.removeFavoriteMediaItem(withId: self.mediaItemDetail.id)
+                                self.store.deleteMediaItem(withId: self.mediaItemDetail.id)
                             }
                         }
                     }
