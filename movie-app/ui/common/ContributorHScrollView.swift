@@ -44,10 +44,6 @@ struct ContributorHScrollView: View {
                         .padding(.bottom, 12)
                         SubNamesView(name: contributor.name)
                     }
-                    .frame(width: 77)
-                    .onAppear{
-                        print("<<<<\(contributor.profileImageUrl)")
-                    }
                 }
             }
         }

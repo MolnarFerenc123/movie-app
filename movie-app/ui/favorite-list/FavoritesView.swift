@@ -32,7 +32,7 @@ struct FavoritesView: View {
         }
         .showAlert(model: $viewModel.alertModel)
         .onAppear{
-            viewModel.fetchFavorites()
+            viewModel.viewLoaded.send(())
         }
     }
 }

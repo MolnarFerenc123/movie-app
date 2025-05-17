@@ -41,5 +41,9 @@ class ServiceAssembly: Assembly {
         container.register(ReactiveMoviesServiceProtocol.self) { _ in
             return ReactiveMoviesService()
         }.inObjectScope(.container)
+        
+        container.register(FavoriteMediaStoreProtocol.self) { _ in
+            return FavoriteMediaStore()
+        }.inObjectScope(.container)
     }
 }

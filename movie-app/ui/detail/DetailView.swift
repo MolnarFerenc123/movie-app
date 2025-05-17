@@ -80,9 +80,9 @@ struct DetailView: View {
         .toolbar{
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
-                    movieCellViewModel.mediaIdSubject.send([mediaItem.id, Favorites.favoritesId.contains(mediaItem.id) ? false : true])
+                    detailViewModel.favoriteButtonTapped.send(())
                 }){
-                    Image(Favorites.favoritesId.contains(mediaItem.id) ? .favoriteSmall : .noFavoriteSmall)
+                    Image(detailViewModel.isFavorite ? .favoriteSmall : .noFavoriteSmall)
                         .resizable()
                         .frame(height: 48)
                         .frame(width: 48)

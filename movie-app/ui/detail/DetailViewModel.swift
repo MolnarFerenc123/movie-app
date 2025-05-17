@@ -9,24 +9,25 @@ import Combine
 import InjectPropertyWrapper
 
 protocol DetailViewModelProtocol: ObservableObject {
-    var mediaItemDetail: MediaItemDetail { get }
-    var cast: [Contributor] { get }
-    var alertModel: AlertModel? { get set }
-    var mediaIdSubject: PassthroughSubject<Int, Never> { get }
 }
 
 
 class DetailViewModel: DetailViewModelProtocol, ErrorPresentable{
     @Published var mediaItemDetail: MediaItemDetail = MediaItemDetail()
     @Published var cast: [Contributor] = []
+    @Published var isFavorite: Bool = false
     @Published var alertModel: AlertModel? = nil
     
     private var cancellables = Set<AnyCancellable>()
     
     let mediaIdSubject = PassthroughSubject<Int, Never>()
+    let favoriteButtonTapped = PassthroughSubject<Void, Never>()
     
     @Inject
     private var service: ReactiveMoviesServiceProtocol
+    
+    @Inject
+    private var favoriteMediaStore: FavoriteMediaStoreProtocol
     
     init() {
         let movieDetailsPublisher = mediaIdSubject
@@ -35,6 +36,7 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable{
                     preconditionFailure("There is no self")
                 }
                 let request = FetchDetailRequest(mediaId: mediaItemId)
+                isFavorite = favoriteMediaStore.isFavoriteMediaItem(withId: mediaItemId)
                 return self.service.fetchMovieDetail(req: request)
             }
             .share()
@@ -66,10 +68,44 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable{
             })
             .store(in: &cancellables)
         
+        favoriteButtonTapped
+                    .flatMap { [weak self] _ -> AnyPublisher<(EditFavoriteResult, Bool), MovieError> in
+                        guard let self = self else {
+                            preconditionFailure("There is no self")
+                        }
+                        let isFavorite = !self.isFavorite
+                        let request = EditFavoriteRequest(movieId: self.mediaItemDetail.id, favorite: isFavorite)
+                        return service.editFavoriteMovie(req: request)
+                            .map { result in
+                            (result, isFavorite)
+                        }
+                        .eraseToAnyPublisher()
+                    }
+                    .sink { [weak self] completion in
+                        if case let .failure(error) = completion {
+                            self?.alertModel = self?.toAlertModel(error)
+                        }
+                    } receiveValue: { [weak self] result, isFavorite in
+                        guard let self = self else {
+                            preconditionFailure("There is no self")
+                        }
+                        if result.success {
+                            self.isFavorite = isFavorite
+                            if isFavorite {
+                                //self.favoriteMediaStore.addFavoriteMediaItem(self.mediaItemDetail)
+                            } else {
+                                self.favoriteMediaStore.removeFavoriteMediaItem(withId: self.mediaItemDetail.id)
+                            }
+                        }
+                    }
+                    .store(in: &cancellables)
+        
     }
     
     deinit {
         cancellables.forEach { $0.cancel() }
     }
+    
+    
 }
 

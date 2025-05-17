@@ -9,22 +9,30 @@ import Foundation
 struct Contributor: Identifiable{
     let id: Int
     let name: String
-    let profileImageUrl: URL?
+    let logoPath: String?
     
-    init(id: Int, name: String, profileImageUrl: URL?) {
+    var profileImageUrl: URL? {
+        guard let logoPath = logoPath else{
+            return nil
+        }
+        return URL(string: "https://image.tmdb.org/t/p/w500\(logoPath)")
+    }
+    
+    init(id: Int, name: String, logoPath: String) {
         self.id = id
         self.name = name
-        self.profileImageUrl = profileImageUrl
+        self.logoPath = logoPath
     }
     
     init(dto: ContributorResponse) {
         self.id = dto.id
         self.name = dto.name
-        var imageUrl: URL? {
-            dto.profileImagePath.flatMap {
-                URL(string: "https://image.tmdb.org/t/p/w500\($0)")
-            }
-        }
-        self.profileImageUrl = imageUrl
+        self.logoPath = dto.logoPath
+    }
+    
+    init(dto: CompanyResponse) {
+        self.id = dto.id
+        self.name = dto.name
+        self.logoPath = dto.logoPath
     }
 }

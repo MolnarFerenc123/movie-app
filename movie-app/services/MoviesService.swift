@@ -28,7 +28,7 @@ protocol MoviesServiceProtocol {
     func fetchMovies(req: FetchMediaListRequest) async throws -> [MediaItem]
     func searchMovies(req: SearchMovieRequest) async throws -> [MediaItem]
     func fetchFavoriteMovies(req: FetchFavoriteMovieRequest) async throws -> [MediaItem]
-    func editFavoriteMovie(req: EditFavoriteRequest) async throws -> AddFavoriteResponse
+    func editFavoriteMovie(req: EditFavoriteRequest) async throws -> EditFavoriteResponse
 }
 
 class MoviesService : MoviesServiceProtocol {
@@ -80,13 +80,13 @@ class MoviesService : MoviesServiceProtocol {
         )
     }
     
-    func editFavoriteMovie(req: EditFavoriteRequest) async throws -> AddFavoriteResponse{
+    func editFavoriteMovie(req: EditFavoriteRequest) async throws -> EditFavoriteResponse{
         return try await withCheckedThrowingContinuation { continuation in
             moya.request(MultiTarget(MoviesApi.editFavoriteMovie(req: req))) { result in
                 switch result {
                 case .success(let response):
                     do {
-                        let decodedResponse = try JSONDecoder().decode(AddFavoriteResponse.self, from: response.data)
+                        let decodedResponse = try JSONDecoder().decode(EditFavoriteResponse.self, from: response.data)
                         continuation.resume(returning: decodedResponse)
                     } catch {
                         continuation.resume(throwing: error)

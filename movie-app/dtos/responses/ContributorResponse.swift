@@ -17,11 +17,11 @@ struct ContributorListResponse : Decodable {
 struct ContributorResponse : Decodable {
     let id: Int
     let name: String
-    let profileImagePath: String?
+    let logoPath: String?
     
     enum CodingKeys: String, CodingKey {
         case id
         case name
-        case profileImagePath = "profile_path"
+        case logoPath = "profile_path"
     }
 }

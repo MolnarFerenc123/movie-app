@@ -89,9 +89,7 @@ struct MediaItemDetail: Identifiable{
             }
         self.overview = dto.overview
         self.productionCompanies = dto.productionCompanies
-            .map { el in
-                return Contributor(id: el.id, name: el.name, profileImageUrl: URL(string: "https://image.tmdb.org/t/p/w500\(el.logoImagePath!)"))
-            }
+            .map({Contributor(dto: $0)})
         
     }
     
