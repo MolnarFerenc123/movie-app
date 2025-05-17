@@ -24,6 +24,9 @@ protocol ReactiveMoviesServiceProtocol {
 
 class ReactiveMoviesService: ReactiveMoviesServiceProtocol {
     @Inject
+    private var store: MediaItemStoreProtocol
+    
+    @Inject
     var moya: MoyaProvider<MultiTarget>!
     
     func fetchGenres(req: FetchGenreRequest) -> AnyPublisher<[Genre], MovieError> {
@@ -72,6 +75,10 @@ class ReactiveMoviesService: ReactiveMoviesServiceProtocol {
             decodeTo: MoviePageResponse.self,
             transform: { $0.results.map(MediaItem.init(dto:)) }
         )
+            .handleEvents(receiveOutput: { mediaItems in
+                self.store.saveMediaItems(mediaItems)
+            })
+            .eraseToAnyPublisher()
     }
     
     func editFavoriteMovie(req: EditFavoriteRequest) -> AnyPublisher<EditFavoriteResult, MovieError> {

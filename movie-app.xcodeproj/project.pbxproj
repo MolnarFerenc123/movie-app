@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AD5801C02DD87F3F00526B57 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AD5801BF2DD87F3F00526B57 /* RealmSwift */; };
+		AD5801CB2DD885E700526B57 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AD5801CA2DD885E700526B57 /* RealmSwift */; };
 		AD8085792DAA65340006D665 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = AD8085782DAA65340006D665 /* CombineMoya */; };
 		AD80857B2DAA65340006D665 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = AD80857A2DAA65340006D665 /* Moya */; };
 		AD81FF7A2DA534660060AE12 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = AD81FF782DA5345E0060AE12 /* .gitignore */; };
@@ -81,7 +81,7 @@
 				AD80857B2DAA65340006D665 /* Moya in Frameworks */,
 				AD8085792DAA65340006D665 /* CombineMoya in Frameworks */,
 				AD9E9C142DAE85460052D059 /* InjectPropertyWrapper in Frameworks */,
-				AD5801C02DD87F3F00526B57 /* RealmSwift in Frameworks */,
+				AD5801CB2DD885E700526B57 /* RealmSwift in Frameworks */,
 				AD9E9C172DAE85610052D059 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,7 +143,7 @@
 				AD80857A2DAA65340006D665 /* Moya */,
 				AD9E9C132DAE85460052D059 /* InjectPropertyWrapper */,
 				AD9E9C162DAE85610052D059 /* Swinject */,
-				AD5801BF2DD87F3F00526B57 /* RealmSwift */,
+				AD5801CA2DD885E700526B57 /* RealmSwift */,
 			);
 			productName = "movie-app";
 			productReference = AD80854D2DAA57250006D665 /* movie-app.app */;
@@ -236,7 +236,7 @@
 				AD9E9C152DAE85610052D059 /* XCRemoteSwiftPackageReference "Swinject" */,
 				ADFBF1E52DB7B4970008C560 /* XCRemoteSwiftPackageReference "Nimble" */,
 				ADFBF1E82DB7B4BC0008C560 /* XCRemoteSwiftPackageReference "Quick" */,
-				AD5801BE2DD87F3F00526B57 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				AD5801C92DD885E700526B57 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = ADA6F72E2DA14F8E007981C1;
@@ -1780,7 +1780,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AD5801BE2DD87F3F00526B57 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+		AD5801C92DD885E700526B57 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift";
 			requirement = {
@@ -1831,9 +1831,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AD5801BF2DD87F3F00526B57 /* RealmSwift */ = {
+		AD5801CA2DD885E700526B57 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AD5801BE2DD87F3F00526B57 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			package = AD5801C92DD885E700526B57 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
 		AD8085782DAA65340006D665 /* CombineMoya */ = {

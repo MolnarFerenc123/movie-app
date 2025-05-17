@@ -45,5 +45,9 @@ class ServiceAssembly: Assembly {
         container.register(FavoriteMediaStoreProtocol.self) { _ in
             return FavoriteMediaStore()
         }.inObjectScope(.container)
+        
+        container.register(MediaItemStoreProtocol.self) { _ in
+            return MediaItemStore()
+        }.inObjectScope(.container)
     }
 }
