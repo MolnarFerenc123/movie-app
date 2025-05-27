@@ -36,3 +36,6 @@
 "cast.subtitle" = "Szereposztás";
 
 "no.internet" = "Nincs internet elérés";
+
+"addReview.subTitle" = "Adj egy őszinte véleményt";
+"addReview.button" = "Vélemény elküldése";

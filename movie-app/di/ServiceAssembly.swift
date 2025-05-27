@@ -34,12 +34,20 @@ class ServiceAssembly: Assembly {
         }.inObjectScope(.container)
         
         
-        container.register(ReactiveMoviesServiceProtocol.self) { _ in
-            return ReactiveMoviesService()
+        container.register(MovieRepository.self) { _ in
+            return MovieRepositoryImpl()
         }.inObjectScope(.container)
         
         container.register(MediaItemStoreProtocol.self) { _ in
             return MediaItemStore()
+        }.inObjectScope(.container)
+        
+        container.register(MediaItemDetailStoreProtocol.self) { _ in
+            return MediaItemDetailStore()
+        }.inObjectScope(.container)
+        
+        container.register(CastMemberStoreProtocol.self) { _ in
+            return CastMemberStore()
         }.inObjectScope(.container)
         
         container.register(NetworkMonitorProtocol.self) { _ in

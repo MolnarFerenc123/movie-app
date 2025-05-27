@@ -24,7 +24,7 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable{
     let favoriteButtonTapped = PassthroughSubject<Void, Never>()
     
     @Inject
-    private var service: ReactiveMoviesServiceProtocol
+    private var repository: MovieRepository
     
     @Inject
     private var store: MediaItemStoreProtocol
@@ -37,7 +37,7 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable{
                 }
                 let request = FetchDetailRequest(mediaId: mediaItemId)
                 isFavorite = store.isMediaItemStored(withId: mediaItemId)
-                return self.service.fetchMovieDetail(req: request)
+                return self.repository.fetchMovieDetail(req: request)
             }
             .share()
         
@@ -47,7 +47,7 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable{
                     preconditionFailure("There is no self")
                 }
                 let request = FetchDetailRequest(mediaId: mediaItemId)
-                return self.service.fetchCast(req: request)
+                return self.repository.fetchCast(req: request)
             }
             .share()
         
@@ -69,36 +69,36 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable{
             .store(in: &cancellables)
         
         favoriteButtonTapped
-                    .flatMap { [weak self] _ -> AnyPublisher<(EditFavoriteResult, Bool), MovieError> in
-                        guard let self = self else {
-                            preconditionFailure("There is no self")
-                        }
-                        let isFavorite = !self.isFavorite
-                        let request = EditFavoriteRequest(movieId: self.mediaItemDetail.id, favorite: isFavorite)
-                        return service.editFavoriteMovie(req: request)
-                            .map { result in
-                            (result, isFavorite)
-                        }
-                        .eraseToAnyPublisher()
+            .flatMap { [weak self] _ -> AnyPublisher<(ModifyMediaResult, Bool), MovieError> in
+                guard let self = self else {
+                    preconditionFailure("There is no self")
+                }
+                let isFavorite = !self.isFavorite
+                let request = EditFavoriteRequest(movieId: self.mediaItemDetail.id, favorite: isFavorite)
+                return repository.editFavoriteMovie(req: request)
+                    .map { result in
+                        (result, isFavorite)
                     }
-                    .sink { [weak self] completion in
-                        if case let .failure(error) = completion {
-                            self?.alertModel = self?.toAlertModel(error)
-                        }
-                    } receiveValue: { [weak self] result, isFavorite in
-                        guard let self = self else {
-                            preconditionFailure("There is no self")
-                        }
-                        if result.success {
-                            self.isFavorite = isFavorite
-                            if isFavorite {
-                                //self.favoriteMediaStore.addFavoriteMediaItem(self.mediaItemDetail)
-                            } else {
-                                self.store.deleteMediaItem(withId: self.mediaItemDetail.id)
-                            }
-                        }
+                    .eraseToAnyPublisher()
+            }
+            .sink { [weak self] completion in
+                if case let .failure(error) = completion {
+                    self?.alertModel = self?.toAlertModel(error)
+                }
+            } receiveValue: { [weak self] result, isFavorite in
+                guard let self = self else {
+                    preconditionFailure("There is no self")
+                }
+                if result.success {
+                    self.isFavorite = isFavorite
+                    if isFavorite {
+                        //self.favoriteMediaStore.addFavoriteMediaItem(self.mediaItemDetail)
+                    } else {
+                        self.store.deleteMediaItem(withId: self.mediaItemDetail.id)
                     }
-                    .store(in: &cancellables)
+                }
+            }
+            .store(in: &cancellables)
         
     }
     

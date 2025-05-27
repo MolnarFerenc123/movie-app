@@ -20,6 +20,7 @@ struct MediaItemDetail: Identifiable{
     let genres: [String]
     let spokenLanguages: [String]
     let overview: String
+    let imdbURL: URL?
     let productionCompanies: [Contributor]
     
     init() {
@@ -37,10 +38,11 @@ struct MediaItemDetail: Identifiable{
         self.spokenLanguages = []
         self.overview = ""
         self.productionCompanies = []
+        self.imdbURL = nil
     }
     
-    init(id: Int, title: String, year: String, runtime: Int, imageUrl: URL?, rating: Double, voteCount: Int, summary: String? = nil, popularity: Double = 0, adult: Bool = false, genres: [String] = [], spokenLanguages: [String] = [],
-         overview: String = "", productionCompanies: [Contributor] = []) {
+    init(id: Int = 0, title: String = "", year: String = "", runtime: Int = 0, imageUrl: URL? = nil, rating: Double = 0.0, voteCount: Int = 0, summary: String? = nil, popularity: Double = 0.0, adult: Bool = false, genres: [String] = [], spokenLanguages: [String] = [],
+         overview: String = "", imdbURL: URL? = nil, productionCompanies: [Contributor] = []) {
         self.id = id
         self.title = title
         self.year = year
@@ -55,6 +57,7 @@ struct MediaItemDetail: Identifiable{
         self.spokenLanguages = spokenLanguages
         self.overview = overview
         self.productionCompanies = productionCompanies
+        self.imdbURL = imdbURL
     }
     
     init(dto: MovieDetailResponse) {
@@ -66,6 +69,12 @@ struct MediaItemDetail: Identifiable{
         var imageUrl: URL? {
             dto.posterPath.flatMap {
                 URL(string: "https://image.tmdb.org/t/p/w500\($0)")
+            }
+        }
+        
+        var imdbURL: URL? {
+            dto.imdbId.flatMap{
+                URL(string: "https://www.imdb.com/title/\($0)/")
             }
         }
         
@@ -88,6 +97,7 @@ struct MediaItemDetail: Identifiable{
                 language.englishName
             }
         self.overview = dto.overview
+        self.imdbURL = imdbURL
         self.productionCompanies = dto.productionCompanies
             .map({Contributor(dto: $0)})
         

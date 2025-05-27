@@ -9,11 +9,11 @@ import Combine
 import InjectPropertyWrapper
 
 protocol MovieCellViewModelProtocol : ObservableObject {
-    var addFavoriteResponse: EditFavoriteResponse? {get}
+    var addFavoriteResponse: ModifyMediaResponse? {get}
 }
 
 class MovieCellViewModel: MovieCellViewModelProtocol, ErrorPresentable {
-    @Published var addFavoriteResponse: EditFavoriteResponse? = nil
+    @Published var addFavoriteResponse: ModifyMediaResponse? = nil
     @Published var mediaItemDetail: MediaItemDetail = MediaItemDetail()
     @Published var alertModel: AlertModel? = nil
     @Published var isFavorite: Bool = false
@@ -23,20 +23,20 @@ class MovieCellViewModel: MovieCellViewModelProtocol, ErrorPresentable {
     private var cancellables = Set<AnyCancellable>()
     
     @Inject
-    private var service: ReactiveMoviesServiceProtocol
+    private var repository: MovieRepository
     
     @Inject
     private var store: MediaItemStoreProtocol
     
     init() {
         favoriteButtonTapped
-                    .flatMap { [weak self] mediaItemId -> AnyPublisher<(EditFavoriteResult, Bool), MovieError> in
+                    .flatMap { [weak self] mediaItemId -> AnyPublisher<(ModifyMediaResult, Bool), MovieError> in
                         guard let self = self else {
                             preconditionFailure("There is no self")
                         }
                         let isFavorite = !self.isFavorite
                         let request = EditFavoriteRequest(movieId: mediaItemId, favorite: isFavorite)
-                        return service.editFavoriteMovie(req: request)
+                        return repository.editFavoriteMovie(req: request)
                             .map { result in
                             (result, isFavorite)
                         }

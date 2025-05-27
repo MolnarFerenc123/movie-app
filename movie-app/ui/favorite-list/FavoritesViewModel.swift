@@ -22,7 +22,7 @@ class FavoritesViewModel: FavoritesViewModelProtocol, ErrorPresentable {
     private var cancellables = Set<AnyCancellable>()
     
     @Inject
-    private var service: ReactiveMoviesServiceProtocol
+    private var repository: MovieRepository
     
     @Inject
     private var store: MediaItemStoreProtocol
@@ -34,7 +34,7 @@ class FavoritesViewModel: FavoritesViewModelProtocol, ErrorPresentable {
                     preconditionFailure("There is no self")
                 }
                 let request = FetchFavoriteMovieRequest()
-                return service.fetchFavoriteMovies(req: request, fromLocal: false)
+                return repository.fetchFavoriteMovies(req: request, fromLocal: false)
             }
             .receive(on: RunLoop.main)
             .sink { completion in

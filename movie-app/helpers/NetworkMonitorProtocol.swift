@@ -20,7 +20,7 @@ class NetworkMonitor: NetworkMonitorProtocol {
     
     private var reachability: Reachability
     
-    private let isConnectedSubject = CurrentValueSubject<Bool, Never>(false)
+    private let isConnectedSubject = CurrentValueSubject<Bool, Never>(true)
     
     init() {
         guard let reachibility = try? Reachability() else {

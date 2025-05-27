@@ -11,6 +11,7 @@ struct DetailView: View {
     @StateObject private var detailViewModel = DetailViewModel()
     @StateObject private var movieCellViewModel = MovieCellViewModel()
     let mediaItem: MediaItem
+    @Environment(\.dismiss) private var dismiss: DismissAction
     
     var body: some View {
         var mediaItemDetail : MediaItemDetail{
@@ -41,8 +42,12 @@ struct DetailView: View {
                     DetailLabel(title: "language", value: mediaItemDetail.langList)
                 }
                 HStack{
-                    StyledButton(style: .outlined, title: "detail.rate")
-                    StyledButton(style: .filled, title: "detail.visit.imdb")
+                    NavigationLink(destination: AddReviewView(mediaItemDetail: mediaItemDetail))
+                    {
+                        StyledButton(style: .outlined, action: .simple, title: "detail.rate")
+                    }
+                    Spacer()
+                    StyledButton(style: .filled, action: .simple ,title: "detail.visit.imdb")
                 }
                 VStack(alignment: .leading, spacing: 12){
                     Text(LocalizedStringKey("detail.title"))

@@ -11,11 +11,16 @@ struct Contributor: Identifiable{
     let name: String
     let logoPath: String?
     
+    
     var profileImageUrl: URL? {
         guard let logoPath = logoPath else{
             return nil
         }
-        return URL(string: "https://image.tmdb.org/t/p/w500\(logoPath)")
+        if logoPath.starts(with: "http") {
+            return URL(string: logoPath)
+        }else {
+            return URL(string: "https://image.tmdb.org/t/p/w500\(logoPath)")
+        }
     }
     
     init(id: Int, name: String, logoPath: String) {

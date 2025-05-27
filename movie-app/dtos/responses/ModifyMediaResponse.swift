@@ -1,4 +1,4 @@
-struct EditFavoriteResponse : Decodable {
+struct ModifyMediaResponse : Decodable {
     let success : Bool
     let statusCode : Int
     let statusMessage : String

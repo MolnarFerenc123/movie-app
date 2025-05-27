@@ -21,14 +21,14 @@ class GenreSectionViewModel: GenreSectionViewModelProtocol, ErrorPresentable{
     
     
     @Inject
-    private var service: ReactiveMoviesServiceProtocol
+    private var repository: MovieRepository
     
     init() {
         let request = FetchGenreRequest()
         
         let genres = Environments.name == .tv ?
-        self.service.fetchGenres(req: request) :
-        self.service.fetchTVGenres(req: request)
+        self.repository.fetchGenres(req: request) :
+        self.repository.fetchTVGenres(req: request)
         
         genres
             .handleEvents(receiveOutput: { genres in

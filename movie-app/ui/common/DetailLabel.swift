@@ -15,7 +15,7 @@ struct DetailLabel: View {
         VStack(alignment: .leading){
             Text(LocalizedStringKey(title))
                 .font(Fonts.caption)
-            Spacer()
+                .padding(.bottom, 5)
             Text(LocalizedStringKey(value))
                 .font(Fonts.paragraph)
         }

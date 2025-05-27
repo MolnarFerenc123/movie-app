@@ -36,3 +36,7 @@
 "cast.subtitle" = "Cast";
 
 "no.internet" = "No internet connection";
+
+"addReview.subTitle" = "Give an honest review";
+"addReview.button" = "Send my review";
+

@@ -18,6 +18,8 @@ struct ContributorHScrollView: View {
                 ForEach(contributors) { contributor in
                     VStack(alignment: .leading){
                         LoadImageView(url: contributor.profileImageUrl)
+                            .frame(width: 56, height: 56)
+                            .cornerRadius(28)
                             .padding(.bottom, 12)
                         SubNamesView(name: contributor.name)
                     }
