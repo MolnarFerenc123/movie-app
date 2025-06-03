@@ -45,12 +45,14 @@ struct DetailView: View {
                     NavigationLink(destination: AddReviewView(mediaItemDetail: mediaItemDetail))
                     {
                         StyledButton(style: .outlined, action: .simple, title: "detail.rate")
+                            .frame(width: 184, height: 56)
                     }
                     Spacer()
                     StyledButton(style: .filled, action: .simple ,title: "detail.visit.imdb")
+                        .frame(width: 184, height: 56)
                 }
                 VStack(alignment: .leading, spacing: 12){
-                    Text(LocalizedStringKey("detail.title"))
+                    Text("detail.title".localized())
                         .font(Fonts.overviewText)
                     Text(mediaItemDetail.overview)
                         .font(Fonts.paragraph)

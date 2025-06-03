@@ -16,6 +16,8 @@
 		AD81FF7A2DA534660060AE12 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = AD81FF782DA5345E0060AE12 /* .gitignore */; };
 		AD9E9C142DAE85460052D059 /* InjectPropertyWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = AD9E9C132DAE85460052D059 /* InjectPropertyWrapper */; };
 		AD9E9C172DAE85610052D059 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = AD9E9C162DAE85610052D059 /* Swinject */; };
+		ADEC557C2DEAF73E005DA617 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = ADEC557B2DEAF73E005DA617 /* Lottie */; };
+		ADEC558D2DEB19F8005DA617 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = ADEC558C2DEB19F8005DA617 /* Shimmer */; };
 		ADFBF1E72DB7B4970008C560 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = ADFBF1E62DB7B4970008C560 /* Nimble */; };
 		ADFBF1EA2DB7B4BC0008C560 /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = ADFBF1E92DB7B4BC0008C560 /* Quick */; };
 /* End PBXBuildFile section */
@@ -98,10 +100,12 @@
 				AD5801D42DD8981D00526B57 /* SDWebImageSwiftUI in Frameworks */,
 				AD5801DB2DD89C5E00526B57 /* Reachability in Frameworks */,
 				AD80857B2DAA65340006D665 /* Moya in Frameworks */,
+				ADEC558D2DEB19F8005DA617 /* Shimmer in Frameworks */,
 				AD8085792DAA65340006D665 /* CombineMoya in Frameworks */,
 				AD9E9C142DAE85460052D059 /* InjectPropertyWrapper in Frameworks */,
 				AD5801CB2DD885E700526B57 /* RealmSwift in Frameworks */,
 				AD9E9C172DAE85610052D059 /* Swinject in Frameworks */,
+				ADEC557C2DEAF73E005DA617 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +170,8 @@
 				AD5801CA2DD885E700526B57 /* RealmSwift */,
 				AD5801D32DD8981D00526B57 /* SDWebImageSwiftUI */,
 				AD5801DA2DD89C5E00526B57 /* Reachability */,
+				ADEC557B2DEAF73E005DA617 /* Lottie */,
+				ADEC558C2DEB19F8005DA617 /* Shimmer */,
 			);
 			productName = "movie-app";
 			productReference = AD80854D2DAA57250006D665 /* movie-app.app */;
@@ -249,6 +255,8 @@
 				en,
 				Base,
 				hu,
+				de,
+				ru,
 			);
 			mainGroup = ADA6F72E2DA14F8E007981C1;
 			minimizedProjectReferenceProxies = 1;
@@ -261,6 +269,8 @@
 				AD5801C92DD885E700526B57 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				AD5801D22DD8981D00526B57 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				AD5801D92DD89C5E00526B57 /* XCRemoteSwiftPackageReference "Reachability" */,
+				ADEC557A2DEAF73E005DA617 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				ADEC558B2DEB19F8005DA617 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = ADA6F72E2DA14F8E007981C1;
@@ -1858,6 +1868,22 @@
 				minimumVersion = 2.9.1;
 			};
 		};
+		ADEC557A2DEAF73E005DA617 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.2;
+			};
+		};
+		ADEC558B2DEB19F8005DA617 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.1;
+			};
+		};
 		ADFBF1E52DB7B4970008C560 /* XCRemoteSwiftPackageReference "Nimble" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Quick/Nimble";
@@ -1911,6 +1937,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AD9E9C152DAE85610052D059 /* XCRemoteSwiftPackageReference "Swinject" */;
 			productName = Swinject;
+		};
+		ADEC557B2DEAF73E005DA617 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADEC557A2DEAF73E005DA617 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		ADEC558C2DEB19F8005DA617 /* Shimmer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADEC558B2DEB19F8005DA617 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
+			productName = Shimmer;
 		};
 		ADFBF1E62DB7B4970008C560 /* Nimble */ = {
 			isa = XCSwiftPackageProductDependency;

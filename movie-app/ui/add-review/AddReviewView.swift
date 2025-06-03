@@ -18,7 +18,7 @@ struct AddReviewView: View {
                     .frame(maxWidth: .infinity)
                     .clipped()
                     .cornerRadius(12)
-                Text(LocalizedStringKey("addReview.subTitle"))
+                Text("addReview.subTitle".localized())
                     .font(Fonts.detailsTitle)
                 HStack{
                     
@@ -28,7 +28,8 @@ struct AddReviewView: View {
                     VStack{
                         StarRatingView(rating: $viewModel.selectedRating)
                             .padding(.bottom, 72)
-                        StyledButton(style: .filled, action: .simple, title: "addReview.buttonTitle")
+                        StyledButton(style: .filled, action: .simple, title: "addReview.buttonTitle".localized())
+                            .frame(width: 184, height: 56)
                             .onTapGesture {
                                 viewModel.ratingButtonSubject.send(())
                             }

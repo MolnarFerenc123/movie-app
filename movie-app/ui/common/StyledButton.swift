@@ -26,7 +26,7 @@ struct StyledButton: View {
         baseView
             .font(Fonts.subheading)
             .foregroundColor(style == .outlined ? .primary : .main)
-            .padding(.horizontal, 32.0)
+            .padding(.horizontal, 16)
             .padding(.vertical, LayoutConst.normalPadding)
             .background(backgroundView)
             .clipShape(Capsule())
@@ -34,19 +34,18 @@ struct StyledButton: View {
                 Capsule()
                     .stroke(Color.primary, lineWidth: style == .outlined ? 1 : 0)
             }
-            .frame(width: 184, height: 56)
     }
     
     @ViewBuilder
     private var baseView: some View {
         switch action {
         case .simple:
-            Text(LocalizedStringKey(title))
+            Text(title.localized())
         case .link(let url):
             if let url = url {
-                Link(LocalizedStringKey(title), destination: url)
+                Link(title.localized(), destination: url)
             } else {
-                Text(LocalizedStringKey(title))
+                Text(title.localized())
             }
         }
     }

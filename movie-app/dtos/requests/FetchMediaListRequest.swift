@@ -13,7 +13,7 @@ struct FetchMediaListRequest {
     let includeAdult: Bool
     
     func asReqestParams() -> [String: Any] {
-        return ["language" : Locale.preferredLanguages.first?.components(separatedBy: "-")[0] ?? "en",
+        return ["language" : Bundle.getLangCode(),
                 "with_genres" : genreId,
                 "include_adult" : includeAdult
         ]

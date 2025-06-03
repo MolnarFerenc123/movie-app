@@ -10,6 +10,6 @@ import Foundation
 struct FetchGenreRequest {
     let accessToken: String = Config.bearerToken
     func asReqestParams() -> [String: String] {
-        return ["language" : Locale.preferredLanguages.first?.components(separatedBy: "-")[0] ?? "en"]
+        return ["language" : Bundle.getLangCode()]
     }
 }

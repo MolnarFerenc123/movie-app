@@ -11,6 +11,6 @@ struct FetchDetailRequest {
     let mediaId: Int
     
     func asReqestParams() -> [String: String] {
-        return ["language" : Locale.preferredLanguages.first?.components(separatedBy: "-")[0] ?? "en"]
+        return ["language" : Bundle.getLangCode()]
     }
 }

@@ -13,7 +13,7 @@ struct SearchMovieRequest {
     let includeAdult: Bool
     
     func asReqestParams() -> [String: Any] {
-        return ["language" : Locale.preferredLanguages.first?.components(separatedBy: "-")[0] ?? "en",
+        return ["language" : Bundle.getLangCode(),
                 "query" : query,
                 "include_adult" : includeAdult
         ]

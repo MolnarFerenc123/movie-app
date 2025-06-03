@@ -53,5 +53,9 @@ class ServiceAssembly: Assembly {
         container.register(NetworkMonitorProtocol.self) { _ in
             return NetworkMonitor()
         }.inObjectScope(.container)
+        
+        container.register(GenreSectionUseCase.self) { _ in
+            return GenreSectionUseCaseImpl()
+        }.inObjectScope(.container)
     }
 }

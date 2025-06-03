@@ -23,7 +23,7 @@ struct AddReviewRequest: Encodable {
     let rating: Double
     
     func asReqestParams() -> [String: Any] {
-        return ["language" : Locale.preferredLanguages.first?.components(separatedBy: "-")[0] ?? "en",
+        return ["language" : Bundle.getLangCode(),
                         "movie_id" : mediaId,
                         "value" : rating]
     }

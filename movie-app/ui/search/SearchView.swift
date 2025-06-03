@@ -23,7 +23,7 @@ struct SearchView: View {
             VStack{
                 HStack {
                     Image(.searchIcon)
-                    TextField("", text: $viewModel.searchText, prompt: Text("search.textfield.placeholder").foregroundColor(Color.mainInvert))
+                    TextField("", text: $viewModel.searchText, prompt: Text("search.textfield.placeholder".localized()).foregroundColor(Color.mainInvert))
                         .foregroundStyle(Color.mainInvert)
                         .font(Fonts.paragraph)
                         .onChange(of: viewModel.searchText){
@@ -43,7 +43,7 @@ struct SearchView: View {
                 
                 if(viewModel.searchText.isEmpty) {
                     Spacer()
-                    Text("search.empty.text")
+                    Text("search.empty.text".localized())
                         .font(Fonts.title)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 100)

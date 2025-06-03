@@ -13,10 +13,10 @@ struct DetailLabel: View {
     
     var body: some View {
         VStack(alignment: .leading){
-            Text(LocalizedStringKey(title))
+            Text(title.localized())
                 .font(Fonts.caption)
                 .padding(.bottom, 5)
-            Text(LocalizedStringKey(value))
+            Text(value.localized())
                 .font(Fonts.paragraph)
         }
     }

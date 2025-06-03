@@ -26,7 +26,7 @@ struct EditFavoriteRequest : Encodable {
     let movieId: Int
     let favorite: Bool
     func asReqestParams() -> [String: Any] {
-        return ["language" : Locale.preferredLanguages.first?.components(separatedBy: "-")[0] ?? "en",
+        return ["language" : Bundle.getLangCode(),
                 "media_type" : "movie",
                         "media_id" : movieId,
                         "favorite" : favorite]

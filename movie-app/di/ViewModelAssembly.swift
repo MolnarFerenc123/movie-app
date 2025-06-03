@@ -15,8 +15,8 @@ class ViewModelAssembly: Assembly {
             return MovieListViewModel()
         }.inObjectScope(.transient)
         
-        container.register((any GenreSectionViewModelProtocol).self) { _ in
-            return GenreSectionViewModel()
+        container.register((any GenreSectionViewModel).self) { _ in
+            return GenreSectionViewModelImpl()
         }.inObjectScope(.transient)
         
         container.register((any SearchViewModelProtocol).self) { _ in

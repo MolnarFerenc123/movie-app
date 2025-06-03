@@ -31,7 +31,7 @@ struct FavoritesView: View {
                     }
                     .scrollDismissesKeyboard(.interactively)
                     .padding(.top, 20)
-                    .navigationTitle("favoriteMovies.title")
+                    .navigationTitle("favoriteMovies.title".localized())
                 }
             }
             

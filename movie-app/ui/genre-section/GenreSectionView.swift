@@ -8,32 +8,45 @@
 import SwiftUI
 import InjectPropertyWrapper
 import Foundation
+import Shimmer
 
 struct GenreSectionView: View {
-    @StateObject private var viewModel = GenreSectionViewModel()
+    @StateObject private var viewModel = GenreSectionViewModelImpl()
     
     var body: some View {
         NavigationView{
             ZStack(alignment: .topTrailing){
                 Image(.redQuarterCircle)
                     .ignoresSafeArea(.all)
-                List(viewModel.genres.sorted{$0.name < $1.name}){ genre in
+                List(viewModel.genres){ genre in
                     ZStack {
                         NavigationLink(destination: MovieListView(genre:genre)){
                             EmptyView()
                         }
                         
-                        GenreSectionCell(genre: genre)
+                        let mediaItems = viewModel.getMediaItemsByGenre(genre.id)
+                        
+                        MediaItemListByGenre(genre: genre, mediaItems: mediaItems)
+                            .onAppear{
+                                if viewModel.mediaItemsByGenre[genre.id] == nil {
+                                    viewModel.loadMediaItems(genreId: genre.id)
+                                }
+                            }
+                            .animation(.easeInOut(duration: 0.8))
                     }
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
                 }
                 .listStyle(.plain)
-                .navigationTitle(Environments.name == .tv ? "TV" : "genreSection.title")
+                .navigationTitle(Environments.name == .tv ? "TV" : "genreSection.title".localized())
             }
             
         }
         .showAlert(model: $viewModel.alertModel)
+        .onAppear{
+            viewModel.loadGenres()
+            viewModel.genresAppeared()
+        }
     }
 }
 

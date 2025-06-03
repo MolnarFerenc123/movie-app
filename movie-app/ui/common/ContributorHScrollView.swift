@@ -11,7 +11,7 @@ struct ContributorHScrollView: View {
     let contributors: [Contributor]
     
     var body: some View {
-        Text(LocalizedStringKey(title))
+        Text(title.localized())
             .font(Fonts.overviewText)
         ScrollView(.horizontal){
             HStack(spacing: 20){

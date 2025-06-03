@@ -40,3 +40,12 @@
 "addReview.subTitle" = "Give an honest review";
 "addReview.button" = "Send my review";
 
+// SETTINGS
+"settings.title" = "Settings";
+"settings.chooseLanguage" = "Choose Language";
+"settings.chooseTheme" = "Choose Theme";
+"settings.lang.english" = "English";
+"settings.lang.german" = "German";
+"settings.lang.hungarian" = "Hungarian";
+"settings.theme.light" = "Light Mode";
+"settings.theme.dark" = "Dark Mode";

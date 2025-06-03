@@ -11,6 +11,6 @@ struct FetchFavoriteMovieRequest {
     let accessToken: String = Config.bearerToken
     let accountId: String = Config.accountId
     func asReqestParams() -> [String: String] {
-        return ["language" : Locale.preferredLanguages.first?.components(separatedBy: "-")[0] ?? "en"]
+        return ["language" : Bundle.getLangCode()]
     }
 }

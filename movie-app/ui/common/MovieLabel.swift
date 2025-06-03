@@ -37,7 +37,7 @@ struct MovieLabel : View {
         
         return HStack(spacing: 6) {
             Image(imageRes)
-            Text(LocalizedStringKey(text))
+            Text(text.localized())
                 .font(Fonts.labelBold)
         }
         .padding(6)

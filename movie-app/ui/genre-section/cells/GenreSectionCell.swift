@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GenreSectionCell : View {
     var genre : Genre
+    @Binding var isExpanded: Bool
     
     var body: some View {
         HStack{
@@ -17,7 +18,10 @@ struct GenreSectionCell : View {
                 .foregroundStyle(.primary)
                 .accessibilityLabel(genre.name)
             Spacer()
-            Image(.rightArrow)
+            RotatingArrow(isExpanded: isExpanded)
+                .onTapGesture {
+                    isExpanded.toggle()
+                }
         }
     }
 }
