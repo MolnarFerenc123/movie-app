@@ -23,13 +23,21 @@ class MovieListViewModel: MovieListViewModelProtocol, ErrorPresentable {
     
     let genreIdSubject = PassthroughSubject<Int, Never>()
     
+    let refreshSubject = CurrentValueSubject<Void, Never>(())
+    
     private var cancellables = Set<AnyCancellable>()
     
     @Inject
     private var repository: MovieRepository
     
     init(){
-        genreIdSubject
+        let refreshPublisher = refreshSubject
+            .handleEvents(receiveOutput: { [weak self]_ in
+                self?.movies = []
+                self?.actualPage = 0
+            })
+        
+        Publishers.CombineLatest(genreIdSubject, refreshPublisher)
             .filter { [weak self]_ in
                 guard let self = self else {
                     preconditionFailure("There is no self")
@@ -40,7 +48,7 @@ class MovieListViewModel: MovieListViewModelProtocol, ErrorPresentable {
                 self?.isLoading = true
                 self?.actualPage += 1
             })
-            .flatMap{ [weak self] genreId -> AnyPublisher<MediaItemPage, MovieError> in
+            .flatMap{ [weak self] (genreId, _) -> AnyPublisher<MediaItemPage, MovieError> in
                 guard let self = self else {
                     preconditionFailure("There is no self")
                 }
