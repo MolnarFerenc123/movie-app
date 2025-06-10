@@ -23,12 +23,20 @@ struct MovieListView: View {
                         .ignoresSafeArea(.all)
                         .offset(x: 0, y: -150)
                     LazyVGrid(columns: columns, spacing: 24) {
-                        ForEach(viewModel.movies) { movie in
-                            MovieCell(movie: movie, imageHeight: 100, showFavouriteIcon: false)
+                        ForEach(Array(viewModel.movies.enumerated()), id: \.offset) { index, movie in
+                            return MovieCell(movie: movie, imageHeight: 100, showFavouriteIcon: false)
+                                .onAppear {
+                                    if index == viewModel.movies.count - 1 {
+                                        viewModel.genreIdSubject.send(genre.id)
+                                    }
+                                }
                         }
                     }
                     .padding(.horizontal, 16)
                     .padding(.top, 16)
+                }
+                if viewModel.isLoading{
+                    ProgressView()
                 }
             }
             .navigationTitle(genre.name)

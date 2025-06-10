@@ -13,11 +13,13 @@ import Shimmer
 struct GenreSectionView: View {
     @StateObject private var viewModel = GenreSectionViewModelImpl()
     
+    
     var body: some View {
-        NavigationView{
-            ZStack(alignment: .topTrailing){
-                Image(.redQuarterCircle)
-                    .ignoresSafeArea(.all)
+        ZStack(alignment: .topTrailing){
+            Image(.redQuarterCircle)
+                .ignoresSafeArea(.all)
+            VStack {
+                GenreMotdCell(mediaItem: viewModel.motdMovieDetail ?? MediaItemDetail())
                 List(viewModel.genres){ genre in
                     ZStack {
                         NavigationLink(destination: MovieListView(genre:genre)){
@@ -39,8 +41,8 @@ struct GenreSectionView: View {
                 }
                 .listStyle(.plain)
                 .navigationTitle(Environments.name == .tv ? "TV" : "genreSection.title".localized())
+                
             }
-            
         }
         .showAlert(model: $viewModel.alertModel)
         .onAppear{

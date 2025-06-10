@@ -25,8 +25,12 @@ class GenreSectionViewModelImpl: GenreSectionViewModel, ErrorPresentable{
     @Published var genres: [Genre] = []
     @Published var alertModel: AlertModel? = nil
     @Published var mediaItemsByGenre: [Int: [MediaItem]] = [:]
+    @Published var motdMovieDetail: MediaItemDetail? = nil
+    @Published var motdMovie: MediaItem? = nil
     
     private var cancellables = Set<AnyCancellable>()
+    
+    private var motdMovieSubject = PassthroughSubject<MediaItem, Never>()
     
     @Inject
     private var useCase: GenreSectionUseCase
@@ -46,6 +50,22 @@ class GenreSectionViewModelImpl: GenreSectionViewModel, ErrorPresentable{
                 self?.alertModel = alertModel
             }
             .store(in: &cancellables)
+        
+        motdMovieSubject
+            .flatMap { [weak self]mediaItem in
+                guard let self = self else {
+                    preconditionFailure("There is no self")
+                }
+                return self.useCase.getMediaItemDetail(movieId: mediaItem.id)
+            }
+            .sink { completion in
+                if case let .failure(error) = completion {
+                    self.alertModel = self.toAlertModel(error)
+                }
+            } receiveValue: { movieDetail in
+                self.motdMovieDetail = movieDetail
+            }
+            .store(in: &cancellables)
     }
     func loadGenres() {
         useCase.loadGenres()
@@ -62,8 +82,8 @@ class GenreSectionViewModelImpl: GenreSectionViewModel, ErrorPresentable{
     func loadMediaItems(genreId: Int) {
         useCase.loadMediaItems(genreId: genreId)
             .delay(for: .seconds(3), scheduler: RunLoop.main)
-            .map( { mediaItem in
-                Array(mediaItem.prefix(5))
+            .map( { mediaItemPage in
+                Array(mediaItemPage.mediaItems.prefix(5))
             })
             .sink{ completion in
                 if case let .failure(error) = completion {
@@ -71,6 +91,10 @@ class GenreSectionViewModelImpl: GenreSectionViewModel, ErrorPresentable{
                 }
             } receiveValue: { mediaItems in
                 self.mediaItemsByGenre[genreId] = mediaItems
+                
+                let motdMovie = mediaItems.randomElement()
+                
+                self.motdMovieSubject.send(motdMovie ?? MediaItem())
             }
             .store(in: &cancellables)
     }
