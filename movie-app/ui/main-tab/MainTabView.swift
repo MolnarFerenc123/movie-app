@@ -10,20 +10,22 @@ struct MainTabView: View {
     @State var selectedTab = 0
     
     init() {
-            let transparentAppearence = UITabBarAppearance()
-            transparentAppearence.configureWithTransparentBackground() // 🔑
-            UITabBar.appearance().standardAppearance = transparentAppearence
-        }
+        let transparentAppearence = UITabBarAppearance()
+        transparentAppearence.configureWithTransparentBackground()
+        UITabBar.appearance().standardAppearance = transparentAppearence
+    }
     
     var body: some View {
         VStack {
             TabView(selection: $selectedTab) {
                 GenreSectionView()
                     .tag(0)
-                SearchMovieView()
+                SearchView()
                     .tag(1)
-                FavoriteListView()
+                FavoritesView()
                     .tag(2)
+                SettingsView()
+                    .tag(3)
             }
             .padding(.bottom, -10)
             HStack{
@@ -31,7 +33,8 @@ struct MainTabView: View {
                     Spacer()
                     Button{
                         selectedTab = item.rawValue
-                    } label: {
+                    }
+                    label: {
                         CustomTabItem(imageName: item.iconName, isActive: (selectedTab == item.rawValue))
                     }
                     Spacer()
@@ -45,7 +48,7 @@ struct MainTabView: View {
         .ignoresSafeArea()
     }
 }
-    
+
 #Preview {
     MainTabView()
 }

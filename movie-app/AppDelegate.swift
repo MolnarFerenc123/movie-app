@@ -8,6 +8,7 @@
 import UIKit
 import InjectPropertyWrapper
 import Swinject
+import FirebaseCore
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     let assembler: MainAssembler
@@ -17,6 +18,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
         print("AppDelegate - App launched")
+        
+        FirebaseApp.configure()
+        
         return true
     }
     

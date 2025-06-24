@@ -1,0 +1,50 @@
+/* 
+  Localizable.strings
+  movie-app
+
+  Created by Ferenc Molnar on 2025. 04. 08..
+  
+*/
+"genreSection.title" = "Кино приложение";
+"search.empty.text" = "Начните ввод для поиска";
+"search.textfield.placeholder" = "Фильмы, режиссёр, актёр, актриса и т.д.";
+"button.close.text" = "Закрыть";
+
+"unexpected.error.title" = "Неожиданная ошибка";
+"unexpected.error.message" = "Что-то пошло не так. Пожалуйста, попробуйте позже";
+
+"api.error.title" = "Ошибка API";
+
+"client.error.title" = "Ошибка клиента";
+"client.error.message" = "Потеряно соединение с сервером";
+
+"favoriteMovies.title" = "Избранное";
+
+"closed.caption.available" = "Доступно";
+"closed.caption.unavailable" = "Недоступно";
+
+"release.date" = "Дата выхода";
+"runtime" = "Продолжительность";
+"language" = "Язык";
+
+"detail.rate" = "Оцените этот фильм";
+"detail.visit.imdb" = "Посетить на IMDB";
+"detail.title" = "Синопсис";
+
+"publishers.and.companies.subtitle" = "Издатель и компании";
+"cast.subtitle" = "Актёрский состав";
+
+"no.internet" = "Нет подключения к интернету";
+
+"addReview.subTitle" = "Оставьте честный отзыв";
+"addReview.button" = "Отправить мой отзыв";
+
+// SETTINGS
+"settings.title" = "Настройки";
+"settings.chooseLanguage" = "Выберите язык";
+"settings.chooseTheme" = "Выберите тему";
+"settings.lang.english" = "Английский";
+"settings.lang.german" = "Немецкий";
+"settings.lang.hungarian" = "Венгерский";
+"settings.theme.light" = "Светлая тема";
+"settings.theme.dark" = "Тёмная тема";

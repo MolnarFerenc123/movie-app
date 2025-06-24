@@ -7,3 +7,45 @@
 */
 
 "genreSection.title" = "Movie app";
+"search.empty.text" = "Start typing to search";
+"search.textfield.placeholder" = "Movies, Director, Actor, Actress, etc.";
+"button.close.text" = "Close";
+
+"unexpected.error.title" = "Unexpected Error";
+"unexpected.error.message" = "Something went wrong. Please try again later";
+
+"api.error.title" = "API Error";
+
+"client.error.title" = "Client Error";
+"client.error.message" = "Lost connection to server";
+
+"favoriteMovies.title" = "Favourites";
+
+"closed.caption.available" = "Available";
+"closed.caption.unavailable" = "Unvailable";
+
+"release.date" = "Release Date";
+"runtime" = "Runtime";
+"language" = "Language";
+
+"detail.rate" = "Rate this movie";
+"detail.visit.imdb" = "Visit at IMDB";
+"detail.title" = "Synopsis";
+
+"publishers.and.companies.subtitle" = "Publisher and companies";
+"cast.subtitle" = "Cast";
+
+"no.internet" = "No internet connection";
+
+"addReview.subTitle" = "Give an honest review";
+"addReview.button" = "Send my review";
+
+// SETTINGS
+"settings.title" = "Settings";
+"settings.chooseLanguage" = "Choose Language";
+"settings.chooseTheme" = "Choose Theme";
+"settings.lang.english" = "English";
+"settings.lang.german" = "German";
+"settings.lang.hungarian" = "Hungarian";
+"settings.theme.light" = "Light Mode";
+"settings.theme.dark" = "Dark Mode";

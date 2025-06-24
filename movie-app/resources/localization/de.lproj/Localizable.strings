@@ -1,0 +1,50 @@
+/* 
+  Localizable.strings
+  movie-app
+
+  Created by Ferenc Molnar on 2025. 04. 08..
+  
+*/
+"genreSection.title" = "Film-App";
+"search.empty.text" = "Beginne zu tippen, um zu suchen";
+"search.textfield.placeholder" = "Filme, Regisseur, Schauspieler, Schauspielerin usw.";
+"button.close.text" = "Schließen";
+
+"unexpected.error.title" = "Unerwarteter Fehler";
+"unexpected.error.message" = "Etwas ist schiefgelaufen. Bitte versuche es später noch einmal";
+
+"api.error.title" = "API-Fehler";
+
+"client.error.title" = "Client-Fehler";
+"client.error.message" = "Verbindung zum Server verloren";
+
+"favoriteMovies.title" = "Favoriten";
+
+"closed.caption.available" = "Verfügbar";
+"closed.caption.unavailable" = "Nicht verfügbar";
+
+"release.date" = "Veröffentlichungsdatum";
+"runtime" = "Laufzeit";
+"language" = "Sprache";
+
+"detail.rate" = "Bewerte diesen Film";
+"detail.visit.imdb" = "Bei IMDB ansehen";
+"detail.title" = "Zusammenfassung";
+
+"publishers.and.companies.subtitle" = "Verleger und Firmen";
+"cast.subtitle" = "Besetzung";
+
+"no.internet" = "Keine Internetverbindung";
+
+"addReview.subTitle" = "Gib eine ehrliche Bewertung ab";
+"addReview.button" = "Meine Bewertung senden";
+
+// SETTINGS
+"settings.title" = "Einstellungen";
+"settings.chooseLanguage" = "Sprache wählen";
+"settings.chooseTheme" = "Design wählen";
+"settings.lang.english" = "Englisch";
+"settings.lang.german" = "Deutsch";
+"settings.lang.hungarian" = "Ungarisch";
+"settings.theme.light" = "Heller Modus";
+"settings.theme.dark" = "Dunkler Modus";

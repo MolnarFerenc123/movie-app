@@ -5,7 +5,7 @@
 //  Created by Ferenc Molnar on 2025. 04. 18..
 //
 
-enum TabbedItems: Int, CaseIterable {
+enum TabbedItems: Int, CaseIterable, Hashable {
     case home = 0
     case theatres
     case favorite

@@ -8,43 +8,47 @@
 import SwiftUI
 import InjectPropertyWrapper
 import Foundation
+import Shimmer
 
 struct GenreSectionView: View {
-    @StateObject private var viewModel = GenreSectionViewModel()
+    @StateObject private var viewModel = GenreSectionViewModelImpl()
+    
     
     var body: some View {
         NavigationView{
             ZStack(alignment: .topTrailing){
                 Image(.redQuarterCircle)
                     .ignoresSafeArea(.all)
-                List(viewModel.genres.sorted{$0.name < $1.name}){ genre in
-                    ZStack {
-                        NavigationLink(destination: MovieListView(genre:genre)){
-                            EmptyView()
+                VStack {
+                    GenreMotdCell(mediaItem: viewModel.motdMovieDetail ?? MediaItemDetail())
+                    List(viewModel.genres){ genre in
+                        ZStack {
+                            let mediaItems = viewModel.getMediaItemsByGenre(genre.id)
+                            
+                            MediaItemListByGenre(genre: genre, mediaItems: mediaItems)
+                                .onAppear{
+                                    if viewModel.mediaItemsByGenre[genre.id] == nil {
+                                        viewModel.loadMediaItems(genreId: genre.id)
+                                    }
+                                }
+                            //                            .animation(.easeInOut(duration: 0.8))
                         }
-                        HStack{
-                            Text(genre.name)
-                                .font(Fonts.title)
-                                .foregroundStyle(.primary)
-                            Spacer()
-                            Image(.rightArrow)
-                        }
-                        
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
                     }
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
+                    .listStyle(.plain)
+                    .navigationTitle(Environments.name == .tv ? "TV" : "genreSection.title".localized())
+                    .accessibilityLabel(AccessibilityLabels.genreSectionCollectionView)
+                    
                 }
-                .listStyle(.plain)
-                .navigationTitle(Enviroments.name == .tv ? "TV" : "genreSection.title")
             }
-                
-            }
-            .onAppear {
-                Task {
-                    await viewModel.loadGenres()
-                }
+            .showAlert(model: $viewModel.alertModel)
+            .onAppear{
+                viewModel.loadGenres()
+                viewModel.genresAppeared()
             }
         }
+    }
 }
 
 #Preview {
