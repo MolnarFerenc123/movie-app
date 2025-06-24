@@ -72,13 +72,6 @@
 			);
 			target = ADA6F7362DA14F8E007981C1 /* movie-app */;
 		};
-		ADC1B62F2E0AB67F00C17BAB /* Exceptions for "movie-app" folder in "movie-appUITests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				helpers/AccessibilityLabels.swift,
-			);
-			target = ADFBF1F52DB7CDB40008C560 /* movie-appUITests */;
-		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -86,7 +79,6 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				AD2C77C82DA58D380093D474 /* Exceptions for "movie-app" folder in "movie-app" target */,
-				ADC1B62F2E0AB67F00C17BAB /* Exceptions for "movie-app" folder in "movie-appUITests" target */,
 			);
 			path = "movie-app";
 			sourceTree = "<group>";
