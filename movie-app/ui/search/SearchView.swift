@@ -29,6 +29,7 @@ struct SearchView: View {
                         .onChange(of: viewModel.searchText){
                             viewModel.startSearch.send(())
                         }
+                        .accessibilityLabel(AccessibilityLabels.searchTextField)
                         .focused($textFieldIsFocused)
                 }
                 .padding(21)

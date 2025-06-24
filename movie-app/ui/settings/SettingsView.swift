@@ -7,6 +7,7 @@
 
 import SwiftUI
 import InjectPropertyWrapper
+import FirebaseCrashlytics
 
 struct SettingsView: View {
     @StateObject private var viewModel = SettingsViewModel()
@@ -66,6 +67,23 @@ struct SettingsView: View {
                     }
             }
             .padding(.bottom, 43)
+            
+            HStack(spacing: 12)  {
+                StyledButton(style: .outlined, action: .simple, title: "Crash")
+                    .font(Fonts.detailsButton)
+                    .lineLimit(1)
+                    .frame(maxWidth: .infinity)
+                    .onTapGesture {
+                        fatalError("Crash forced")
+                    }
+                StyledButton(style: .outlined, action: .simple, title: "No Internet error")
+                    .font(Fonts.detailsButton)
+                    .lineLimit(1)
+                    .frame(maxWidth: .infinity)
+                    .onTapGesture {
+                        Crashlytics.crashlytics().record(error: MovieError.noInternetError)
+                    }
+            }
             
             Spacer()
             VStack(spacing: LayoutConst.smallPadding) {

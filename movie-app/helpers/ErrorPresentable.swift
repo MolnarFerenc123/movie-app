@@ -34,12 +34,6 @@ extension ErrorPresentable {
             )
         case .noInternetError:
             return nil
-        case .serverError:
-            return AlertModel(
-                title: "server.error.title",
-                message: error.localizedDescription,
-                dismissButtonTitle: "button.close.text"
-            )
         case .mappingError(let message):
             return AlertModel(
                 title: "mapping.error.title",

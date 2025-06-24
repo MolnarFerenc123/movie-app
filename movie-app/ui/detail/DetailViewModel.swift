@@ -17,6 +17,7 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable{
     @Published var cast: [Contributor] = []
     @Published var isFavorite: Bool = false
     @Published var alertModel: AlertModel? = nil
+    @Published var reviews: [MovieReview] = []
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -51,7 +52,16 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable{
             }
             .share()
         
-        Publishers.CombineLatest(movieDetailsPublisher, castPublisher)
+        let reviews = mediaIdSubject
+                    .flatMap { [weak self]mediaItemId in
+                        guard let self = self else {
+                            preconditionFailure("There is no self")
+                        }
+                        let request = FetchMovieReviewsRequest(mediaId: mediaItemId)
+                        return self.repository.fetchMovieReviews(req: request)
+                    }
+        
+        Publishers.CombineLatest3(movieDetailsPublisher, castPublisher, reviews)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { [weak self] completion in
                 guard let self = self else { return }
@@ -61,10 +71,11 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable{
                 case .finished:
                     break
                 }
-            }, receiveValue: { [weak self] (detail, cast) in
+            }, receiveValue: { [weak self] (detail, cast, reviews) in
                 guard let self = self else { return }
                 self.mediaItemDetail = detail
                 self.cast = cast
+                self.reviews = reviews.prefix(4).map { $0 }
             })
             .store(in: &cancellables)
         

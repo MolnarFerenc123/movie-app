@@ -14,6 +14,9 @@
 		AD8085792DAA65340006D665 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = AD8085782DAA65340006D665 /* CombineMoya */; };
 		AD80857B2DAA65340006D665 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = AD80857A2DAA65340006D665 /* Moya */; };
 		AD81FF7A2DA534660060AE12 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = AD81FF782DA5345E0060AE12 /* .gitignore */; };
+		AD983AE32E01792C00EF78BD /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = AD983AE22E01792C00EF78BD /* FirebaseAnalytics */; };
+		AD983AE52E01792C00EF78BD /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = AD983AE42E01792C00EF78BD /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		AD983AE72E01792C00EF78BD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = AD983AE62E01792C00EF78BD /* FirebaseCrashlytics */; };
 		AD9E9C142DAE85460052D059 /* InjectPropertyWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = AD9E9C132DAE85460052D059 /* InjectPropertyWrapper */; };
 		AD9E9C172DAE85610052D059 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = AD9E9C162DAE85610052D059 /* Swinject */; };
 		ADEC557C2DEAF73E005DA617 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = ADEC557B2DEAF73E005DA617 /* Lottie */; };
@@ -69,6 +72,13 @@
 			);
 			target = ADA6F7362DA14F8E007981C1 /* movie-app */;
 		};
+		ADC1B62F2E0AB67F00C17BAB /* Exceptions for "movie-app" folder in "movie-appUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				helpers/AccessibilityLabels.swift,
+			);
+			target = ADFBF1F52DB7CDB40008C560 /* movie-appUITests */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -76,6 +86,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				AD2C77C82DA58D380093D474 /* Exceptions for "movie-app" folder in "movie-app" target */,
+				ADC1B62F2E0AB67F00C17BAB /* Exceptions for "movie-app" folder in "movie-appUITests" target */,
 			);
 			path = "movie-app";
 			sourceTree = "<group>";
@@ -101,10 +112,13 @@
 				AD5801DB2DD89C5E00526B57 /* Reachability in Frameworks */,
 				AD80857B2DAA65340006D665 /* Moya in Frameworks */,
 				ADEC558D2DEB19F8005DA617 /* Shimmer in Frameworks */,
+				AD983AE52E01792C00EF78BD /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				AD8085792DAA65340006D665 /* CombineMoya in Frameworks */,
 				AD9E9C142DAE85460052D059 /* InjectPropertyWrapper in Frameworks */,
 				AD5801CB2DD885E700526B57 /* RealmSwift in Frameworks */,
 				AD9E9C172DAE85610052D059 /* Swinject in Frameworks */,
+				AD983AE72E01792C00EF78BD /* FirebaseCrashlytics in Frameworks */,
+				AD983AE32E01792C00EF78BD /* FirebaseAnalytics in Frameworks */,
 				ADEC557C2DEAF73E005DA617 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -172,6 +186,9 @@
 				AD5801DA2DD89C5E00526B57 /* Reachability */,
 				ADEC557B2DEAF73E005DA617 /* Lottie */,
 				ADEC558C2DEB19F8005DA617 /* Shimmer */,
+				AD983AE22E01792C00EF78BD /* FirebaseAnalytics */,
+				AD983AE42E01792C00EF78BD /* FirebaseAnalyticsWithoutAdIdSupport */,
+				AD983AE62E01792C00EF78BD /* FirebaseCrashlytics */,
 			);
 			productName = "movie-app";
 			productReference = AD80854D2DAA57250006D665 /* movie-app.app */;
@@ -271,6 +288,7 @@
 				AD5801D92DD89C5E00526B57 /* XCRemoteSwiftPackageReference "Reachability" */,
 				ADEC557A2DEAF73E005DA617 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				ADEC558B2DEB19F8005DA617 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
+				AD983AE12E01792C00EF78BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = ADA6F72E2DA14F8E007981C1;
@@ -1852,6 +1870,14 @@
 				minimumVersion = 15.0.3;
 			};
 		};
+		AD983AE12E01792C00EF78BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.14.0;
+			};
+		};
 		AD9E9C122DAE85460052D059 /* XCRemoteSwiftPackageReference "InjectPropertyWrapper" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/egeniq/InjectPropertyWrapper";
@@ -1927,6 +1953,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AD8085772DAA65340006D665 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		AD983AE22E01792C00EF78BD /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD983AE12E01792C00EF78BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		AD983AE42E01792C00EF78BD /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD983AE12E01792C00EF78BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		AD983AE62E01792C00EF78BD /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD983AE12E01792C00EF78BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 		AD9E9C132DAE85460052D059 /* InjectPropertyWrapper */ = {
 			isa = XCSwiftPackageProductDependency;

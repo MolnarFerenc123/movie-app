@@ -14,7 +14,7 @@ struct MovieCell: View {
     let showFavouriteIcon: Bool
     
     var body: some View {
-        NavigationLink(destination: DetailView(mediaItem: movie)){
+        
             VStack(alignment: .leading, spacing: 8) {
                 ZStack(alignment: .topLeading) {
                     HStack(alignment: .center) {
@@ -63,7 +63,5 @@ struct MovieCell: View {
                 
                 Spacer()
             }
-        }
-        .buttonStyle(PlainButtonStyle())
     }
 }

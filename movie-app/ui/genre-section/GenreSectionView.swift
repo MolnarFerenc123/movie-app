@@ -38,6 +38,7 @@ struct GenreSectionView: View {
                     }
                     .listStyle(.plain)
                     .navigationTitle(Environments.name == .tv ? "TV" : "genreSection.title".localized())
+                    .accessibilityLabel(AccessibilityLabels.genreSectionCollectionView)
                     
                 }
             }

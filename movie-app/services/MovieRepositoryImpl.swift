@@ -22,10 +22,12 @@ protocol MovieRepository {
     func fetchMovieDetail(req: FetchDetailRequest) -> AnyPublisher<MediaItemDetail, MovieError>
     func fetchCast(req: FetchDetailRequest) -> AnyPublisher<[Contributor], MovieError>
     func addReview(req: AddReviewRequest) -> AnyPublisher<ModifyMediaResult, MovieError>
+    func fetchMovieReviews(req: FetchMovieReviewsRequest) -> AnyPublisher<[MovieReview], MovieError>
+    func fetchCastDetail(req: FetchContributorDetailRequest) -> AnyPublisher<ContributorDetail, MovieError>
+    func fetchCompanyDetail(req: FetchContributorDetailRequest) -> AnyPublisher<ContributorDetail, MovieError>
 }
 
 class MovieRepositoryImpl: MovieRepository {
-    
     @Inject
     private var store: MediaItemStoreProtocol
     
@@ -157,15 +159,9 @@ class MovieRepositoryImpl: MovieRepository {
         return networkMonitor.isConnected
             .flatMap { isConnected -> AnyPublisher<[Contributor], MovieError> in
                 if isConnected {
-                    print("<<<<service")
                     return serviceResponse
-                        .print("<<<<")
-                        .eraseToAnyPublisher()
                 } else {
-                    print("<<<<local")
                     return localResponse
-                        .print("<<<<")
-                        .eraseToAnyPublisher()
                 }
             }
             .eraseToAnyPublisher()
@@ -177,6 +173,50 @@ class MovieRepositoryImpl: MovieRepository {
             decodeTo: ModifyMediaResponse.self,
             transform: { response in
                 ModifyMediaResult(dto: response)
+            }
+        )
+    }
+    
+    func fetchMovieReviews(req: FetchMovieReviewsRequest) -> AnyPublisher<[MovieReview], MovieError> {
+            return networkMonitor.isConnected
+                .flatMap { isConnected -> AnyPublisher<[MovieReview], MovieError> in
+                    if isConnected {
+                        return self.requestAndTransform(
+                            target: MultiTarget(MoviesApi.fetchMovieReviews(req: req)),
+                            decodeTo: MovieReviewsResponse.self,
+                            transform: { dto in
+                                dto.results.map(MovieReview.init(dto:))
+                            }
+                        )
+                        .handleEvents(receiveOutput: { [weak self]reviews in
+                            // TODO: Save reviews to store
+                        })
+                        .eraseToAnyPublisher()
+                    } else {
+                        // TODO: Fetch reviews from store
+                        return Fail(error: MovieError.unexpectedError).eraseToAnyPublisher()
+                    }
+                }
+                .eraseToAnyPublisher()
+        }
+    
+    
+    func fetchCastDetail(req: FetchContributorDetailRequest) -> AnyPublisher<ContributorDetail, MovieError> {
+        requestAndTransform(
+            target: MultiTarget(MoviesApi.fetchCastDetail(req: req)),
+            decodeTo: CastDetailResponse.self,
+            transform: { response in
+                ContributorDetail(dto: response)
+            }
+        )
+    }
+    
+    func fetchCompanyDetail(req: FetchContributorDetailRequest) -> AnyPublisher<ContributorDetail, MovieError> {
+        requestAndTransform(
+            target: MultiTarget(MoviesApi.fetchCompanyDetail(req: req)),
+            decodeTo: CompanyDetailResponse.self,
+            transform: { response in
+                ContributorDetail(dto: response)
             }
         )
     }
@@ -201,8 +241,6 @@ class MovieRepositoryImpl: MovieRepository {
                         }
                     case 400..<500:
                         future(.failure(MovieError.clientError))
-                    case 500..<600:
-                        future(.failure(MovieError.serverError))
                     default:
                         if let apiError = try? JSONDecoder().decode(MovieAPIErrorResponse.self, from: response.data) {
                             if apiError.statusCode == 7 {

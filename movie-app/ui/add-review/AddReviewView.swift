@@ -26,7 +26,7 @@ struct AddReviewView: View {
                 HStack{
                     Spacer()
                     VStack{
-                        StarRatingView(rating: $viewModel.selectedRating)
+                        StarRatingView(rating: $viewModel.selectedRating, starSize: 40, starViewType: .changable)
                             .padding(.bottom, 72)
                         StyledButton(style: .filled, action: .simple, title: "addReview.buttonTitle".localized())
                             .frame(width: 184, height: 56)

@@ -1,13 +1,15 @@
 //
-//  movie_appUITests.swift
-//  movie-appUITests
+//  FavoriesViewUITests.swift
+//  movie-app
 //
-//  Created by Ferenc Molnar on 2025. 04. 22..
+//  Created by Ferenc Molnar on 2025. 06. 24..
 //
 
 import XCTest
 
-final class movie_app_liveUITests: XCTestCase {
+final class FavoriesViewUITests: XCTestCase {
+    
+    let app = XCUIApplication()
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -16,18 +18,25 @@ final class movie_app_liveUITests: XCTestCase {
         continueAfterFailure = false
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        
+        app.launch()
+        sleep(3)
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    @MainActor
-    func _testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testFavoriteSelection() throws {
+        app.images["favorites"].tap()
+        let scrollView = app.firstScrollViewView(withIdentifier: AccessibilityLabels.favoritesScrollView)
+        scrollView.swipeUp()
+        print(scrollView.images)
+        
+        let secondCell = app.findElement(withId: "MediaItem2")
+        secondCell?.tap()
+         
+                
+        
     }
 }

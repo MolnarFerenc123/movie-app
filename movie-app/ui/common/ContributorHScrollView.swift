@@ -7,8 +7,16 @@
 import SwiftUI
 
 struct ContributorHScrollView: View {
+    enum NavigationType {
+        case none
+        case person
+        case company
+    }
+    
+    
     let title: String
     let contributors: [Contributor]
+    var navigationType: NavigationType = .none
     
     var body: some View {
         Text(title.localized())
@@ -16,12 +24,37 @@ struct ContributorHScrollView: View {
         ScrollView(.horizontal){
             HStack(spacing: 20){
                 ForEach(contributors) { contributor in
-                    VStack(alignment: .leading){
-                        LoadImageView(url: contributor.profileImageUrl)
-                            .frame(width: 56, height: 56)
-                            .cornerRadius(28)
-                            .padding(.bottom, 12)
-                        SubNamesView(name: contributor.name)
+                    switch navigationType {
+                    case .none:
+                        VStack(alignment: .leading){
+                            LoadImageView(url: contributor.profileImageUrl)
+                                .frame(width: 56, height: 56)
+                                .cornerRadius(28)
+                                .padding(.bottom, 12)
+                            SubNamesView(name: contributor.name)
+                        }
+                    case .person:
+                        NavigationLink(destination: ContributorDetailView(contributorIdType: .castMember(id: contributor.id))) {
+                            VStack(alignment: .leading){
+                                LoadImageView(url: contributor.profileImageUrl)
+                                    .frame(width: 56, height: 56)
+                                    .cornerRadius(28)
+                                    .padding(.bottom, 12)
+                                SubNamesView(name: contributor.name)
+                            }
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    case .company:
+                        NavigationLink(destination: ContributorDetailView(contributorIdType: .company(id: contributor.id))) {
+                            VStack(alignment: .leading){
+                                LoadImageView(url: contributor.profileImageUrl)
+                                    .frame(width: 56, height: 56)
+                                    .cornerRadius(28)
+                                    .padding(.bottom, 12)
+                                SubNamesView(name: contributor.name)
+                            }
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
                 }
             }

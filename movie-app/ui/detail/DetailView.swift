@@ -57,8 +57,9 @@ struct DetailView: View {
                     Text(mediaItemDetail.overview)
                         .font(Fonts.paragraph)
                 }
-                ContributorHScrollView(title: "publishers.and.companies.subtitle", contributors: detailViewModel.cast)
-                ContributorHScrollView(title: "cast.subtitle", contributors: mediaItemDetail.productionCompanies)
+                ContributorHScrollView(title: "publishers.and.companies.subtitle", contributors: detailViewModel.cast, navigationType: .person)
+                ContributorHScrollView(title: "cast.subtitle", contributors: mediaItemDetail.productionCompanies, navigationType: .company)
+                ReviewScrollView(reviews: detailViewModel.reviews)
             }
             .padding(.horizontal, LayoutConst.maxPadding)
         }

@@ -24,14 +24,20 @@ struct FavoritesView: View {
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 10) {
                             ForEach(viewModel.movies) { movie in
-                                MovieCell(movie: movie, imageHeight: 180, showFavouriteIcon: true)
-                                    .padding(.horizontal, 25)
+                                NavigationLink(destination: DetailView(mediaItem: movie)){
+                                    MovieCell(movie: movie, imageHeight: 180, showFavouriteIcon: true)
+                                        .padding(.horizontal, 25)
+                                    
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                                .accessibilityLabel("MediaItem\(movie.id)")
                             }
                         }
                     }
                     .scrollDismissesKeyboard(.interactively)
                     .padding(.top, 20)
                     .navigationTitle("favoriteMovies.title".localized())
+                    .accessibilityLabel(AccessibilityLabels.favoritesScrollView)
                 }
             }
             
