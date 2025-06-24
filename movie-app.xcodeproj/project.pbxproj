@@ -7,11 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD5801CB2DD885E700526B57 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AD5801CA2DD885E700526B57 /* RealmSwift */; };
+		AD5801D42DD8981D00526B57 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = AD5801D32DD8981D00526B57 /* SDWebImageSwiftUI */; };
+		AD5801D72DD899A200526B57 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = AD5801CA2DD885E700526B57 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AD5801DB2DD89C5E00526B57 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = AD5801DA2DD89C5E00526B57 /* Reachability */; };
 		AD8085792DAA65340006D665 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = AD8085782DAA65340006D665 /* CombineMoya */; };
 		AD80857B2DAA65340006D665 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = AD80857A2DAA65340006D665 /* Moya */; };
 		AD81FF7A2DA534660060AE12 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = AD81FF782DA5345E0060AE12 /* .gitignore */; };
+		AD983AE32E01792C00EF78BD /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = AD983AE22E01792C00EF78BD /* FirebaseAnalytics */; };
+		AD983AE52E01792C00EF78BD /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = AD983AE42E01792C00EF78BD /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		AD983AE72E01792C00EF78BD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = AD983AE62E01792C00EF78BD /* FirebaseCrashlytics */; };
 		AD9E9C142DAE85460052D059 /* InjectPropertyWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = AD9E9C132DAE85460052D059 /* InjectPropertyWrapper */; };
 		AD9E9C172DAE85610052D059 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = AD9E9C162DAE85610052D059 /* Swinject */; };
+		ADEC557C2DEAF73E005DA617 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = ADEC557B2DEAF73E005DA617 /* Lottie */; };
+		ADEC558D2DEB19F8005DA617 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = ADEC558C2DEB19F8005DA617 /* Shimmer */; };
 		ADFBF1E72DB7B4970008C560 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = ADFBF1E62DB7B4970008C560 /* Nimble */; };
 		ADFBF1EA2DB7B4BC0008C560 /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = ADFBF1E92DB7B4BC0008C560 /* Quick */; };
 /* End PBXBuildFile section */
@@ -32,6 +41,20 @@
 			remoteInfo = "movie-app";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AD5801D82DD899A200526B57 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AD5801D72DD899A200526B57 /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		AD80854D2DAA57250006D665 /* movie-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "movie-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,10 +100,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD5801D42DD8981D00526B57 /* SDWebImageSwiftUI in Frameworks */,
+				AD5801DB2DD89C5E00526B57 /* Reachability in Frameworks */,
 				AD80857B2DAA65340006D665 /* Moya in Frameworks */,
+				ADEC558D2DEB19F8005DA617 /* Shimmer in Frameworks */,
+				AD983AE52E01792C00EF78BD /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				AD8085792DAA65340006D665 /* CombineMoya in Frameworks */,
 				AD9E9C142DAE85460052D059 /* InjectPropertyWrapper in Frameworks */,
+				AD5801CB2DD885E700526B57 /* RealmSwift in Frameworks */,
 				AD9E9C172DAE85610052D059 /* Swinject in Frameworks */,
+				AD983AE72E01792C00EF78BD /* FirebaseCrashlytics in Frameworks */,
+				AD983AE32E01792C00EF78BD /* FirebaseAnalytics in Frameworks */,
+				ADEC557C2DEAF73E005DA617 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +158,7 @@
 				ADA6F7332DA14F8E007981C1 /* Sources */,
 				ADA6F7342DA14F8E007981C1 /* Frameworks */,
 				ADA6F7352DA14F8E007981C1 /* Resources */,
+				AD5801D82DD899A200526B57 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -141,6 +173,14 @@
 				AD80857A2DAA65340006D665 /* Moya */,
 				AD9E9C132DAE85460052D059 /* InjectPropertyWrapper */,
 				AD9E9C162DAE85610052D059 /* Swinject */,
+				AD5801CA2DD885E700526B57 /* RealmSwift */,
+				AD5801D32DD8981D00526B57 /* SDWebImageSwiftUI */,
+				AD5801DA2DD89C5E00526B57 /* Reachability */,
+				ADEC557B2DEAF73E005DA617 /* Lottie */,
+				ADEC558C2DEB19F8005DA617 /* Shimmer */,
+				AD983AE22E01792C00EF78BD /* FirebaseAnalytics */,
+				AD983AE42E01792C00EF78BD /* FirebaseAnalyticsWithoutAdIdSupport */,
+				AD983AE62E01792C00EF78BD /* FirebaseCrashlytics */,
 			);
 			productName = "movie-app";
 			productReference = AD80854D2DAA57250006D665 /* movie-app.app */;
@@ -224,6 +264,8 @@
 				en,
 				Base,
 				hu,
+				de,
+				ru,
 			);
 			mainGroup = ADA6F72E2DA14F8E007981C1;
 			minimizedProjectReferenceProxies = 1;
@@ -233,6 +275,12 @@
 				AD9E9C152DAE85610052D059 /* XCRemoteSwiftPackageReference "Swinject" */,
 				ADFBF1E52DB7B4970008C560 /* XCRemoteSwiftPackageReference "Nimble" */,
 				ADFBF1E82DB7B4BC0008C560 /* XCRemoteSwiftPackageReference "Quick" */,
+				AD5801C92DD885E700526B57 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				AD5801D22DD8981D00526B57 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				AD5801D92DD89C5E00526B57 /* XCRemoteSwiftPackageReference "Reachability" */,
+				ADEC557A2DEAF73E005DA617 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				ADEC558B2DEB19F8005DA617 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
+				AD983AE12E01792C00EF78BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = ADA6F72E2DA14F8E007981C1;
@@ -347,6 +395,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -443,6 +492,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -532,6 +582,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -621,6 +672,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -684,6 +736,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -806,6 +859,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1776,12 +1830,44 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AD5801C92DD885E700526B57 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		AD5801D22DD8981D00526B57 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.3;
+			};
+		};
+		AD5801D92DD89C5E00526B57 /* XCRemoteSwiftPackageReference "Reachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		AD8085772DAA65340006D665 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 15.0.3;
+			};
+		};
+		AD983AE12E01792C00EF78BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.14.0;
 			};
 		};
 		AD9E9C122DAE85460052D059 /* XCRemoteSwiftPackageReference "InjectPropertyWrapper" */ = {
@@ -1798,6 +1884,22 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.9.1;
+			};
+		};
+		ADEC557A2DEAF73E005DA617 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.2;
+			};
+		};
+		ADEC558B2DEB19F8005DA617 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.1;
 			};
 		};
 		ADFBF1E52DB7B4970008C560 /* XCRemoteSwiftPackageReference "Nimble" */ = {
@@ -1819,6 +1921,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AD5801CA2DD885E700526B57 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD5801C92DD885E700526B57 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		AD5801D32DD8981D00526B57 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD5801D22DD8981D00526B57 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+		AD5801DA2DD89C5E00526B57 /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD5801D92DD89C5E00526B57 /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
+		};
 		AD8085782DAA65340006D665 /* CombineMoya */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AD8085772DAA65340006D665 /* XCRemoteSwiftPackageReference "Moya" */;
@@ -1829,6 +1946,21 @@
 			package = AD8085772DAA65340006D665 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
 		};
+		AD983AE22E01792C00EF78BD /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD983AE12E01792C00EF78BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		AD983AE42E01792C00EF78BD /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD983AE12E01792C00EF78BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		AD983AE62E01792C00EF78BD /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD983AE12E01792C00EF78BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
 		AD9E9C132DAE85460052D059 /* InjectPropertyWrapper */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AD9E9C122DAE85460052D059 /* XCRemoteSwiftPackageReference "InjectPropertyWrapper" */;
@@ -1838,6 +1970,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AD9E9C152DAE85610052D059 /* XCRemoteSwiftPackageReference "Swinject" */;
 			productName = Swinject;
+		};
+		ADEC557B2DEAF73E005DA617 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADEC557A2DEAF73E005DA617 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		ADEC558C2DEB19F8005DA617 /* Shimmer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADEC558B2DEB19F8005DA617 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
+			productName = Shimmer;
 		};
 		ADFBF1E62DB7B4970008C560 /* Nimble */ = {
 			isa = XCSwiftPackageProductDependency;
