@@ -33,6 +33,7 @@ struct ContributorHScrollView: View {
                                 .padding(.bottom, 12)
                             SubNamesView(name: contributor.name)
                         }
+                        .frame(width: 56)
                     case .person:
                         NavigationLink(destination: ContributorDetailView(contributorIdType: .castMember(id: contributor.id))) {
                             VStack(alignment: .leading){
@@ -42,6 +43,7 @@ struct ContributorHScrollView: View {
                                     .padding(.bottom, 12)
                                 SubNamesView(name: contributor.name)
                             }
+                            .frame(width: 56)
                         }
                         .buttonStyle(PlainButtonStyle())
                     case .company:
@@ -53,6 +55,7 @@ struct ContributorHScrollView: View {
                                     .padding(.bottom, 12)
                                 SubNamesView(name: contributor.name)
                             }
+                            .frame(width: 56)
                         }
                         .buttonStyle(PlainButtonStyle())
                     }
@@ -67,13 +70,15 @@ struct SubNamesView: View {
     var name: String
     
     var body: some View {
-        var subNames = name.split(separator: " ").map { String($0) }
+        let subNames = name.split(separator: " ").map { String($0) }
         let firstName = subNames.first ?? ""
         let remainingNames = subNames.dropFirst().joined(separator: " ")
         Text(firstName)
             .font(Fonts.paragraph)
             .padding(.bottom, 4)
+            .lineLimit(1)
         Text(remainingNames)
             .font(Fonts.overviewText)
+            .lineLimit(1)
     }
 }

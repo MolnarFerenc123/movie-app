@@ -24,12 +24,15 @@ struct MovieListView: View {
                         .offset(x: 0, y: -150)
                     LazyVGrid(columns: columns, spacing: 24) {
                         ForEach(Array(viewModel.movies.enumerated()), id: \.offset) { index, movie in
-                            return MovieCell(movie: movie, imageHeight: 100, showFavouriteIcon: false)
-                                .onAppear {
-                                    if index == viewModel.movies.count - 1 {
-                                        viewModel.genreIdSubject.send(genre.id)
+                            NavigationLink(destination: DetailView(mediaItem: movie)) {
+                                 MovieCell(movie: movie, imageHeight: 100, showFavouriteIcon: false)
+                                    .onAppear {
+                                        if index == viewModel.movies.count - 1 {
+                                            viewModel.genreIdSubject.send(genre.id)
+                                        }
                                     }
-                                }
+                            }
+                            .buttonStyle(PlainButtonStyle())
                         }
                     }
                     .padding(.horizontal, 16)

@@ -9,13 +9,14 @@ import SwiftUI
 import Lottie
 
 struct SplashScreen: View {
-    @State var animationFinished = false
+    @State var animationFinished = true
     @AppStorage("color-scheme") var colorScheme: Theme = .dark
     
     var body: some View {
         if animationFinished {
             RootView()
                 .preferredColorScheme(ColorScheme(theme: colorScheme))
+                .environmentObject(LanguageManager.shared)
         } else {
             LottieView(animation: LottieAnimation.named("movies"))
                 .playing(loopMode: .repeatBackwards(1))

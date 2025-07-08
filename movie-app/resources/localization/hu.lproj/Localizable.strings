@@ -19,6 +19,8 @@
 "client.error.title" = "Kliens hiba";
 "client.error.message" = "Megszakadt a kapcsolat a szerverrel";
 
+"mapping.error.title" = "Leképzési hiba";
+
 "favoriteMovies.title" = "Kedvencek";
 
 "closed.caption.available" = "Elérhető";
@@ -38,7 +40,7 @@
 "no.internet" = "Nincs internet elérés";
 
 "addReview.subTitle" = "Adj egy őszinte véleményt";
-"addReview.button" = "Vélemény elküldése";
+"addReview.buttonTitle" = "Vélemény elküldése";
 
 "settings.title" = "Beállítások";
 "settings.chooseLanguage" = "Válassz Nyelvet";
@@ -48,3 +50,8 @@
 "settings.lang.hungarian" = "Magyar";
 "settings.theme.light" = "Világos Mód";
 "settings.theme.dark" = "Sötét Mód";
+
+"detail.topReviews" = "Legjobb Értékelések";
+"detail.noReviews" = "Nincs értékelés";
+
+"similars" = "Hasonlók";

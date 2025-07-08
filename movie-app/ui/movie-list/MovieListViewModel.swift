@@ -53,7 +53,7 @@ class MovieListViewModel: MovieListViewModelProtocol, ErrorPresentable {
                     preconditionFailure("There is no self")
                 }
                 let request = FetchMediaListRequest(genreId: genreId, includeAdult: true, page: actualPage)
-                return self.repository.fetchMovies(req: request)
+                return Environments.name == .dev ? self.repository.fetchMovies(req: request) : self.repository.fetchTV(req: request)
             }
             .delay(for: .seconds(2), scheduler: RunLoop.main)
             .sink { [weak self] completion in

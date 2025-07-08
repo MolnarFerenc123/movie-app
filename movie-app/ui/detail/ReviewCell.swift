@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ReviewCell: View {
-    let review: MovieReview
+    let review: MediaItemReview
     
     var body: some View {
         VStack(alignment: .leading, spacing: LayoutConst.smallPadding) {

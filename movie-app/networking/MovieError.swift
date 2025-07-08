@@ -43,9 +43,9 @@ extension MovieError: CustomNSError {
     
     var errorCode: Int {
         switch self {
-        case .invalidApiKeyError(let message):
+        case .invalidApiKeyError:
             return 1000
-        case .mappingError(let message):
+        case .mappingError:
             return 1001
         case .clientError:
             return 1002

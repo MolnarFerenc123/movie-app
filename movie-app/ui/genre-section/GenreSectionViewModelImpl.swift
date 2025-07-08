@@ -25,7 +25,7 @@ class GenreSectionViewModelImpl: GenreSectionViewModel, ErrorPresentable{
     @Published var genres: [Genre] = []
     @Published var alertModel: AlertModel? = nil
     @Published var mediaItemsByGenre: [Int: [MediaItem]] = [:]
-    @Published var motdMovieDetail: MediaItemDetail? = nil
+    @Published var motdMovieDetail: MediaItemDetail = MediaItemDetail()
     @Published var motdMovie: MediaItem? = nil
     
     private var cancellables = Set<AnyCancellable>()
@@ -37,6 +37,14 @@ class GenreSectionViewModelImpl: GenreSectionViewModel, ErrorPresentable{
     
     @Inject
     private var mediaItemStore: MediaItemStoreProtocol
+    
+    var allGenresLoaded: Bool {
+        genres.allSatisfy { genre in
+            mediaItemsByGenre[genre.id] != nil
+        }
+    }
+    
+    var motdMediaItemLoaded: Bool = false
     
     init() {
         useCase.showAppearPopup
@@ -56,7 +64,7 @@ class GenreSectionViewModelImpl: GenreSectionViewModel, ErrorPresentable{
                 guard let self = self else {
                     preconditionFailure("There is no self")
                 }
-                return self.useCase.getMediaItemDetail(movieId: mediaItem.id)
+                return self.useCase.getMediaItemDetail(mediaItem: mediaItem)
             }
             .sink { completion in
                 if case let .failure(error) = completion {
@@ -75,6 +83,9 @@ class GenreSectionViewModelImpl: GenreSectionViewModel, ErrorPresentable{
                 }
             } receiveValue: { genres in
                 self.genres = genres
+                for genre in genres {
+                    self.loadMediaItems(genreId: genre.id)
+                }
             }
             .store(in: &cancellables)
     }
@@ -91,12 +102,17 @@ class GenreSectionViewModelImpl: GenreSectionViewModel, ErrorPresentable{
                 }
             } receiveValue: { mediaItems in
                 self.mediaItemsByGenre[genreId] = mediaItems
-                
-                let motdMovie = mediaItems.randomElement()
-                
-                self.motdMovieSubject.send(motdMovie ?? MediaItem())
+                if self.allGenresLoaded && !self.motdMediaItemLoaded {
+                    self.getMotdMovie()
+                }
             }
             .store(in: &cancellables)
+    }
+    
+    func getMotdMovie(){
+        let motdMovie = mediaItemsByGenre.randomElement()?.value.randomElement()
+        self.motdMovieSubject.send(motdMovie ?? MediaItem())
+        self.motdMediaItemLoaded = true
     }
     
     func genresAppeared() {

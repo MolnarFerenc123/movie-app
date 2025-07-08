@@ -8,30 +8,33 @@
 import SwiftUI
 
 struct GenreMotdCell: View {
-    let mediaItem: MediaItemDetail
+    let mediaItemDetail: MediaItemDetail
     
     var body: some View {
-        ZStack(alignment: .bottomLeading) {
-            LoadImageView(url: mediaItem.imageUrl)
-                .frame(width: 370, height: 185)
-                .cornerRadius(12)
-            
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(mediaItem.genreList)
-                        .font(Fonts.paragraphList)
-                    Text(mediaItem.title)
-                        .font(Fonts.title)
-                }
-                .padding(LayoutConst.normalPadding)
+        NavigationLink (destination: DetailView(mediaItem: mediaItemDetail.asMediaItem())){
+            ZStack(alignment: .bottomLeading) {
+                LoadImageView(url: mediaItemDetail.imageUrl)
+                    .frame(width: 370, height: 185)
+                    .cornerRadius(12)
                 
-                Spacer()
-                
-                Image(.playButton)
-                    .frame(width: 48, height: 48)
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(mediaItemDetail.genreList)
+                            .font(Fonts.paragraphList)
+                        Text(mediaItemDetail.title)
+                            .font(Fonts.title)
+                    }
                     .padding(LayoutConst.normalPadding)
+                    
+                    Spacer()
+                    
+                    Image(.playButton)
+                        .frame(width: 48, height: 48)
+                        .padding(LayoutConst.normalPadding)
+                }
             }
+            .padding(LayoutConst.maxPadding)
         }
-        .padding(LayoutConst.maxPadding)
+        .buttonStyle(PlainButtonStyle())
     }
 }

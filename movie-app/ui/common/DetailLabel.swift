@@ -10,6 +10,7 @@ import SwiftUI
 struct DetailLabel: View {
     let title: String
     let value: String
+    @EnvironmentObject var languageManager: LanguageManager
     
     var body: some View {
         VStack(alignment: .leading){

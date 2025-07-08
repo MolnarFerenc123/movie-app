@@ -25,7 +25,7 @@ struct MediaItemListByGenre: View {
                                     .frame(width: 200, height: 100)
                                     .shimmering()
                             }else {
-                                MovieCell(movie: mediaItem, imageHeight: 100, showFavouriteIcon: false)
+                                MovieCell(movie: mediaItem, imageHeight: 100, imageWidth: 200, showFavouriteIcon: false)
                             }
                         }
                         .buttonStyle(PlainButtonStyle())
@@ -33,11 +33,7 @@ struct MediaItemListByGenre: View {
                 }
             }
             .listRowBackground(Color.clear)
-            .frame(height: isExpanded ? nil : 0)
-            .opacity(isExpanded ? 1 : 0)
-            .disabled(isExpanded ? false : true)
             .clipped()
-            .animation(.easeInOut(duration: 0.8), value: isExpanded)
         }
     }
 }

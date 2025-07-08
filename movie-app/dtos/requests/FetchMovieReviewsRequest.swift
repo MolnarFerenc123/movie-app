@@ -12,6 +12,6 @@ struct FetchMovieReviewsRequest{
     let mediaId: Int
     
     func asRequestParams() -> [String: Any]{
-        return [:]
+        return ["language" : Bundle.getLangCode()]
     }
 } 

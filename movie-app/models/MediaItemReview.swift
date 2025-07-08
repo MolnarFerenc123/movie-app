@@ -7,12 +7,20 @@
 
 import Foundation
 
-struct MovieReview: Identifiable {
+struct MediaItemReview: Identifiable {
     let id: String
     let author: String
     let content: String
     let rating: Double?
     let avatarURL: URL?
+    
+    init(id: String, author: String, content: String, rating: Double?, avatarURL: URL?) {
+            self.id = id
+            self.author = author
+            self.content = content
+            self.rating = rating
+            self.avatarURL = avatarURL
+        }
     
     init(dto: MovieReviewResponse) {
         self.id = dto.id

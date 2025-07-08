@@ -15,4 +15,10 @@ struct MediaItemPage {
                             .map(MediaItem.init)
         self.totalPages = dto.totalPages
     }
+    
+    init(dto: TVPageResponse) {
+        self.mediaItems = dto.results
+                            .map(MediaItem.init)
+        self.totalPages = dto.totalPages
+    }
 }

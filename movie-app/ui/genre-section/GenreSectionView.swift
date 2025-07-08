@@ -19,28 +19,25 @@ struct GenreSectionView: View {
             ZStack(alignment: .topTrailing){
                 Image(.redQuarterCircle)
                     .ignoresSafeArea(.all)
-                VStack {
-                    GenreMotdCell(mediaItem: viewModel.motdMovieDetail ?? MediaItemDetail())
-                    List(viewModel.genres){ genre in
-                        ZStack {
-                            let mediaItems = viewModel.getMediaItemsByGenre(genre.id)
-                            
-                            MediaItemListByGenre(genre: genre, mediaItems: mediaItems)
-                                .onAppear{
-                                    if viewModel.mediaItemsByGenre[genre.id] == nil {
-                                        viewModel.loadMediaItems(genreId: genre.id)
-                                    }
-                                }
-                            //                            .animation(.easeInOut(duration: 0.8))
+                    
+                    List{
+                        GenreMotdCell(mediaItemDetail: viewModel.motdMovieDetail)
+                            .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
+                        ForEach(Array(viewModel.genres.enumerated()), id: \.element.id) { index, genre in
+                            ZStack {
+                                let mediaItems = viewModel.getMediaItemsByGenre(genre.id)
+                                
+                                MediaItemListByGenre(genre: genre, mediaItems: mediaItems)
+                            }
+                            .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
                         }
-                        .listRowBackground(Color.clear)
-                        .listRowSeparator(.hidden)
                     }
                     .listStyle(.plain)
                     .navigationTitle(Environments.name == .tv ? "TV" : "genreSection.title".localized())
                     .accessibilityLabel(AccessibilityLabels.genreSectionCollectionView)
-                    
-                }
+                    .background(.clear)
             }
             .showAlert(model: $viewModel.alertModel)
             .onAppear{

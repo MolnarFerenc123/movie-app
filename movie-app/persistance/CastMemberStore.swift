@@ -30,7 +30,6 @@ class CastMemberStore: CastMemberStoreProtocol {
             .where {
                 $0.movieId == movieId
             }
-        print("<<<<<\(results)")
         let castMembers = results.map { $0.toDomain }
         return Just(Array(castMembers))
             .setFailureType(to: MovieError.self)

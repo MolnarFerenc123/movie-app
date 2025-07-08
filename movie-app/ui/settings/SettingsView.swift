@@ -10,6 +10,7 @@ import InjectPropertyWrapper
 import FirebaseCrashlytics
 
 struct SettingsView: View {
+    @ObservedObject var languageManager = LanguageManager.shared
     @StateObject private var viewModel = SettingsViewModel()
     
     var body: some View {
@@ -68,27 +69,10 @@ struct SettingsView: View {
             }
             .padding(.bottom, 43)
             
-            HStack(spacing: 12)  {
-                StyledButton(style: .outlined, action: .simple, title: "Crash")
-                    .font(Fonts.detailsButton)
-                    .lineLimit(1)
-                    .frame(maxWidth: .infinity)
-                    .onTapGesture {
-                        fatalError("Crash forced")
-                    }
-                StyledButton(style: .outlined, action: .simple, title: "No Internet error")
-                    .font(Fonts.detailsButton)
-                    .lineLimit(1)
-                    .frame(maxWidth: .infinity)
-                    .onTapGesture {
-                        Crashlytics.crashlytics().record(error: MovieError.noInternetError)
-                    }
-            }
-            
             Spacer()
             VStack(spacing: LayoutConst.smallPadding) {
                 Text("Version 0.9.1")
-                Text("Created by Hell yeah")
+                Text("Created by Molnár Ferenc")
             }
             .font(Fonts.subheading)
             .frame(maxWidth: .infinity, alignment: .center)

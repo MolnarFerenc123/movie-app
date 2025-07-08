@@ -18,6 +18,7 @@ enum ButtonStyleAction {
 }
 
 struct StyledButton: View {
+    @EnvironmentObject var languageManager: LanguageManager
     let style: StyledButtonType
     let action: ButtonStyleAction
     var title: String

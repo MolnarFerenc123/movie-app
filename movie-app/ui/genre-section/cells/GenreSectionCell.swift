@@ -12,19 +12,22 @@ struct GenreSectionCell : View {
     @Binding var isExpanded: Bool
     
     var body: some View {
-        NavigationLink(destination: MovieListView(genre:genre)){
+        ZStack {
+            NavigationLink(destination: MovieListView(genre:genre)){
+                EmptyView()
+            }
+            .opacity(0)
+            
             HStack{
                 Text(genre.name)
                     .font(Fonts.title)
                     .foregroundStyle(.primary)
                     .accessibilityLabel(genre.name)
                 Spacer()
-                RotatingArrow(isExpanded: isExpanded)
-                    .onTapGesture {
-                        isExpanded.toggle()
-                    }
+                Image(.rightArrow)
             }
         }
+        
         
     }
 }

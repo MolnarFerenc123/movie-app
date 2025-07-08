@@ -57,7 +57,8 @@ class MediaItemDetailEntity: Object {
             spokenLanguages: [spokenLanguages],
             overview: overview,
             imdbURL: imdbURL.flatMap(URL.init),
-            productionCompanies: productionCompanies.map { $0.toDomain }
+            productionCompanies: productionCompanies.map { $0.toDomain },
+            showType: .unknown
         )
     }
 }

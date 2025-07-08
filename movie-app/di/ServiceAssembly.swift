@@ -50,6 +50,10 @@ class ServiceAssembly: Assembly {
             return CastMemberStore()
         }.inObjectScope(.container)
         
+        container.register(ReviewStoreProtocol.self) { _ in
+            return ReviewStore()
+        }.inObjectScope(.container)
+        
         container.register(NetworkMonitorProtocol.self) { _ in
             return NetworkMonitor()
         }.inObjectScope(.container)

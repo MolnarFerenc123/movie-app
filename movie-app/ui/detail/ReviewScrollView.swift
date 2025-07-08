@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ReviewScrollView: View {
-    let reviews: [MovieReview]
+    let reviews: [MediaItemReview]
     
     var body: some View {
         VStack(alignment: .leading, spacing: LayoutConst.normalPadding) {
