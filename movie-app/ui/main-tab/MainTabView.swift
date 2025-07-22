@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State var selectedTab = 0
+    @State var selectedTab: Int = 0
     
     init() {
         let transparentAppearence = UITabBarAppearance()

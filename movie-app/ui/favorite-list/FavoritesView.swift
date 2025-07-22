@@ -34,18 +34,19 @@ struct FavoritesView: View {
                             }
                         }
                     }
+                    
                     .scrollDismissesKeyboard(.interactively)
                     .padding(.top, 20)
                     .navigationTitle("favoriteMovies.title".localized())
                     .accessibilityLabel(AccessibilityLabels.favoritesScrollView)
                 }
+                .onAppear{
+                    viewModel.viewLoaded.send(())
+                }
             }
             
         }
         .showAlert(model: $viewModel.alertModel)
-        .onAppear{
-            viewModel.viewLoaded.send(())
-        }
     }
 }
 

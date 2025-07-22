@@ -9,7 +9,7 @@ import SwiftUI
 import Lottie
 
 struct SplashScreen: View {
-    @State var animationFinished = true
+    @State var animationFinished = false
     @AppStorage("color-scheme") var colorScheme: Theme = .dark
     
     var body: some View {

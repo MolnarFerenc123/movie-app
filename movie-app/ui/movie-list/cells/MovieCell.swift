@@ -68,7 +68,7 @@ struct MovieCell: View {
                     Image(.playButton)
                 }
             }
-            .frame(maxWidth: imageWidth)
+            .frame(width: imageWidth)
             Spacer()
         }
         .contentShape(Rectangle())

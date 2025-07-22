@@ -124,7 +124,7 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable{
                 if result.success {
                     self.isFavorite = isFavorite
                     if isFavorite {
-                        //self.favoriteMediaStore.addFavoriteMediaItem(self.mediaItemDetail)
+//                        self.store.addFavoriteMediaItem(self.mediaItemDetail.id)
                     } else {
                         self.store.deleteMediaItem(withId: self.mediaItemDetail.id)
                     }

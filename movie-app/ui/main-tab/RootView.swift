@@ -10,7 +10,6 @@ import Lottie
 import Combine
 
 struct RootView: View {
-    @State var selectedTab: Int = 0
     @StateObject private var viewModel = RootViewModel()
 
     var body: some View {
