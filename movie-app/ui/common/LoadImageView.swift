@@ -1,0 +1,30 @@
+//
+//  LoadImageView.swift
+//  movie-app
+//
+//  Created by Ferenc Molnar on 2025. 05. 17..
+//
+
+import SwiftUI
+import SDWebImageSwiftUI
+import Shimmer
+
+struct LoadImageView: View {
+    let url: URL?
+    
+    var body: some View {
+        if url == nil {
+            Color.gray.opacity(0.7)
+        }else {
+            WebImage(url: url) { image in
+                image
+                    .resizable()
+                    .scaledToFill()
+            } placeholder: {
+                ZStack {
+                    Color.gray.opacity(0.7)
+                }
+            }
+        }
+    }
+}

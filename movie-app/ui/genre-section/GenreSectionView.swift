@@ -6,54 +6,46 @@
 //
 
 import SwiftUI
-
-class GenreSectionViewModel: ObservableObject {
-    @Published var genres: [Genre] = []
-    
-    func loadGenres() {
-        self.genres = [
-            Genre(id: 1, name: "Adventure"),
-            Genre(id: 2, name: "Sci-fi"),
-            Genre(id: 3, name: "Horror"),
-            Genre(id: 4, name: "Comedy")
-        ]
-    }
-}
+import InjectPropertyWrapper
+import Foundation
+import Shimmer
 
 struct GenreSectionView: View {
-    @StateObject private var viewModel = GenreSectionViewModel()
+    @StateObject private var viewModel = GenreSectionViewModelImpl()
     
     var body: some View {
         NavigationView{
             ZStack(alignment: .topTrailing){
                 Image(.redQuarterCircle)
                     .ignoresSafeArea(.all)
-                List(viewModel.genres){ genre in
-                    ZStack {
-                        NavigationLink(destination: Text(genre.name)){
-                            EmptyView()
+                
+                List{
+                    GenreMotdCell(mediaItemDetail: viewModel.motdMovieDetail)
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                    ForEach(Array(viewModel.genres.enumerated()), id: \.element.id) { index, genre in
+                        ZStack {
+                            let mediaItems = viewModel.getMediaItemsByGenre(genre.id)
+                            
+                            MediaItemListByGenre(genre: genre, mediaItems: mediaItems)
                         }
-                        HStack{
-                            Text(genre.name)
-                                .font(Fonts.title)
-                                .foregroundStyle(.primary)
-                            Spacer()
-                            Image(.rightArrow)
-                        }
-                        
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
                     }
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
                 }
                 .listStyle(.plain)
-                .navigationTitle("genreSection.title")
+                .navigationTitle(Environments.name == .tv ? "TV" : "genreSection.title".localized())
+                .accessibilityLabel(AccessibilityLabels.genreSectionCollectionView)
+                .background(.clear)
             }
-                
-            }
-            .onAppear {
+            .showAlert(model: $viewModel.alertModel)
+            .onAppear{
                 viewModel.loadGenres()
+                viewModel.genresAppeared()
             }
         }
+    }
+        
 }
 
 #Preview {

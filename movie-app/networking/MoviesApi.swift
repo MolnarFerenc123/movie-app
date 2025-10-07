@@ -1,0 +1,159 @@
+//
+//  MoviesApi.swift
+//  movie-app
+//
+//  Created by Ferenc Molnar on 2025. 04. 12..
+//
+
+import Foundation
+import Moya
+
+enum MoviesApi {
+    case fetchGenres(req: FetchGenreRequest)
+    case fetchTVGenres(req: FetchGenreRequest)
+    case fetchMovies(req: FetchMediaListRequest)
+    case fetchTV(req: FetchMediaListRequest)
+    case searchMovies(req: SearchMovieRequest)
+    case fetchFavoriteMovies(req: FetchFavoriteMovieRequest)
+    case editFavoriteMovie(req: EditFavoriteRequest)
+    case fetchMovieDetail(req: FetchDetailRequest)
+    case fetchTVDetail(req: FetchDetailRequest)
+    case fetchCast(req: FetchDetailRequest)
+    case addReview(req: AddReviewRequest)
+    case fetchMovieReviews(req: FetchMovieReviewsRequest)
+    case fetchCastDetail(req: FetchContributorDetailRequest)
+    case fetchCompanyDetail(req: FetchContributorDetailRequest)
+    case fetchSimilarMedias(req: FetchSimilarMedias)
+}
+
+extension MoviesApi: TargetType{
+    var baseURL: URL {
+        let baseUrl = "https://api.themoviedb.org/3/"
+        guard let baseUrl = URL(string: baseUrl) else {
+            preconditionFailure("Base url is not a valid url")
+        }
+        return baseUrl
+    }
+    
+    var path: String {
+        switch self {
+        case .fetchGenres:
+            return "genre/movie/list"
+        case .fetchTVGenres:
+            return "genre/tv/list"
+        case .fetchMovies:
+            return "discover/movie"
+        case .searchMovies:
+            return "search/movie"
+        case .fetchFavoriteMovies(let req):
+            return "account/\(req.accountId)/favorite/movies"
+        case .editFavoriteMovie(let req):
+            return "account/\(req.accountId)/favorite"
+        case .fetchTV:
+            return "discover/tv"
+        case .fetchMovieDetail(let req):
+            return "movie/\(req.mediaId)"
+        case .fetchTVDetail(let req):
+            return "tv/\(req.mediaId)"
+        case .fetchCast(let req):
+            return "movie/\(req.mediaId)/credits"
+        case .addReview(let req):
+            return "movie/\(req.mediaId)/rating"
+        case .fetchMovieReviews(req: let req):
+            return "movie/\(req.mediaId)/reviews"
+        case .fetchCastDetail(let req):
+            return "person/\(req.contributorId)"
+        case .fetchCompanyDetail(let req):
+            return "company/\(req.contributorId)"
+        case .fetchSimilarMedias(let req):
+            return "movie/\(req.movieId)/similar"
+        }
+    }
+    
+    var method: Moya.Method {
+        switch self {
+        case .fetchGenres, .fetchTVGenres, .fetchMovies, .fetchTV, .searchMovies, .fetchFavoriteMovies, .fetchMovieDetail, .fetchTVDetail, .fetchCast, .fetchMovieReviews, .fetchCastDetail, .fetchCompanyDetail, .fetchSimilarMedias:
+            return .get
+        case .editFavoriteMovie, .addReview:
+            return .post
+        }
+    }
+    
+    var task: Moya.Task {
+        switch self {
+        case .fetchGenres(let req):
+            return .requestParameters(parameters: req.asReqestParams(), encoding: URLEncoding.queryString)
+        case .fetchTVGenres(let req):
+            return .requestParameters(parameters: req.asReqestParams(), encoding: URLEncoding.queryString)
+        case .fetchMovies(let req):
+            return .requestParameters(parameters: req.asReqestParams(), encoding: URLEncoding.queryString)
+        case .searchMovies(let req):
+            return .requestParameters(parameters: req.asReqestParams(), encoding: URLEncoding.queryString)
+        case .fetchFavoriteMovies(let req):
+            return .requestParameters(parameters: req.asReqestParams(), encoding: URLEncoding.queryString)
+        case .editFavoriteMovie(let req):
+            let request = EditFavoriteBodyRequest(movieId: req.movieId, favorite: req.favorite)
+            return .requestJSONEncodable(request)
+        case .fetchTV(req: let req):
+            return .requestParameters(parameters: req.asReqestParams(), encoding: URLEncoding.queryString)
+        case .fetchMovieDetail(req: let req):
+            return .requestParameters(parameters: req.asReqestParams(), encoding: URLEncoding.queryString)
+        case .fetchTVDetail(req: let req):
+            return .requestParameters(parameters: req.asReqestParams(), encoding: URLEncoding.queryString)
+        case .fetchCast(req: let req):
+            return .requestParameters(parameters: req.asReqestParams(), encoding: URLEncoding.queryString)
+        case .addReview(let req):
+            let request = AddReviewBodyRequest(mediaId:
+                                                req.mediaId, rating: req.rating)
+            return .requestJSONEncodable(request)
+        case .fetchMovieReviews(req: let req):
+            return .requestParameters(parameters: req.asRequestParams(), encoding: URLEncoding.queryString)
+        case .fetchCastDetail(req: let req):
+            return .requestParameters(parameters: req.asReqestParams(), encoding: URLEncoding.queryString)
+        case .fetchCompanyDetail(req: let req):
+            return .requestParameters(parameters: req.asReqestParams(), encoding: URLEncoding.queryString)
+        case .fetchSimilarMedias(req: let req):
+            return .requestParameters(parameters: req.asReqestParams(), encoding: URLEncoding.queryString)
+        }
+    }
+    
+    var headers: [String : String]? {
+        switch self {
+        case let .fetchGenres(req):
+            return ["Authorization" : req.accessToken]
+        case let .fetchTVGenres(req):
+            return ["Authorization" : req.accessToken]
+        case let .fetchMovies(req):
+            return ["Authorization" : req.accessToken]
+        case let .fetchTV(req):
+            return ["Authorization" : req.accessToken]
+        case let .searchMovies(req):
+            return ["Authorization" : req.accessToken,
+                    "accept" : "application/json"]
+        case let .fetchFavoriteMovies(req):
+            return ["Authorization" : req.accessToken]
+        case let .editFavoriteMovie(req):
+            return ["Authorization" : req.accessToken,
+                    "accept" : "application/json"]
+        case let .fetchMovieDetail(req):
+            return ["Authorization" : req.accessToken]
+        case let .fetchTVDetail(req):
+            return ["Authorization" : req.accessToken]
+        case let .fetchCast(req):
+            return ["Authorization" : req.accessToken]
+        case let .addReview(req):
+            return ["Authorization" : req.accessToken]
+        case .fetchMovieReviews(req: let req):
+            return ["Authorization": req.accessToken]
+        case let .fetchCastDetail(req):
+            return ["Authorization" : req.accessToken]
+        case let .fetchCompanyDetail(req):
+            return ["Authorization" : req.accessToken]
+        case let .fetchSimilarMedias(req):
+            return ["Authorization" : req.accessToken]
+        }
+        
+    }
+}
+
+

@@ -7,3 +7,51 @@
 */
 
 "genreSection.title" = "Film alkalmazás";
+"search.empty.text" = "Kezdj el gépelni a kereséshez";
+"search.textfield.placeholder" = "Filmek, rendezők, színészek, stb.";
+"button.close.text" = "Bezárás";
+
+"unexpected.error.title" = "Váratlan hiba";
+"unexpected.error.message" = "Váratlab hiba történt. Kérjük próbálja meg később.";
+
+"api.error.title" = "API Hiba";
+
+"client.error.title" = "Kliens hiba";
+"client.error.message" = "Megszakadt a kapcsolat a szerverrel";
+
+"mapping.error.title" = "Leképzési hiba";
+
+"favoriteMovies.title" = "Kedvencek";
+
+"closed.caption.available" = "Elérhető";
+"closed.caption.unavailable" = "Nem elérhető";
+
+"release.date" = "Kiadás Éve";
+"runtime" = "Hossz";
+"language" = "Nyelv";
+
+"detail.rate" = "Értékeld ezt a filmet";
+"detail.visit.imdb" = "Meglátogatás IMDB-n";
+"detail.title" = "Szinopszis";
+
+"publishers.and.companies.subtitle" = "Kiadó és vállalatok";
+"cast.subtitle" = "Szereposztás";
+
+"no.internet" = "Nincs internet elérés";
+
+"addReview.subTitle" = "Adj egy őszinte véleményt";
+"addReview.buttonTitle" = "Vélemény elküldése";
+
+"settings.title" = "Beállítások";
+"settings.chooseLanguage" = "Válassz Nyelvet";
+"settings.chooseTheme" = "Válassz Témát";
+"settings.lang.english" = "Angol";
+"settings.lang.german" = "Német";
+"settings.lang.hungarian" = "Magyar";
+"settings.theme.light" = "Világos Mód";
+"settings.theme.dark" = "Sötét Mód";
+
+"detail.topReviews" = "Legjobb Értékelések";
+"detail.noReviews" = "Nincs értékelés";
+
+"similars" = "Hasonlók";
